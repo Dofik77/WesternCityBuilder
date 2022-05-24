@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1acc22492de4aa289f314eea92bbd67, type: 3}
+  m_Name: PrefabsBase
+  m_EditorClassIdentifier: 
+  prefabs:
+  - Name: Camera
+    GameObject: {fileID: 2181769509312897065, guid: 98159cdb47afa4a48839a7dad7e4a2cd, type: 3}
+  - Name: Player
+    GameObject: {fileID: 7445344910305056461, guid: 2d6babde6a6192545990cfbbc03c3ebb, type: 3}
+  - Name: BusyLetter
+    GameObject: {fileID: 3094909925261188104, guid: e359d35f650ecb6448cffc1391d220b5, type: 3}
+  - Name: Storage
+    GameObject: {fileID: 1593121119353188470, guid: 1bccb48dba35363408b7d8f51d272024, type: 3}
+  - Name: CampFire
+    GameObject: {fileID: 8242270563373547872, guid: e90c5546d9732d44fb5f20849661c52b, type: 3}
+  - Name: WoodResourceType
+    GameObject: {fileID: 5762262939642190981, guid: 030a558c187484c479654111b3982952, type: 3}
+  - Name: RockStorage
+    GameObject: {fileID: 6016696611572077271, guid: ba873e72dfea1b14cac7fd354821af56, type: 3}
+  - Name: RockResourceType
+    GameObject: {fileID: 4378127906827903364, guid: 1b0586724468ad14796a66ee0eeff5c9, type: 3}

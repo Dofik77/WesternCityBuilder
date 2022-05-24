@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de991d049d6c4f2b8bcbfebfb3bd180a, type: 3}
+  m_Name: UiPrefabsBase
+  m_EditorClassIdentifier: 
+  prefabs:
+  - Name: UiGeneratedEntity
+    GameObject: {fileID: 5907433141820812848, guid: c7617d5a5e8f1b04590d0dbd09510f71, type: 3}
+  - Name: LevelEntity
+    GameObject: {fileID: 6060599512507553550, guid: 6e705410d27b7e0498944b60bcf04d07, type: 3}
+  - Name: VipLevelEntity
+    GameObject: {fileID: 956109376715875097, guid: e083b30098fd3754daaebc88e1080dae, type: 3}
+  - Name: BackgroundEntity
+    GameObject: {fileID: 5907433141820812848, guid: 38d7f676279fbf8428121bc6fe703caa, type: 3}
+  - Name: uiStars
+    GameObject: {fileID: 1521823285143819911, guid: 96929b455248c7b42bb733e700a75573, type: 3}

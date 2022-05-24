@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8674350ec4a244c2b43b4754250a06e6, type: 3}
+  m_Name: ProjectUiPrefabInstaller
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 7768699646857002867, guid: 391113a733bff1443afd3106782d0afd, type: 3}
+  eventSystem: {fileID: 92499733164934512, guid: 1106d478a15dbbe4d8dbcb0f24a8c642,
+    type: 3}
+  blackScreen: {fileID: 8335193137908558683, guid: ccd6aed02989b9b4dbc51f42fbfb14b4,
+    type: 3}

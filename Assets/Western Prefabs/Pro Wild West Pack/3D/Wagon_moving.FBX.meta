@@ -1,0 +1,87 @@
+fileFormatVersion: 2
+guid: 94d81b6d4073a17458d12356bd883ef1
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: Dummy
+    100002: Dummy_wheels01
+    100004: Dummy_wheels02
+    100006: Dummy_wheels03
+    100008: Dummy_wheels04
+    100010: Wagon
+    100012: Wagon_Bottom
+    100014: //RootNode
+    100016: Wagon_Wheels
+    400000: Dummy
+    400002: Dummy_wheels01
+    400004: Dummy_wheels02
+    400006: Dummy_wheels03
+    400008: Dummy_wheels04
+    400010: Wagon
+    400012: Wagon_Bottom
+    400014: //RootNode
+    400016: Wagon_Wheels
+    2300000: Wagon
+    2300002: Wagon_Bottom
+    3300000: Wagon
+    3300002: Wagon_Bottom
+    4300000: Wagon_Wheels
+    4300002: Wagon_Bottom
+    4300004: Wagon
+    7400000: wagon_moving
+    9500000: //RootNode
+    13700000: Wagon_Wheels
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 

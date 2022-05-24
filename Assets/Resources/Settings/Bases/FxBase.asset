@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30a53a56e5be43dea4ccf32f2aac7d34, type: 3}
+  m_Name: FxBase
+  m_EditorClassIdentifier: 
+  Fxs:
+  - Name: HintParticle
+    ParticleSystem: {fileID: 8485179685353768517, guid: 97e96e0911627ef43affe2551c50bae7, type: 3}
+  - Name: fx_darkblue_letter
+    ParticleSystem: {fileID: 6523235081610661657, guid: 168a0efbd65977a4ab8cd5fdce7caadf, type: 3}
+  - Name: fx_skyblue_letter
+    ParticleSystem: {fileID: 6523235081610661657, guid: 0bf22f6aab9f17344a31ffaf60d87ff6, type: 3}
+  - Name: fx_turquoise_letter
+    ParticleSystem: {fileID: 6523235081610661657, guid: 7f530f1588743384585c1d5e457ff29b, type: 3}
+  - Name: fx_white_letter
+    ParticleSystem: {fileID: 8485179685353768517, guid: 97e96e0911627ef43affe2551c50bae7, type: 3}
+  - Name: fx_yellow_letter
+    ParticleSystem: {fileID: 6523235081610661657, guid: 90f49204dd0a5fc4db9f5f924888f1f6, type: 3}
+  - Name: fx_red_letter
+    ParticleSystem: {fileID: 6523235081610661657, guid: fb6b4cb9700615c4fb7e6b70a74b0dd7, type: 3}
+  - Name: fx_purple_letter
+    ParticleSystem: {fileID: 6523235081610661657, guid: 0a247134a7e2e7549b88d6c05211a846, type: 3}
+  - Name: fx_green_letter
+    ParticleSystem: {fileID: 6523235081610661657, guid: 9a9f8af037627a24f859d2954ad7e834, type: 3}
+  - Name: fx_faded_pink_letter
+    ParticleSystem: {fileID: 6523235081610661657, guid: 1b8607af5efa3f8438f48e76f14ef5e7, type: 3}

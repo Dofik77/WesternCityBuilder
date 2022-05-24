@@ -1,0 +1,13 @@
+﻿using SimpleUi;
+
+namespace #NS# 
+{
+    public class #NAME#Window : WindowBase 
+    {
+        public override string Name => "#NAME#";
+        protected override void AddControllers()
+        {
+            AddController<#NAME#ViewController>();
+        }
+    }
+}

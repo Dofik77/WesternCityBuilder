@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daee29ca35b341c8b0dd29a3f4beda70, type: 3}
+  m_Name: MenuUiPrefabInstaller
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 7768699646857002867, guid: 391113a733bff1443afd3106782d0afd, type: 3}
+  mainMenu: {fileID: 8353741110744207288, guid: 6ab53e91b05c3e24fae054dd3ea10844,
+    type: 3}
+  settingsView: {fileID: 7376529162607879930, guid: 4a0df24fe6e6acf48a90d352c1d0e969,
+    type: 3}
+  savesView: {fileID: 5330253754844832411, guid: 60496a45c2eec55488316ffb3a6e1d7c,
+    type: 3}
+  quit: {fileID: 324071007252587099, guid: a63ef1207b8d47d42a51a4172ff8da28, type: 3}

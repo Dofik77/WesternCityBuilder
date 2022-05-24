@@ -1,0 +1,10 @@
+﻿using SimpleUi.Abstracts;
+using UnityEngine.UI;
+
+namespace #NS# 
+{
+    public class #NAME#View : UiView 
+    {
+        
+    }
+}

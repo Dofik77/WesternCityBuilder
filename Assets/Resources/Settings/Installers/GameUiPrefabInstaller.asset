@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5906bff5a2cc49ebada3ead411f41c71, type: 3}
+  m_Name: GameUiPrefabInstaller
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 7768699646857002867, guid: 391113a733bff1443afd3106782d0afd, type: 3}
+  inGameMenu: {fileID: 5959754699772154118, guid: fa2a9d70ac0341f41aa914c5c3bbfa03, type: 3}
+  focusView: {fileID: 6003708801938987829, guid: ce4e8d876ac313948b1642a909071d81, type: 3}
+  consentPopUpTarget: {fileID: 324071007252587099, guid: a63ef1207b8d47d42a51a4172ff8da28, type: 3}
+  touchpadView: {fileID: 28076545930685498, guid: 7307750229d24054dab79fa465928138, type: 3}
+  gameOverView: {fileID: 235630740065941943, guid: be35ac11a5873fc40af032f07098df30, type: 3}
+  levelCompleteView: {fileID: 2066993196224163984, guid: 1ca14149482580642a74c33c80dc0a04, type: 3}
+  inGameButtonsView: {fileID: 5659588307343922049, guid: 77d6f45a83761754a9308e1d475040ef, type: 3}
+  developerModeView: {fileID: 1401423803131489734, guid: a1365be70e6fe934d90e1e42dba57db9, type: 3}
+  storeView: {fileID: 5395717644166240318, guid: 22ffe090b1f9a1c4abc9a23ec616f568, type: 3}
+  levelsView: {fileID: 1830013312195924518, guid: bebcd9529976a0b46a35422cdd1f3096, type: 3}

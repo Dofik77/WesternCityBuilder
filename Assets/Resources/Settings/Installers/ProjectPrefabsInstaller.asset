@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b69cc58253d34a59abb1e3e3d32d5472, type: 3}
+  m_Name: ProjectPrefabsInstaller
+  m_EditorClassIdentifier: 
+  prefabsBase: {fileID: 11400000, guid: 591907a7a196021409d354f0c953cf07, type: 2}
+  uiPrefabsBase: {fileID: 11400000, guid: f68245e5b474c664fa494672b0bdafb6, type: 2}
+  materialsBase: {fileID: 11400000, guid: 08a3cdc183b9f5c4ea9f71fead679931, type: 2}
+  audioBase: {fileID: 11400000, guid: be3172739187ab64a91363260a2795af, type: 2}
+  fxBase: {fileID: 11400000, guid: 04d9ba06638e8f144a0c075339f24aeb, type: 2}
+  skinsData: {fileID: 11400000, guid: 366f9d12ea1c7804fae9394af837a5f7, type: 2}
+  levelsData: {fileID: 11400000, guid: 90fa46ab2358e2b4c8a9d61b7ba88dde, type: 2}
+  currenciesData: {fileID: 11400000, guid: 2c001f782883d964a939661f7750baea, type: 2}

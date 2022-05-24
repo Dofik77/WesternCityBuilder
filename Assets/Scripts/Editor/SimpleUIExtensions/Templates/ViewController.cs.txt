@@ -1,0 +1,15 @@
+﻿using SimpleUi.Abstracts;
+using Zenject;
+
+namespace #NS# 
+{
+    public class #NAME#ViewController : UiController<#NAME#View> 
+    {
+        private readonly SignalBus _signalBus;
+    
+        public #NAME#ViewController(SignalBus signalBus)
+        {
+            _signalBus = signalBus;
+        }
+    }
+}

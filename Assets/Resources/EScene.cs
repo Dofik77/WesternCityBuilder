@@ -1,0 +1,1 @@
+public enum EScene { SplashScene, MainMenu, LoadingScene, Level_001, }

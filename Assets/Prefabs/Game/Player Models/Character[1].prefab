@@ -52,7 +52,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 2
---- !u!114 &8261459122042143900
+--- !u!114 &5564158229274270476
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -61,7 +61,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7445344910305056461}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d8d462565ca4162a1f2ed7f44c6114b, type: 3}
+  m_Script: {fileID: 11500000, guid: fa1b975199680004eb1cad6fd6d9b191, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _agent: {fileID: 6166519745912872223}

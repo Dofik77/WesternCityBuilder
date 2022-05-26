@@ -59,6 +59,9 @@ namespace ECS.Game.Systems.General.Level
             foreach (var i in _player)
             {
             }
+            
+            _world.CreateUnit();
+            _world.CreateUnit();
         }
         
         

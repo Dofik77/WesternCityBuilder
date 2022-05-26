@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6abf44efefa475b9275a7f1827937ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hapticReceiver: {fileID: 4593437182189773943}
   _defaultResolution: {x: 1080, y: 1920}
   _widthOrHeight: 0
   _initialSize: 0

@@ -16,14 +16,18 @@ MonoBehaviour:
   - _key: craft_woodStorage
     _dependKey: 
     _name: WoodStorage
+    _description: Storage some wood
     _recipeIcon: {fileID: 21300000, guid: 9fcef60dfed3e42a89964370f4dfb654, type: 3}
     _recipeResources:
     - Key: 1
       Value: 5
+    _levelOpenData: LV1
   - _key: craft_rockStorage
     _dependKey: 
     _name: RockStorage
+    _description: Storage some rock
     _recipeIcon: {fileID: 21300000, guid: 37a7ae19048e34c15a8935f7c259e3fc, type: 3}
     _recipeResources:
-    - Key: 1
+    - Key: 2
       Value: 5
+    _levelOpenData: LV1

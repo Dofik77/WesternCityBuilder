@@ -16,18 +16,24 @@ namespace Runtime.Data.PlayerData.Recipe
     {
         public string GetLowerKey() => _key.ToLower();
         
-        [Header("General")] [SerializeField] private string _key;
+        [Header("General")] 
+        [SerializeField] private string _key;
         public string GetDependKey() => _dependKey;
         [SerializeField] private string _dependKey;
-        public string GetName() => _name;
         
-        [Header("Recipe")] [SerializeField] private string _name;
-        
-        public Sprite GetIcon() => _recipeIcon;
+        [Header("Recipe")] 
+        [SerializeField] private string _name;
+        [SerializeField] private string _description;
         [SerializeField] private Sprite _recipeIcon;
-
-        public ResourceCount[] GetResourceCount() => _recipeResources;
         [SerializeField] private ResourceCount[] _recipeResources;
+        [SerializeField] private string _levelOpenData;
+
+        public string GetLevelOpenData() => _levelOpenData;
+        public string GetName() => _name;
+        public string GetDescription() => _description;
+        public Sprite GetIcon() => _recipeIcon;
+        public ResourceCount[] GetResourceCount() => _recipeResources;
+       
         
         public ECurrency GetCurrency()
         {

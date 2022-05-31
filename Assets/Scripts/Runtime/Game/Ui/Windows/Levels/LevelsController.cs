@@ -22,6 +22,7 @@ namespace Runtime.Game.Ui.Windows.Levels
     {
         [Inject] private readonly ILevelsData _levelsData;
         [Inject] private readonly ICurrenciesData _currenciesData;
+        
 
         private EcsWorld _world;
 
@@ -69,6 +70,7 @@ namespace Runtime.Game.Ui.Windows.Levels
             UiLevelEntity levelEntity;
             Services.CommonPlayerData.Data.Levels.LevelProperty property;
             Level level;
+            
             void InitStars(UiGeneratedEntity entity)
             {
                 levelEntity = (UiLevelEntity) entity;

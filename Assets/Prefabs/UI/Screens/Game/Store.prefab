@@ -1166,7 +1166,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 509470443955521423, guid: 98f43abac78dee24c9643a7ab61da2e1, type: 3}
       propertyPath: m_Name
-      value: BoxesLabel
+      value: CraftLabel
+      objectReference: {fileID: 0}
+    - target: {fileID: 867356879987274969, guid: 98f43abac78dee24c9643a7ab61da2e1, type: 3}
+      propertyPath: m_text
+      value: Craft
       objectReference: {fileID: 0}
     - target: {fileID: 867356879987274969, guid: 98f43abac78dee24c9643a7ab61da2e1, type: 3}
       propertyPath: m_fontSize
@@ -1324,7 +1328,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 509470443955521423, guid: 98f43abac78dee24c9643a7ab61da2e1, type: 3}
       propertyPath: m_Name
-      value: BackgroundLabel
+      value: UnitUpgradeLabel
       objectReference: {fileID: 0}
     - target: {fileID: 509470443955521423, guid: 98f43abac78dee24c9643a7ab61da2e1, type: 3}
       propertyPath: m_IsActive
@@ -1332,7 +1336,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 867356879987274969, guid: 98f43abac78dee24c9643a7ab61da2e1, type: 3}
       propertyPath: m_text
-      value: Backgrounds
+      value: Upgrades
       objectReference: {fileID: 0}
     - target: {fileID: 867356879987274969, guid: 98f43abac78dee24c9643a7ab61da2e1, type: 3}
       propertyPath: m_fontSize
@@ -1731,7 +1735,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6326377702000690692, guid: 03368478eebe1364a885a1cb829158c8, type: 3}
       propertyPath: m_Name
-      value: BoxesLayout
+      value: CraftLayout
       objectReference: {fileID: 0}
     - target: {fileID: 6792894023834649522, guid: 03368478eebe1364a885a1cb829158c8, type: 3}
       propertyPath: m_fontSize
@@ -1751,7 +1755,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8939936104485748423, guid: 03368478eebe1364a885a1cb829158c8, type: 3}
       propertyPath: _dataKeyMask
-      value: cube_
+      value: craft_
+      objectReference: {fileID: 0}
+    - target: {fileID: 8939936104485748423, guid: 03368478eebe1364a885a1cb829158c8, type: 3}
+      propertyPath: _uiPrefabName
+      value: UiRecip
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03368478eebe1364a885a1cb829158c8, type: 3}
@@ -1856,15 +1864,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6326377702000690692, guid: 03368478eebe1364a885a1cb829158c8, type: 3}
       propertyPath: m_Name
-      value: BackgroundLayout
+      value: UnitUpgradesLayout
       objectReference: {fileID: 0}
+    - target: {fileID: 6792894023834649522, guid: 03368478eebe1364a885a1cb829158c8, type: 3}
+      propertyPath: m_fontSize
+      value: 51.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 6792894023834649522, guid: 03368478eebe1364a885a1cb829158c8, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 6792894023834649522, guid: 03368478eebe1364a885a1cb829158c8, type: 3}
       propertyPath: m_sharedMaterial
       value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 8421641336399964597, guid: 03368478eebe1364a885a1cb829158c8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8939936104485748423, guid: 03368478eebe1364a885a1cb829158c8, type: 3}
       propertyPath: _dataKeyMask
-      value: background_
+      value: unitUpgrade_
       objectReference: {fileID: 0}
     - target: {fileID: 8939936104485748423, guid: 03368478eebe1364a885a1cb829158c8, type: 3}
       propertyPath: _uiPrefabName

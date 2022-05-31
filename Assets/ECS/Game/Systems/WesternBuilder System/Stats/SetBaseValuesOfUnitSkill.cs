@@ -13,14 +13,14 @@ namespace ECS.Game.Systems.WesternBuilder_System.Stats
         {
             entity.Get<UnitsSkillScoreComponent>().SkillsOfMine = new UnitSkillOfMine[]
             {
-                new UnitSkillOfMine(RequiredResourceType.WoodResourceType, 5),
-                new UnitSkillOfMine(RequiredResourceType.RockResourceType, 3),
+                new UnitSkillOfMine(RequiredResourceType.WoodResource, 5),
+                new UnitSkillOfMine(RequiredResourceType.RockResource, 3),
             };
 
             entity.Get<UnitsSkillScoreComponent>().SkillOfPortability = new UnitSkillOfPortability[]
             {
-                new UnitSkillOfPortability(RequiredResourceType.WoodResourceType, 3),
-                new UnitSkillOfPortability(RequiredResourceType.RockResourceType, 2),
+                new UnitSkillOfPortability(RequiredResourceType.WoodResource, 3),
+                new UnitSkillOfPortability(RequiredResourceType.RockResource, 2),
             };
         }
     }

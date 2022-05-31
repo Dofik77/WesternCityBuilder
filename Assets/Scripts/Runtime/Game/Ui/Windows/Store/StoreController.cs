@@ -3,9 +3,11 @@ using Leopotam.Ecs;
 using Lofelt.NiceVibrations;
 using Runtime.Data;
 using Runtime.Data.PlayerData.Currency;
+using Runtime.Data.PlayerData.Recipe;
 using Runtime.Data.PlayerData.Skins;
 using Runtime.Game.Ui.Extensions;
 using Runtime.Game.Ui.Impls;
+using Runtime.Game.Ui.Objects;
 using Runtime.Game.Ui.Objects.Layouts;
 using Runtime.Services.UiData.Data;
 using SimpleUi.Signals;
@@ -20,6 +22,7 @@ namespace Runtime.Game.Ui.Windows.Store
     {
         [Inject] private readonly ISkinsData _skinsData;
         [Inject] private readonly ICurrenciesData _currenciesData;
+        [Inject] private readonly IRecipeData _recipeData;
 
         private EcsWorld _world;
 
@@ -47,65 +50,74 @@ namespace Runtime.Game.Ui.Windows.Store
             }
             
             View.RebuildUiData(uiData.StoreUiData);
+            
         }
         
         public void InitValues()
         {
             var data = _commonPlayerData.GetData();
+            
             View.InitCurrencies(ref data.Money, _currenciesData);
-            View.LayoutContainer.Init(_skinsData.Get(), data, OnButton,
+            View.LayoutContainer.Init(_recipeData.Get(), data, OnButton,
                 key => key.StartsWith("cube_locked_") || key.StartsWith("background_locked_"),
-                key => !data.Skins.Contain(key), 
+                null, 
                 key => data.CurrentCubeSkinKey == key || data.CurrentBackgroundSkinKey == key);
-
+            
             void OnButton(UiGeneratedEntity entity, UiGeneratedLayout layout)
             {
-                Skin skin = _skinsData.Get().Get(entity.Key);
-                var data = _commonPlayerData.GetData();
-                switch (entity.CurrentUiState)
-                {
-                    case EUiEntityState.Available:
-                        HapticPatterns.PlayPreset(HapticPatterns.PresetType.RigidImpact);
-                        data.Skins.Add(entity.Key);
-                        data.Money.Add(skin.GetCurrency(), -skin.GetCost());
-                        View.GetCurrencyBox(skin.GetCurrency()).Value.text = data.Money.Get(skin.GetCurrency()).ToString();
-                        entity.SetState(EUiEntityState.Action);
-                        View.LayoutContainer.UpdatePurchaseStates(_skinsData.Get(),
-                            ref _commonPlayerData.GetData().Money.CurrencyValues);
-                        break;
-
-                    case EUiEntityState.Unavailable:
-                        SelectImpact(entity, HapticPatterns.PresetType.SoftImpact, 0.3f);
-                        break;
-
-                    case EUiEntityState.Action:
-                        HapticPatterns.PlayPreset(HapticPatterns.PresetType.RigidImpact);
-                        // SpawnParticle(entity.CurrentStateObjective);
-                        layout.CurrentGreyEntity.SetState(EUiEntityState.Action);
-                        entity.SetState(EUiEntityState.Grey);
-                        layout.CurrentGreyEntity = entity;
-
-                        // EcsFilter skinFilter = null;
-                        // if (layout.DataKeyMask == "cube_")
-                        // {
-                        //     skinFilter = _world.GetFilter(typeof(EcsFilter<HasSkinComponent, CubeSkinComponent>));
-                        //     data.CurrentCubeSkinKey = entity.Key;
-                        // }
-                        //
-                        // if (layout.DataKeyMask == "background_")
-                        // {
-                        //     skinFilter = _world.GetFilter(typeof(EcsFilter<HasSkinComponent, BackgroundSkinComponent>));
-                        //     data.CurrentBackgroundSkinKey = entity.Key;
-                        // }
-                        // foreach (var i in skinFilter)
-                        //     skinFilter.GetEntity(i).Get<EventSkinEquipComponent>().Value = skin;
-
-                        break;
-                    case EUiEntityState.Grey:
-                        break;
-                }
-
-                _commonPlayerData.Save(data);
+                Skin skin = _skinsData.Get().Get(entity.Key);//здесь рецепт
+                //в рецепте будет храниться -
+                //IsStorageOff? 
+                //what type of objects?(wood, rock, or nan)
+                
+                // var data = _commonPlayerData.GetData();
+                // //выделить действие на кнопку ( спавн объекта ) 
+                //
+                //
+                // switch (entity.CurrentUiState)
+                // {
+                //     case EUiEntityState.Available:
+                //         HapticPatterns.PlayPreset(HapticPatterns.PresetType.RigidImpact);
+                //         data.Skins.Add(entity.Key);
+                //         data.Money.Add(skin.GetCurrency(), -skin.GetCost());
+                //         View.GetCurrencyBox(skin.GetCurrency()).Value.text = data.Money.Get(skin.GetCurrency()).ToString();
+                //         entity.SetState(EUiEntityState.Action);
+                //         View.LayoutContainer.UpdatePurchaseStates(_skinsData.Get(),
+                //             ref _commonPlayerData.GetData().Money.CurrencyValues);
+                //         break;
+                //
+                //     case EUiEntityState.Unavailable:
+                //         SelectImpact(entity, HapticPatterns.PresetType.SoftImpact, 0.3f);
+                //         break;
+                //
+                //     case EUiEntityState.Action:
+                //         HapticPatterns.PlayPreset(HapticPatterns.PresetType.RigidImpact);
+                //         // SpawnParticle(entity.CurrentStateObjective);
+                //         layout.CurrentGreyEntity.SetState(EUiEntityState.Action);
+                //         entity.SetState(EUiEntityState.Grey);
+                //         layout.CurrentGreyEntity = entity;
+                //
+                //         // EcsFilter skinFilter = null;
+                //         // if (layout.DataKeyMask == "cube_")
+                //         // {
+                //         //     skinFilter = _world.GetFilter(typeof(EcsFilter<HasSkinComponent, CubeSkinComponent>));
+                //         //     data.CurrentCubeSkinKey = entity.Key;
+                //         // }
+                //         //
+                //         // if (layout.DataKeyMask == "background_")
+                //         // {
+                //         //     skinFilter = _world.GetFilter(typeof(EcsFilter<HasSkinComponent, BackgroundSkinComponent>));
+                //         //     data.CurrentBackgroundSkinKey = entity.Key;
+                //         // }
+                //         // foreach (var i in skinFilter)
+                //         //     skinFilter.GetEntity(i).Get<EventSkinEquipComponent>().Value = skin;
+                //
+                //         break;
+                //     case EUiEntityState.Grey:
+                //         break;
+                // }
+                //
+                // _commonPlayerData.Save(data);
             }
 
             void SelectImpact(UiGeneratedEntity entity, HapticPatterns.PresetType type, float duration)

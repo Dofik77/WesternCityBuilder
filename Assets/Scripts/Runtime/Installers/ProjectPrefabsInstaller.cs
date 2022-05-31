@@ -11,6 +11,8 @@ using Runtime.Data.PlayerData.Currency;
 using Runtime.Data.PlayerData.Currency.Impls;
 using Runtime.Data.PlayerData.Levels;
 using Runtime.Data.PlayerData.Levels.Impls;
+using Runtime.Data.PlayerData.Recipe;
+using Runtime.Data.PlayerData.Recipe.Impls;
 using Runtime.Data.PlayerData.Skins;
 using Runtime.Data.PlayerData.Skins.Impls;
 using UnityEngine;
@@ -30,6 +32,7 @@ namespace Runtime.Installers
         [SerializeField] private SkinsData skinsData;
         [SerializeField] private LevelsData levelsData;
         [SerializeField] private CurrenciesData currenciesData;
+        [SerializeField] private RecipeData recipeData; 
         
         public override void InstallBindings()
         {
@@ -41,6 +44,7 @@ namespace Runtime.Installers
             Container.Bind<ISkinsData>().FromSubstitute(skinsData).AsSingle();
             Container.Bind<ILevelsData>().FromSubstitute(levelsData).AsSingle();
             Container.Bind<ICurrenciesData>().FromSubstitute(currenciesData).AsSingle();
+            Container.Bind<IRecipeData>().FromSubstitute(recipeData).AsSingle();
         }
     }
 }

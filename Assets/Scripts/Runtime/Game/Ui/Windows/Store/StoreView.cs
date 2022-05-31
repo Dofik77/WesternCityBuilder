@@ -10,3 +10,6 @@ namespace Runtime.Game.Ui.Windows.Store
         public RectTransform UiBox;
     }
 }
+
+
+

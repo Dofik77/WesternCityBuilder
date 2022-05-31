@@ -20,3 +20,4 @@ MonoBehaviour:
   skinsData: {fileID: 11400000, guid: 366f9d12ea1c7804fae9394af837a5f7, type: 2}
   levelsData: {fileID: 11400000, guid: 90fa46ab2358e2b4c8a9d61b7ba88dde, type: 2}
   currenciesData: {fileID: 11400000, guid: 2c001f782883d964a939661f7750baea, type: 2}
+  recipeData: {fileID: 11400000, guid: a728b328557c1054aaddeab5db31882d, type: 2}

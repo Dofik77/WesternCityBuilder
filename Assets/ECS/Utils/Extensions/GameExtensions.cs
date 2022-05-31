@@ -96,6 +96,7 @@ namespace ECS.Utils.Extensions
             
             entity.Get<BuildWoodStorageComponent>();
 
+            //единый метод что сохранит enum
             entity.GetAndFire<BuildStorageComponent>();
             entity.Get<BuildStorageComponent>().MaxResource = 10;
             entity.Get<BuildStorageComponent>().CurrentResource = 0;

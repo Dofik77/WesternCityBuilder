@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ea519b3416742e2b6b99a581904183a, type: 3}
+  m_Name: RecipeData
+  m_EditorClassIdentifier: 
+  _recipes:
+  - _key: craft_woodStorage
+    _dependKey: 
+    _name: WoodStorage
+    _recipeIcon: {fileID: 21300000, guid: 9fcef60dfed3e42a89964370f4dfb654, type: 3}
+    _recipeResources:
+    - Key: 1
+      Value: 5
+  - _key: craft_rockStorage
+    _dependKey: 
+    _name: RockStorage
+    _recipeIcon: {fileID: 21300000, guid: 37a7ae19048e34c15a8935f7c259e3fc, type: 3}
+    _recipeResources:
+    - Key: 1
+      Value: 5

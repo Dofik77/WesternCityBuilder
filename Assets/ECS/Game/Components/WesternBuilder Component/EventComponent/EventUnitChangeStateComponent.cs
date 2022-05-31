@@ -14,10 +14,10 @@ namespace ECS.Game.Components.WesternBuilder_Component
     {
         Default, 
         
-        WoodResourceType,
-        RockResourceType,
-        OreType,
-        FoodType
+        WoodResource,
+        RockResource,
+        OreResource,
+        FoodResource
         
     }
 

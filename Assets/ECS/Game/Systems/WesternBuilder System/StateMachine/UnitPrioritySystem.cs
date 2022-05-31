@@ -19,8 +19,15 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
         private readonly EcsFilter<UnitsSkillScoreComponent> _unitSkills;
 
         private readonly EcsFilter<BuildCampFireComponent, LinkComponent> _campfire;
+        
         private readonly EcsFilter<BuildWoodStorageComponent, LinkComponent> _woodStorage;
         private readonly EcsFilter<BuildRockStorageComponent, LinkComponent> _rockStorage;
+        //exclude заполненые склады по компоненту, exclude isBuildingNow, потому что склад сначало строиться,
+        //а потом являеться складом
+        //заменить на единый storageComponent.enum
+        
+        //2ой компонент - под recipe ( сколько дерева? сколько еды? сколько камня? ) 
+        
 
         protected override EcsFilter<EventUpdatePriorityComponent> ReactiveFilter { get; }
 
@@ -152,7 +159,7 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
             var maxWoodInStorage = _woodStorageEntity.Get<BuildStorageComponent>().MaxResource;
             var expectedAmountOfResource = _woodStorageEntity.Get<ExpectedAmountOfResource>().ExpectedValue;
             
-            var RequiredMining = RequiredResourceType.WoodResourceType;
+            var RequiredMining = RequiredResourceType.WoodResource;
                 
             entity.Get<UnitPriorityData>().RequiredMining = RequiredMining;
             entity.Get<UnitPriorityData>().TargetBuildsView = _woodStorageEntity.Get<LinkComponent>().View as BuildsView;
@@ -173,7 +180,7 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
             var maxRockInStorage = _rockStorageEntity.Get<BuildStorageComponent>().MaxResource;
             var expectedAmountOfResource = _rockStorageEntity.Get<ExpectedAmountOfResource>().ExpectedValue;
             
-            var RequiredMining = RequiredResourceType.RockResourceType;
+            var RequiredMining = RequiredResourceType.RockResource;
                 
             entity.Get<UnitPriorityData>().RequiredMining = RequiredMining;
             entity.Get<UnitPriorityData>().TargetBuildsView = _rockStorageEntity.Get<LinkComponent>().View as BuildsView;

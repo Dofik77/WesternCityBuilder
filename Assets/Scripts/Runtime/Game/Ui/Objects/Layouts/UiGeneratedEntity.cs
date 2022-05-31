@@ -25,7 +25,7 @@ namespace Runtime.Game.Ui.Objects.Layouts
         [HideInInspector] public EUiEntityState CurrentUiState;
         [HideInInspector] public UiLayoutObjective CurrentStateObjective;
 
-        public void InitEntity(IProvideUiGeneratedEntity dataEntity, string greyStateText, string actionStateText, string rejectState, Sprite currencyIcon)
+        public virtual void InitEntity(IProvideUiGeneratedEntity dataEntity, string greyStateText, string actionStateText, string rejectState, Sprite currencyIcon)
         {
             transform.localScale = Vector3.one;
             _key = dataEntity.GetLowerKey();

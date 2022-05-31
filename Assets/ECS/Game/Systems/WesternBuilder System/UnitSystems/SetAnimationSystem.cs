@@ -5,7 +5,7 @@ using Leopotam.Ecs;
 
 namespace ECS.Game.Systems.WesternBuilder_System
 {
-    public class SetAnimationSystem :  ReactiveSystem<EventSetAnimationComponent>
+    public class SetAnimationSystem : ReactiveSystem<EventSetAnimationComponent>
     {
         protected override EcsFilter<EventSetAnimationComponent> ReactiveFilter { get; }
         private EcsFilter<EventSetAnimationComponent> _animationUnit;

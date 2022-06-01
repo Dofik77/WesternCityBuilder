@@ -10,6 +10,7 @@ using ECS.Game.Systems.WesternBuilder_System.StateMachine;
 using ECS.Views;
 using ECS.Views.General;
 using Leopotam.Ecs;
+using Runtime.Data.PlayerData.Recipe;
 using Runtime.Game.Ui.Windows.TouchPad;
 using Runtime.Services.Uid;
 using UnityEngine;
@@ -27,10 +28,17 @@ namespace ECS.Utils.Extensions
             world.CreateDistanceTriggers();
             world.CreateNavMeshLinks();
             
-            //Temp
+            
+            world.CreateUnit();
+            world.CreateUnit();
             world.CreateUnitSkillScoresEntity();
             world.CreateResourceMining();
+            world.CreateCampFire();
         }
+        
+        //разделить на два класса?
+        //один вызывает все методы при инициализации игры
+        //другой вызывает методы в runtime
 
         public static EcsEntity GetInput(this EcsWorld world)
         {
@@ -75,58 +83,7 @@ namespace ECS.Utils.Extensions
             entity.GetAndFire<PrefabComponent>().Value = "Player";
             entity.Get<EventUnitChangeStateComponent>();
         }
-
-        public static EcsEntity CreateResourceType(this EcsWorld world, Transform point, RequiredResourceType resourceType)
-        {
-            var entity = world.NewEntity();
-            entity.Get<UIdComponent>().Value = UidGenerator.Next();
-            entity.GetAndFire<WoodLogComponent>();
-            entity.GetAndFire<PrefabComponent>().Value = resourceType.ToString();
-            entity.Get<EventMakeObjectAsChild>().Parent = point;
-            
-            return entity;
-        }
-
-        public static void CreateWoodStorage(this EcsWorld world)
-        {
-            var entity = world.NewEntity();
-            entity.Get<UIdComponent>().Value = UidGenerator.Next();
-            entity.GetAndFire<BuildComponent>().Value = "Storage";
-            entity.GetAndFire<PrefabComponent>().Value = "Storage";
-            
-            entity.Get<BuildWoodStorageComponent>();
-
-            //единый метод что сохранит enum
-            entity.GetAndFire<BuildStorageComponent>();
-            entity.Get<BuildStorageComponent>().MaxResource = 10;
-            entity.Get<BuildStorageComponent>().CurrentResource = 0;
-        }
         
-        public static void CreateRockStorage(this EcsWorld world)
-        {
-            var entity = world.NewEntity();
-            entity.Get<UIdComponent>().Value = UidGenerator.Next();
-            entity.GetAndFire<BuildComponent>().Value = "RockStorage";
-            entity.GetAndFire<PrefabComponent>().Value = "RockStorage";
-            
-            entity.Get<BuildRockStorageComponent>();
-            
-            entity.GetAndFire<BuildStorageComponent>();
-            entity.Get<BuildStorageComponent>().MaxResource = 5;
-            entity.Get<BuildStorageComponent>().CurrentResource = 0;
-        }
-        
-        public static void CreateCampFire(this EcsWorld world)
-        {
-            var entity = world.NewEntity();
-            entity.Get<UIdComponent>().Value = UidGenerator.Next();
-            entity.GetAndFire<BuildComponent>().Value = "CampFire";
-            entity.GetAndFire<PrefabComponent>().Value = "CampFire";
-            entity.Get<BuildCampFireComponent>();
-            
-            //сделать единый для всех объектов FindBuild, но пытаться найти реализацию Build : CampFire
-        }
-
         public static void CreateResourceMining(this EcsWorld world)
         {
             var views = Object.FindObjectsOfType<ObjectMiningView>();
@@ -139,9 +96,39 @@ namespace ECS.Utils.Extensions
                 entity.LinkView(view);
             }
         }
-
         
+        public static void CreateCampFire(this EcsWorld world)
+        {
+            var views = Object.FindObjectsOfType<BuildsView>(true); // сделать под костёр уникальную View
 
+            foreach (var view in views)
+            {
+                var entity = world.NewEntity();
+                entity.GetAndFire<BuildCampFireComponent>();
+                entity.Get<UIdComponent>().Value = UidGenerator.Next();
+                entity.LinkView(view);
+            }
+        }
+        
+        public static void CreateResourceType(this EcsWorld world, Transform point, RequiredResourceType resourceType)
+        {
+            var entity = world.NewEntity();
+            entity.Get<UIdComponent>().Value = UidGenerator.Next();
+            entity.GetAndFire<WoodLogComponent>();
+            entity.GetAndFire<PrefabComponent>().Value = resourceType.ToString();
+            entity.Get<EventMakeObjectAsChild>().Parent = point;
+            
+            // return entity;
+        }
+
+        public static void CreateRequestRecipe(this EcsWorld world, Recipe recipe)
+        {
+            var entity = world.NewEntity();
+            entity.Get<UIdComponent>().Value = UidGenerator.Next();
+            entity.GetAndFire<BuildUnderConstruction>().Recipe = recipe;
+            entity.GetAndFire<PrefabComponent>().Value = recipe.GetName();
+        }
+        
         public static void CreateDistanceTriggers(this EcsWorld world)
         {
             var views = Object.FindObjectsOfType<DistanceTriggerView>(true);
@@ -166,3 +153,32 @@ namespace ECS.Utils.Extensions
         }
     }
 }
+
+// public static void CreateWoodStorage(this EcsWorld world)
+// {
+//     var entity = world.NewEntity();
+//     entity.Get<UIdComponent>().Value = UidGenerator.Next();
+//     //entity.GetAndFire<BuildComponent>().Value = "Storage";
+//     entity.GetAndFire<PrefabComponent>().Value = "Storage";
+//             
+//     entity.Get<BuildWoodStorageComponent>();
+//
+//     //единый метод что сохранит enum
+//     entity.GetAndFire<BuildStorageComponent>();
+//     entity.Get<BuildStorageComponent>().MaxResource = 10;
+//     entity.Get<BuildStorageComponent>().CurrentResource = 0;
+// }
+//         
+// public static void CreateRockStorage(this EcsWorld world)
+// {
+//     var entity = world.NewEntity();
+//     entity.Get<UIdComponent>().Value = UidGenerator.Next();
+//     //entity.GetAndFire<BuildComponent>().Value = "RockStorage";
+//     entity.GetAndFire<PrefabComponent>().Value = "RockStorage";
+//             
+//     entity.Get<BuildRockStorageComponent>();
+//             
+//     entity.GetAndFire<BuildStorageComponent>();
+//     entity.Get<BuildStorageComponent>().MaxResource = 5;
+//     entity.Get<BuildStorageComponent>().CurrentResource = 0;
+// }

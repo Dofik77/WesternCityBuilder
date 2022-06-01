@@ -22,6 +22,7 @@ MonoBehaviour:
     - Key: 1
       Value: 5
     _levelOpenData: LV1
+    isStorageOff: 1
   - _key: craft_rockStorage
     _dependKey: 
     _name: RockStorage
@@ -31,3 +32,4 @@ MonoBehaviour:
     - Key: 2
       Value: 5
     _levelOpenData: LV1
+    isStorageOff: 2

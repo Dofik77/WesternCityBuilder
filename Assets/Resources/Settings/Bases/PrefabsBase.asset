@@ -19,7 +19,7 @@ MonoBehaviour:
     GameObject: {fileID: 7445344910305056461, guid: 2d6babde6a6192545990cfbbc03c3ebb, type: 3}
   - Name: BusyLetter
     GameObject: {fileID: 3094909925261188104, guid: e359d35f650ecb6448cffc1391d220b5, type: 3}
-  - Name: Storage
+  - Name: WoodStorage
     GameObject: {fileID: 1593121119353188470, guid: 1bccb48dba35363408b7d8f51d272024, type: 3}
   - Name: CampFire
     GameObject: {fileID: 8242270563373547872, guid: e90c5546d9732d44fb5f20849661c52b, type: 3}

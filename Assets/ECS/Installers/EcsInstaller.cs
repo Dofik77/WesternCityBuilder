@@ -22,6 +22,7 @@ namespace ECS.Installers
     public class EcsInstaller : MonoInstaller
     {
         [SerializeField] private ScreenVariables _screenVariables;
+        // ReSharper disable Unity.PerformanceAnalysis
         public override void InstallBindings()
         {
             Container.Bind<ScreenVariables>().FromInstance(_screenVariables).AsSingle();
@@ -30,6 +31,7 @@ namespace ECS.Installers
             Container.BindInterfacesTo<EcsMainBootstrap>().AsSingle();
         }
 
+        // ReSharper disable Unity.PerformanceAnalysis
         private void BindSystems()
         {
             Container.BindInterfacesAndSelfTo<GameInitializeSystem>().AsSingle();
@@ -38,16 +40,16 @@ namespace ECS.Installers
 
             //West Isle Builder Systems 
             Container.BindInterfacesAndSelfTo<SetAnimationSystem>().AsSingle();
-            Container.BindInterfacesAndSelfTo<BuildingsInitSystem>().AsSingle();
-            Container.BindInterfacesAndSelfTo<BuildStorageInitSystem>().AsSingle();
+            Container.BindInterfacesAndSelfTo<BuildCreatedBeforeRuntimeSystem>().AsSingle();
+            //Container.BindInterfacesAndSelfTo<BuildingsInitSystem>().AsSingle();
+            Container.BindInterfacesAndSelfTo<BuildUnderConstructionInitSystem>().AsSingle();
             Container.BindInterfacesAndSelfTo<MiningResourceObjectInitSystem>().AsSingle();
             Container.BindInterfacesAndSelfTo<UnitInitSystem>().AsSingle();
             Container.BindInterfacesAndSelfTo<SetBaseValuesOfUnitSkill>().AsSingle();
             
             Container.BindInterfacesAndSelfTo<UnitPrioritySystem>().AsSingle();
             Container.BindInterfacesAndSelfTo<UnitStateMachine>().AsSingle();
-            Container.BindInterfacesAndSelfTo<AssignmentOfTasksForUnitsSystem>().AsSingle();
-            
+
             Container.BindInterfacesAndSelfTo<FindClosestResourceObjectSystem>().AsSingle();
             Container.BindInterfacesAndSelfTo<CreateAndTransferRequestResourceSystem>().AsSingle();
             Container.BindInterfacesAndSelfTo<DistanceControlSystem>().AsSingle();

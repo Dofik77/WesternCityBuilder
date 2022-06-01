@@ -15,13 +15,13 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
     public class UnitPrioritySystem : ReactiveSystem<EventUpdatePriorityComponent>
     {
         //при спавне постройки давать компонент ( активная постройка ) и искать по фильтру активные постройки, и вытаскивать от туда данные
-        private readonly EcsFilter<BuildUnderConstruction, LinkComponent> _buildConstruction;
         private readonly EcsFilter<UnitsSkillScoreComponent> _unitSkills;
-
         private readonly EcsFilter<BuildCampFireComponent, LinkComponent> _campfire;
         
+        private readonly EcsFilter<BuildUnderConstruction, LinkComponent> _buildConstruction;
         private readonly EcsFilter<BuildWoodStorageComponent, LinkComponent> _woodStorage;
         private readonly EcsFilter<BuildRockStorageComponent, LinkComponent> _rockStorage;
+        
         //exclude заполненые склады по компоненту, exclude isBuildingNow, потому что склад сначало строиться,
         //а потом являеться складом
         //заменить на единый storageComponent.enum
@@ -33,8 +33,10 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
 
         private EcsEntity _campFireEntity;
         private EcsEntity _woodStorageEntity;
-        private EcsEntity _unitSkillsEntity;
         private EcsEntity _rockStorageEntity;
+        private EcsEntity _buildUnderConstructionEntity;
+        private EcsEntity _unitSkillsEntity;
+       
 
         private int _maxWoodTakeUnitResource;
 
@@ -47,43 +49,6 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
 
         protected override void Execute(EcsEntity entity)
         {
-            // foreach (var i in _campfire)
-            //     _campFireEntity = _campfire.GetEntity(i);
-            //
-            // foreach (var i in _woodStorage)
-            //     _woodStorageEntity = _woodStorage.GetEntity(i);
-            //
-            // foreach (var i in _rockStorage)
-            //     _rockStorageEntity = _rockStorage.GetEntity(i);
-            //
-            // foreach (var i in _unitSkills)
-            //     _unitSkillsEntity = _unitSkills.GetEntity(i);
-            
-            // if (!_woodStorageEntity.IsNull())
-            // {
-            //     var maxWoodInStorage = _woodStorageEntity.Get<BuildStorageComponent>().MaxResource;
-            //     var expectedAmountOfResource = _woodStorageEntity.Get<ExpectedAmountOfResource>().ExpectedValue;
-            //
-            //     if (expectedAmountOfResource < maxWoodInStorage)
-            //     {
-            //         var RequiredMining = RequiredResourceType.WoodResourceType;
-            //         
-            //         entity.Get<UnitPriorityData>().RequiredMining = RequiredMining;
-            //         entity.Get<UnitPriorityData>().TargetBuildsView = _woodStorageEntity.Get<LinkComponent>().View as BuildsView;
-            //
-            //         var maxWoodTakeUnitResource = _unitSkillsEntity.Get<UnitsSkillScoreComponent>().SkillOfPortability.Get(RequiredMining).Skill;
-            //         var requiredWood = maxWoodInStorage - expectedAmountOfResource;
-            //         var requiredValueForUnit = requiredWood > maxWoodTakeUnitResource ? maxWoodTakeUnitResource : requiredWood;
-            //         
-            //         entity.Get<UnitPriorityData>().RequiredValueResource = requiredValueForUnit;
-            //         entity.Get<EventUnitChangeStateComponent>().State = UnitAction.FetchResource;
-            //     }
-            //     else 
-            //         entity.Get<EventUnitChangeStateComponent>().State = UnitAction.AwaitNearCampFire;
-            // }
-            // else 
-            //     entity.Get<EventUnitChangeStateComponent>().State = UnitAction.AwaitNearCampFire;
-
             ChoosePriority();
             TransferPriority(_priority, entity);
         }
@@ -94,11 +59,22 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
             foreach (var i in _campfire)
                 _campFireEntity = _campfire.GetEntity(i);
 
+            foreach (var i in _buildConstruction)
+                _buildUnderConstructionEntity = _buildConstruction.GetEntity(i);
+
             foreach (var i in _woodStorage)
                 _woodStorageEntity = _woodStorage.GetEntity(i);
 
             foreach (var i in _rockStorage)
                 _rockStorageEntity = _rockStorage.GetEntity(i);
+
+            if (!_buildUnderConstructionEntity.IsNull())
+            {
+                var requiredResourceToConstruct = _buildUnderConstructionEntity.Get<BuildUnderConstruction>()
+                    .RequiredResourceToConstruct;
+                var currentResourceCollectedt = _buildUnderConstructionEntity.Get<BuildUnderConstruction>().CurrentResourceCollected;
+                //TODO
+            }
 
             if (!_woodStorageEntity.IsNull() || !_rockStorageEntity.IsNull())
             {
@@ -239,7 +215,7 @@ public enum Priority
     WoodStorage,
     RockStorage,
     
-    Reciept
+    Reciep
 }
 
 

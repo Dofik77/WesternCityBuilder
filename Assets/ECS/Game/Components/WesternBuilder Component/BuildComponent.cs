@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using Runtime.Data.PlayerData.Recipe;
 
 namespace ECS.Game.Components.WesternBuilder_Component
 {
@@ -14,7 +15,10 @@ namespace ECS.Game.Components.WesternBuilder_Component
 
     public struct BuildUnderConstruction
     {
-        
+        public Recipe Recipe;
+
+        public int CurrentResourceCollected;
+        public RequiredResourceCount[] RequiredResourceToConstruct;
     }
     
     public struct BuildCampFireComponent

@@ -1,4 +1,5 @@
 using DG.Tweening;
+using ECS.Utils.Extensions;
 using Leopotam.Ecs;
 using Lofelt.NiceVibrations;
 using Runtime.Data;
@@ -65,59 +66,10 @@ namespace Runtime.Game.Ui.Windows.Store
             
             void OnButton(UiGeneratedEntity entity, UiGeneratedLayout layout)
             {
-                Skin skin = _skinsData.Get().Get(entity.Key);//здесь рецепт
-                //в рецепте будет храниться -
-                //IsStorageOff? 
-                //what type of objects?(wood, rock, or nan)
+                Recipe recipe = _recipeData.Get().Get(entity.Key);
+                _world.CreateRequestRecipe(recipe);
                 
-                // var data = _commonPlayerData.GetData();
-                // //выделить действие на кнопку ( спавн объекта ) 
-                //
-                //
-                // switch (entity.CurrentUiState)
-                // {
-                //     case EUiEntityState.Available:
-                //         HapticPatterns.PlayPreset(HapticPatterns.PresetType.RigidImpact);
-                //         data.Skins.Add(entity.Key);
-                //         data.Money.Add(skin.GetCurrency(), -skin.GetCost());
-                //         View.GetCurrencyBox(skin.GetCurrency()).Value.text = data.Money.Get(skin.GetCurrency()).ToString();
-                //         entity.SetState(EUiEntityState.Action);
-                //         View.LayoutContainer.UpdatePurchaseStates(_skinsData.Get(),
-                //             ref _commonPlayerData.GetData().Money.CurrencyValues);
-                //         break;
-                //
-                //     case EUiEntityState.Unavailable:
-                //         SelectImpact(entity, HapticPatterns.PresetType.SoftImpact, 0.3f);
-                //         break;
-                //
-                //     case EUiEntityState.Action:
-                //         HapticPatterns.PlayPreset(HapticPatterns.PresetType.RigidImpact);
-                //         // SpawnParticle(entity.CurrentStateObjective);
-                //         layout.CurrentGreyEntity.SetState(EUiEntityState.Action);
-                //         entity.SetState(EUiEntityState.Grey);
-                //         layout.CurrentGreyEntity = entity;
-                //
-                //         // EcsFilter skinFilter = null;
-                //         // if (layout.DataKeyMask == "cube_")
-                //         // {
-                //         //     skinFilter = _world.GetFilter(typeof(EcsFilter<HasSkinComponent, CubeSkinComponent>));
-                //         //     data.CurrentCubeSkinKey = entity.Key;
-                //         // }
-                //         //
-                //         // if (layout.DataKeyMask == "background_")
-                //         // {
-                //         //     skinFilter = _world.GetFilter(typeof(EcsFilter<HasSkinComponent, BackgroundSkinComponent>));
-                //         //     data.CurrentBackgroundSkinKey = entity.Key;
-                //         // }
-                //         // foreach (var i in skinFilter)
-                //         //     skinFilter.GetEntity(i).Get<EventSkinEquipComponent>().Value = skin;
-                //
-                //         break;
-                //     case EUiEntityState.Grey:
-                //         break;
-                // }
-                //
-                // _commonPlayerData.Save(data);
+                //layout - вся страничка
             }
 
             void SelectImpact(UiGeneratedEntity entity, HapticPatterns.PresetType type, float duration)

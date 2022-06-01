@@ -612,6 +612,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3514410922298257444, guid: 65b84ba65799bae48b3b915653192708, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3774552407878111454, guid: 65b84ba65799bae48b3b915653192708, type: 3}
       propertyPath: m_Color.b
       value: 0.16602883
@@ -715,8 +719,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8649420252906417003, guid: fe45f5393a8ad0b488aa166537640cf6, type: 3}
       propertyPath: m_fontSize
-      value: 48.4
+      value: 51.45
       objectReference: {fileID: 0}
+    - target: {fileID: 8649420252906417003, guid: fe45f5393a8ad0b488aa166537640cf6, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 8649420252906417003, guid: fe45f5393a8ad0b488aa166537640cf6, type: 3}
       propertyPath: m_fontStyle
       value: 17
@@ -729,6 +737,10 @@ PrefabInstance:
       propertyPath: m_fontSizeBase
       value: 52
       objectReference: {fileID: 0}
+    - target: {fileID: 8649420252906417003, guid: fe45f5393a8ad0b488aa166537640cf6, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 8649420252906417003, guid: fe45f5393a8ad0b488aa166537640cf6, type: 3}
       propertyPath: m_enableAutoSizing
       value: 1
@@ -930,6 +942,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3514410922298257444, guid: 65b84ba65799bae48b3b915653192708, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4057638132406390098, guid: 65b84ba65799bae48b3b915653192708, type: 3}
       propertyPath: m_Type
       value: 0
@@ -1033,8 +1049,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8649420252906417003, guid: fe45f5393a8ad0b488aa166537640cf6, type: 3}
       propertyPath: m_fontSize
-      value: 46.25
+      value: 51.45
       objectReference: {fileID: 0}
+    - target: {fileID: 8649420252906417003, guid: fe45f5393a8ad0b488aa166537640cf6, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 8649420252906417003, guid: fe45f5393a8ad0b488aa166537640cf6, type: 3}
       propertyPath: m_fontStyle
       value: 17
@@ -1047,6 +1067,10 @@ PrefabInstance:
       propertyPath: m_fontSizeBase
       value: 52
       objectReference: {fileID: 0}
+    - target: {fileID: 8649420252906417003, guid: fe45f5393a8ad0b488aa166537640cf6, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 8649420252906417003, guid: fe45f5393a8ad0b488aa166537640cf6, type: 3}
       propertyPath: m_enableAutoSizing
       value: 1
@@ -1248,6 +1272,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3514410922298257444, guid: 65b84ba65799bae48b3b915653192708, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4057638132406390098, guid: 65b84ba65799bae48b3b915653192708, type: 3}
       propertyPath: m_Type
       value: 0
@@ -1377,6 +1405,10 @@ PrefabInstance:
     - target: {fileID: 238153354322971218, guid: 65b84ba65799bae48b3b915653192708, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514410922298257444, guid: 65b84ba65799bae48b3b915653192708, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4057638132406390098, guid: 65b84ba65799bae48b3b915653192708, type: 3}
       propertyPath: m_Type
@@ -1518,6 +1550,10 @@ PrefabInstance:
     - target: {fileID: 238153354322971218, guid: 65b84ba65799bae48b3b915653192708, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514410922298257444, guid: 65b84ba65799bae48b3b915653192708, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4057638132406390098, guid: 65b84ba65799bae48b3b915653192708, type: 3}
       propertyPath: m_Type

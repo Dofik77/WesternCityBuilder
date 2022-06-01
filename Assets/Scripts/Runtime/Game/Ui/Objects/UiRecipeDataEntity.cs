@@ -23,11 +23,12 @@ namespace Runtime.Game.Ui.Objects
             _recipeName.text = entity.GetName();
             _recipeDescription.text = entity.GetDescription();
             _levelOpenData.text = entity.GetLevelOpenData();
-            
+
             foreach (var resource in entity.GetResourceCount())
             {
-                _resourcesRequired[0].text = resource.Key.ToString() + " " + resource.Value.ToString();
+                _resourcesRequired[0].text = resource.Key.ToString() + " " + resource.NeedToConstruct.ToString();
                 //как обрезать строку?
+                
                 //динамичиская подстройка картинок? ( SO Currency ) 
             }
             

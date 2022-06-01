@@ -60,8 +60,7 @@ namespace ECS.Game.Systems.General.Level
             {
             }
             
-            _world.CreateUnit();
-            _world.CreateUnit();
+            
         }
         
         

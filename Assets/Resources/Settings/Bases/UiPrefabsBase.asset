@@ -23,5 +23,5 @@ MonoBehaviour:
     GameObject: {fileID: 5907433141820812848, guid: 38d7f676279fbf8428121bc6fe703caa, type: 3}
   - Name: uiStars
     GameObject: {fileID: 1521823285143819911, guid: 96929b455248c7b42bb733e700a75573, type: 3}
-  - Name: UiRecip
+  - Name: UiRecipe
     GameObject: {fileID: 956109376715875097, guid: e083b30098fd3754daaebc88e1080dae, type: 3}

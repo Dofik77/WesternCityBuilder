@@ -18,7 +18,6 @@ namespace ECS.Game.Components.WesternBuilder_Component
         RockResource,
         OreResource,
         FoodResource
-        
     }
 
 

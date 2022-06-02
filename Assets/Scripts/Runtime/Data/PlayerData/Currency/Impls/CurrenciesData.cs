@@ -8,7 +8,6 @@ namespace Runtime.Data.PlayerData.Currency.Impls
     {
         public Currency[] Get() => _currencies;
         [SerializeField] private Currency[] _currencies;
-        
         public Currency Get(ECurrency type)
         {
             for (var i = 0; i < _currencies.Length; i++)

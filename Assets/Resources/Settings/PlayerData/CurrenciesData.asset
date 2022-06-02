@@ -19,3 +19,9 @@ MonoBehaviour:
   - Type: 1
     Name: Gems
     Icon: {fileID: 21300000, guid: b1ed7170c8e664509a61d90988818474, type: 3}
+  - Type: 2
+    Name: Wood Resource
+    Icon: {fileID: 21300000, guid: 3c014263f3d364907880536586b4a02d, type: 3}
+  - Type: 3
+    Name: Rock Resource
+    Icon: {fileID: 21300000, guid: 3c014263f3d364907880536586b4a02d, type: 3}

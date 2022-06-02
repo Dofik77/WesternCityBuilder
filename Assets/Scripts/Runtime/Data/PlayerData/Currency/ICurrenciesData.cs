@@ -22,6 +22,6 @@ namespace Runtime.Data.PlayerData.Currency
     public enum ECurrency
     {
         Soft,
-        Hard
+        Hard,
     }
 }

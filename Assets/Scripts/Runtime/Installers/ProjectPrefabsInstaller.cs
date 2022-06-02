@@ -9,6 +9,8 @@ using Runtime.Data.Base.Ui;
 using Runtime.Data.Base.Ui.Impl;
 using Runtime.Data.PlayerData.Currency;
 using Runtime.Data.PlayerData.Currency.Impls;
+using Runtime.Data.PlayerData.LayoutSpriteData;
+using Runtime.Data.PlayerData.LayoutSpriteData.Impls;
 using Runtime.Data.PlayerData.Levels;
 using Runtime.Data.PlayerData.Levels.Impls;
 using Runtime.Data.PlayerData.Recipe;
@@ -32,6 +34,7 @@ namespace Runtime.Installers
         [SerializeField] private SkinsData skinsData;
         [SerializeField] private LevelsData levelsData;
         [SerializeField] private CurrenciesData currenciesData;
+        [SerializeField] private LayoutSpiteData _layoutSpiteData; 
         [SerializeField] private RecipeData recipeData; 
         
         public override void InstallBindings()
@@ -45,6 +48,7 @@ namespace Runtime.Installers
             Container.Bind<ILevelsData>().FromSubstitute(levelsData).AsSingle();
             Container.Bind<ICurrenciesData>().FromSubstitute(currenciesData).AsSingle();
             Container.Bind<IRecipeData>().FromSubstitute(recipeData).AsSingle();
+            Container.Bind<ILayoutSpriteData>().FromSubstitute(_layoutSpiteData).AsSingle();
         }
     }
 }

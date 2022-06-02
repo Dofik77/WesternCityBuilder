@@ -20,9 +20,12 @@ MonoBehaviour:
     _recipeIcon: {fileID: 21300000, guid: 9fcef60dfed3e42a89964370f4dfb654, type: 3}
     _recipeResources:
     - Key: 1
-      Value: 5
+      NeedToConstruct: 5
+    - Key: 2
+      NeedToConstruct: 3
     _levelOpenData: LV1
     isStorageOff: 1
+    _maxResourceStorage: 10
   - _key: craft_rockStorage
     _dependKey: 
     _name: RockStorage
@@ -30,6 +33,9 @@ MonoBehaviour:
     _recipeIcon: {fileID: 21300000, guid: 37a7ae19048e34c15a8935f7c259e3fc, type: 3}
     _recipeResources:
     - Key: 2
-      Value: 5
+      NeedToConstruct: 6
+    - Key: 1
+      NeedToConstruct: 4
     _levelOpenData: LV1
     isStorageOff: 2
+    _maxResourceStorage: 5

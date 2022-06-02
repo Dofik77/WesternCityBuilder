@@ -61,22 +61,18 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
 
             foreach (var i in _buildConstruction)
                 _buildUnderConstructionEntity = _buildConstruction.GetEntity(i);
-
+            
             foreach (var i in _woodStorage)
                 _woodStorageEntity = _woodStorage.GetEntity(i);
 
             foreach (var i in _rockStorage)
                 _rockStorageEntity = _rockStorage.GetEntity(i);
+            
 
             if (!_buildUnderConstructionEntity.IsNull())
-            {
-                var requiredResourceToConstruct = _buildUnderConstructionEntity.Get<BuildUnderConstruction>()
-                    .RequiredResourceToConstruct;
-                var currentResourceCollectedt = _buildUnderConstructionEntity.Get<BuildUnderConstruction>().CurrentResourceCollected;
-                //TODO
-            }
-
-            if (!_woodStorageEntity.IsNull() || !_rockStorageEntity.IsNull())
+                _priority = Priority.Reciepe;
+            
+            else if (!_woodStorageEntity.IsNull() || !_rockStorageEntity.IsNull())
             {
                 if (!_woodStorageEntity.IsNull() && !_rockStorageEntity.IsNull())
                 {
@@ -124,7 +120,29 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
                 case Priority.RockStorage :
                     RockStorageUpdate(entity);
                     break;
+                case Priority.Reciepe :
+                    RecipeUpdate(entity);
+                    break;
             }
+        }
+
+        private void RecipeUpdate(EcsEntity entity)
+        {
+            foreach (var i in _unitSkills)
+                _unitSkillsEntity = _unitSkills.GetEntity(i);
+            
+            
+            
+             
+            var requiredResourceToConstruct = _buildUnderConstructionEntity.Get<BuildUnderConstruction>().RequiredResourceToConstruct;
+            var currentResourceCollected = _buildUnderConstructionEntity.Get<BuildUnderConstruction>().CurrentResourceCollected;
+
+            foreach (var resource in requiredResourceToConstruct)
+            {
+                var resourceType = resource.Key;
+                var resourceCount = resource.NeedToConstruct;
+            }
+
         }
 
         private void WoodStorageUpdate(EcsEntity entity)
@@ -196,8 +214,6 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
         //     }
         //    
         // }
-        
-        
     }
 }
 
@@ -215,7 +231,7 @@ public enum Priority
     WoodStorage,
     RockStorage,
     
-    Reciep
+    Reciepe
 }
 
 

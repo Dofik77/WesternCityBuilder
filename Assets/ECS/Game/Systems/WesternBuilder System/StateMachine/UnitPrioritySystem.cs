@@ -49,12 +49,12 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
 
         protected override void Execute(EcsEntity entity)
         {
+            CheckingActivities();
             ChoosePriority();
             TransferPriority(_priority, entity);
         }
-
-
-        private void ChoosePriority()
+        
+        private void CheckingActivities()
         {
             foreach (var i in _campfire)
                 _campFireEntity = _campfire.GetEntity(i);
@@ -68,19 +68,23 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
             foreach (var i in _rockStorage)
                 _rockStorageEntity = _rockStorage.GetEntity(i);
             
-
+            foreach (var i in _unitSkills)
+                _unitSkillsEntity = _unitSkills.GetEntity(i);
+        }
+        private void ChoosePriority()
+        {
             if (!_buildUnderConstructionEntity.IsNull())
                 _priority = Priority.Reciepe;
-            
-            else if (!_woodStorageEntity.IsNull() || !_rockStorageEntity.IsNull())
+            else if 
+                (!_woodStorageEntity.IsNull() || !_rockStorageEntity.IsNull())
             {
                 if (!_woodStorageEntity.IsNull() && !_rockStorageEntity.IsNull())
                 {
                     var maxWoodInStorage = _woodStorageEntity.Get<BuildStorageComponent>().MaxResource;
-                    var expectedAmountWoodStorageOfResource = _woodStorageEntity.Get<ExpectedAmountOfResource>().ExpectedValue;
+                    var expectedAmountWoodStorageOfResource = _woodStorageEntity.Get<ExpectedTypeAndValueResource>().ExpectedValue;
                     
                     var maxRockInStorage = _rockStorageEntity.Get<BuildStorageComponent>().MaxResource;
-                    var expectedAmountRockStorageOfResource = _rockStorageEntity.Get<ExpectedAmountOfResource>().ExpectedValue;
+                    var expectedAmountRockStorageOfResource = _rockStorageEntity.Get<ExpectedTypeAndValueResource>().ExpectedValue;
 
                     if (expectedAmountRockStorageOfResource < maxRockInStorage && !(expectedAmountWoodStorageOfResource < maxWoodInStorage))
                         _priority = Priority.RockStorage;
@@ -93,7 +97,7 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
                 else if (!_woodStorageEntity.IsNull())
                 {
                     var maxWoodInStorage = _woodStorageEntity.Get<BuildStorageComponent>().MaxResource;
-                    var expectedAmountWoodStorageOfResource = _woodStorageEntity.Get<ExpectedAmountOfResource>().ExpectedValue;
+                    var expectedAmountWoodStorageOfResource = _woodStorageEntity.Get<ExpectedTypeAndValueResource>().ExpectedValue;
                     
                     if (expectedAmountWoodStorageOfResource < maxWoodInStorage)
                         _priority = Priority.WoodStorage;
@@ -104,7 +108,6 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
             else
                 _priority = Priority.Await;
         }
-
         private void TransferPriority(Priority priority, EcsEntity entity)
         {
             switch (priority)
@@ -125,22 +128,32 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
                     break;
             }
         }
-
+        
         private void RecipeUpdate(EcsEntity entity)
         {
-            foreach (var i in _unitSkills)
-                _unitSkillsEntity = _unitSkills.GetEntity(i);
-            
-            
-            
-             
-            var requiredResourceToConstruct = _buildUnderConstructionEntity.Get<BuildUnderConstruction>().RequiredResourceToConstruct;
-            var currentResourceCollected = _buildUnderConstructionEntity.Get<BuildUnderConstruction>().CurrentResourceCollected;
+            //может быть ситуация, когда в рецепте уже 0, но в постройке ещё не присены все ресрусы
+            //для этого, перед каждый началом работы RecipeUpdate, нужно проверять, есть ли в Recipe[key,value]==0?
+            //если да, то отправляем его ждать в BuildUnderConstruct
+            var requiredResourceToConstruct = 
+                _buildUnderConstructionEntity.Get<BuildUnderConstruction>().RequiredResourceToConstruct;
+            var currentResourceCollected = 
+                _buildUnderConstructionEntity.Get<BuildUnderConstruction>().CurrentResourceCollected;
+            var targetView = entity.Get<BuildUnderConstruction>().BuildsView;
 
             foreach (var resource in requiredResourceToConstruct)
             {
                 var resourceType = resource.Key;
                 var resourceCount = resource.NeedToConstruct;
+
+                entity.Get<UnitPriorityData>().RequiredMining = resourceType;
+                entity.Get<UnitPriorityData>().TargetBuildsView = targetView;
+                
+                // var maxWoodTakeUnitResource = _unitSkillsEntity.Get<UnitsSkillScoreComponent>().SkillOfPortability.Get(resourceType).Skill;
+                // var requiredWoodForUnit = maxWoodInStorage - expectedAmountOfResource;
+                // var requiredValueForUnit = requiredWoodForUnit > maxWoodTakeUnitResource
+                //     ? maxWoodTakeUnitResource : requiredWoodForUnit;
+                
+                
             }
 
         }
@@ -151,7 +164,7 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
                 _unitSkillsEntity = _unitSkills.GetEntity(i);
             
             var maxWoodInStorage = _woodStorageEntity.Get<BuildStorageComponent>().MaxResource;
-            var expectedAmountOfResource = _woodStorageEntity.Get<ExpectedAmountOfResource>().ExpectedValue;
+            var expectedAmountOfResource = _woodStorageEntity.Get<ExpectedTypeAndValueResource>().ExpectedValue;
             
             var RequiredMining = RequiredResourceType.WoodResource;
                 
@@ -172,7 +185,7 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
                 _unitSkillsEntity = _unitSkills.GetEntity(i);
             
             var maxRockInStorage = _rockStorageEntity.Get<BuildStorageComponent>().MaxResource;
-            var expectedAmountOfResource = _rockStorageEntity.Get<ExpectedAmountOfResource>().ExpectedValue;
+            var expectedAmountOfResource = _rockStorageEntity.Get<ExpectedTypeAndValueResource>().ExpectedValue;
             
             var RequiredMining = RequiredResourceType.RockResource;
                 

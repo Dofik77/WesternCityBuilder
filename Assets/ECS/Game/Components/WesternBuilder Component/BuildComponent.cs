@@ -1,4 +1,7 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
+using ECS.Views;
+using Runtime.Data;
 using Runtime.Data.PlayerData.Recipe;
 
 namespace ECS.Game.Components.WesternBuilder_Component
@@ -8,16 +11,39 @@ namespace ECS.Game.Components.WesternBuilder_Component
         public string Value;
     }
 
-    public struct ExpectedAmountOfResource
+    public struct ExpectedTypeAndValueResource
     {
+        public ResourceTypeValuePair ResourceTypeValuePair;
+        
         public int ExpectedValue;
+        
     }
+    
+    public struct ResourceTypeValuePair : IHasEnumKey
+    {
+        public ResourceTypeValuePair(RequiredResourceType key, int value)
+        {
+            Key = key;
+            Value = value;
+        }
+        
+
+        public RequiredResourceType Key;
+        public int Value;
+        
+        public Enum GetKey()
+        {
+            return Key;
+        }
+    }
+    
 
     public struct BuildUnderConstruction
     {
         public Recipe Recipe;
 
         public int CurrentResourceCollected;
+        public BuildsView BuildsView;
         public RequiredResourceCount[] RequiredResourceToConstruct;
     }
     

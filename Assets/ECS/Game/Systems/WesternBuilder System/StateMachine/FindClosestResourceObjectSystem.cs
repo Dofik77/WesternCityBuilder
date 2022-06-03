@@ -72,7 +72,7 @@ namespace ECS.Game.Systems.WesternBuilder_System
             _closestMiningView.Entity.Get<RemainingAmountResource>().Value -= requiredMining;
             
             entity.Get<UnitDataMainValue>().CurrentMainResourceValue = requiredMining;
-            entity.Get<UnitPriorityData>().TargetBuildsView.Entity.Get<ExpectedAmountOfResource>().ExpectedValue +=
+            entity.Get<UnitPriorityData>().TargetBuildsView.Entity.Get<ExpectedTypeAndValueResource>().ExpectedValue +=
                 requiredMining;
 
             entity.Get<FollowAndSetStateComponent>().FeatureState = UnitAction.TakeResource;

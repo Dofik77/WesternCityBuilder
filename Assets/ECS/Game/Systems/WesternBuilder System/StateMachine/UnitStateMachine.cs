@@ -41,6 +41,11 @@ namespace ECS.Game.Systems.WesternBuilder_System.Stats.StateMachine
                     Debug.Log("TakeResource");
                     break;
                 
+                case UnitAction.Сonstruction :
+                    Debug.Log("ConstructionBuild");
+                    entity.Get<ConstructionBuild>();
+                    break;
+                
                 case UnitAction.PutResource : 
                     Debug.Log("PutResource");
                     entity.Get<EventBuildUpdate>();

@@ -25,7 +25,6 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
 
         private int _currentValue;
         
-        
         protected override void Execute(EcsEntity entity)
         {
             _buildsView = entity.Get<UnitPriorityData>().TargetBuildsView;
@@ -55,9 +54,7 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
             
             entity.Get<EventUpdatePriorityComponent>();
             
-            //UI который будет привязан к постройке 
-            //обновлять данные в постройке 
-            //визуализация тоже в постройке 
+            //проверяем, key,value[] = 0? EventConstruct : EventUpd
         }
     }
 

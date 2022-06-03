@@ -32,10 +32,7 @@ namespace ECS.Game.Components.WesternBuilder_Component
         FetchResource,
         TakeResource,
         PutResource,
-        
-        MiningWood,
-        FindNearestWood,
-        CarryWood,
+        Сonstruction,
     }
 
     

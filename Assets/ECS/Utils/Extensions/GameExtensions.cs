@@ -117,16 +117,14 @@ namespace ECS.Utils.Extensions
             entity.GetAndFire<WoodLogComponent>();
             entity.GetAndFire<PrefabComponent>().Value = resourceType.ToString();
             entity.Get<EventMakeObjectAsChild>().Parent = point;
-            
-            // return entity;
         }
 
         public static void CreateRequestRecipe(this EcsWorld world, Recipe recipe)
         {
             var entity = world.NewEntity();
             entity.Get<UIdComponent>().Value = UidGenerator.Next();
-            entity.GetAndFire<BuildUnderConstruction>().Recipe = recipe;
             entity.GetAndFire<PrefabComponent>().Value = recipe.GetName();
+            entity.GetAndFire<BuildUnderConstruction>().Recipe = recipe;
         }
         
         public static void CreateDistanceTriggers(this EcsWorld world)

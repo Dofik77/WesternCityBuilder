@@ -25,3 +25,5 @@ MonoBehaviour:
     GameObject: {fileID: 1521823285143819911, guid: 96929b455248c7b42bb733e700a75573, type: 3}
   - Name: UiRecipe
     GameObject: {fileID: 956109376715875097, guid: e083b30098fd3754daaebc88e1080dae, type: 3}
+  - Name: ResourceData
+    GameObject: {fileID: 8962008694187482277, guid: f0a749ce519cbae438a62a3f5a18c60e, type: 3}

@@ -16,8 +16,8 @@ MonoBehaviour:
   - _key: craft_woodStorage
     _dependKey: 
     _name: WoodStorage
-    _description: Storage some wood
-    _recipeIcon: {fileID: 21300000, guid: 9fcef60dfed3e42a89964370f4dfb654, type: 3}
+    _description: Alows storing wood. Upgrade to increase the capacity
+    _recipeIcon: {fileID: 21300000, guid: b127a858f9ca941d9b037a1fe8a6def9, type: 3}
     _recipeResources:
     - Key: 1
       NeedToConstruct: 5
@@ -29,13 +29,28 @@ MonoBehaviour:
   - _key: craft_rockStorage
     _dependKey: 
     _name: RockStorage
-    _description: Storage some rock
-    _recipeIcon: {fileID: 21300000, guid: 37a7ae19048e34c15a8935f7c259e3fc, type: 3}
+    _description: Alows storing rock. Upgrade to increase the capacity
+    _recipeIcon: {fileID: 21300000, guid: 04880f7536e0c4425b43bbb3c3ea7cf6, type: 3}
     _recipeResources:
-    - Key: 2
-      NeedToConstruct: 6
     - Key: 1
       NeedToConstruct: 4
+    - Key: 2
+      NeedToConstruct: 6
     _levelOpenData: LV1
     isStorageOff: 2
+    _maxResourceStorage: 5
+  - _key: craft_testRecipe
+    _dependKey: 
+    _name: TestRecipe
+    _description: Show capabilities adaptive ui
+    _recipeIcon: {fileID: 21300000, guid: df257e5fc6bfc4ccba70d45b25d556d0, type: 3}
+    _recipeResources:
+    - Key: 2
+      NeedToConstruct: -10
+    - Key: 1
+      NeedToConstruct: -10
+    - Key: 4
+      NeedToConstruct: -10
+    _levelOpenData: LV3
+    isStorageOff: 0
     _maxResourceStorage: 5

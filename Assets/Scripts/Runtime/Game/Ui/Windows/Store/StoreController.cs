@@ -59,6 +59,7 @@ namespace Runtime.Game.Ui.Windows.Store
             var data = _commonPlayerData.GetData();
             
             View.InitCurrencies(ref data.Money, _currenciesData);
+            //для 2 и 3го key дописать логику ( рецепт закрыт по уровню и т.д) 
             View.LayoutContainer.Init(_recipeData.Get(), data, OnButton,
                 key => key.StartsWith("cube_locked_") || key.StartsWith("background_locked_"),
                 null, 

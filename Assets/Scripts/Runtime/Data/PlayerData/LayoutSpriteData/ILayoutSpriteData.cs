@@ -18,7 +18,7 @@ namespace Runtime.Data.PlayerData.LayoutSpriteData
         
         [Header("Data")]
         public string Name;
-        public GameObject Icon;
+        public Sprite Icon;
     }
     
     

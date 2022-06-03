@@ -16,10 +16,11 @@ namespace Runtime.Services.UiSpawnService.Impls
             _container = container;
             _uiPrefabs = uiPrefabs;
         }
-        
-        public GameObject Spawn(string name)
+
+        public GameObject Spawn(string name, Transform parent = null)
         {
-            return _container.InstantiatePrefab(_uiPrefabs.Get(name), Vector3.zero, Quaternion.identity, null);
+            
+            return _container.InstantiatePrefab(_uiPrefabs.Get(name), Vector3.zero, Quaternion.identity, parent);
         }
     }
 }

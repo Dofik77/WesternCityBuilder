@@ -1,4 +1,6 @@
-﻿using ECS.Core.Utils.ReactiveSystem;
+﻿using DG.Tweening;
+using ECS.Core.Utils.ReactiveSystem;
+using ECS.Core.Utils.ReactiveSystem.Components;
 using ECS.Game.Components.Flags;
 using ECS.Game.Components.General;
 using ECS.Game.Components.WesternBuilder_Component;
@@ -11,11 +13,11 @@ using Zenject;
 
 namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
 {
-    public class BuildUnderConstructionInitSystem : ReactiveSystem<BuildUnderConstruction>
+    public class BuildUnderConstructionInitSystem : ReactiveSystem<EventAddComponent<BuildUnderConstruction>>
     {
         [Inject] private ScreenVariables _screenVariables;
         private readonly EcsFilter<UnitComponent, LinkComponent>.Exclude<UnitHasPriority> _units;
-        protected override EcsFilter<BuildUnderConstruction> ReactiveFilter { get; }
+        protected override EcsFilter <EventAddComponent<BuildUnderConstruction>> ReactiveFilter { get; }
        
         protected override void Execute(EcsEntity entity)
         {
@@ -27,34 +29,32 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
             var view = entity.Get<LinkComponent>().View as BuildsView;
 
             entity.Get<BuildUnderConstruction>().BuildsView = view;
-            entity.Get<BuildUnderConstruction>().CurrentResourceCollected = 0;
+            entity.Get<BuildUnderConstruction>().RequiredRecipeResource = requiredResourceToConstruct;
             entity.Get<BuildUnderConstruction>().RequiredResourceToConstruct = requiredResourceToConstruct;
             
             view.Transform.position = _screenVariables.GetTransformPoint(buildName).position;
             view.Transform.rotation = _screenVariables.GetTransformPoint(buildName).rotation;
 
+            ChangeViewObject(view);
             InitBuildUI(view, requiredResourceToConstruct);
-            InitExpectedResources(entity, requiredResourceToConstruct);
             CheckBuildOnStorage(entity, buildStatus, currentRecipe);
+            
             
             foreach (var i in _units)
                 _units.GetEntity(i).Get<EventUpdatePriorityComponent>();
         }
 
-        private void InitBuildUI(BuildsView view, RequiredResourceCount[] requiredResourceToConstruct)
+        private void ChangeViewObject(BuildsView view)
         {
-            view.UpdateScore(0,requiredResourceToConstruct[0].NeedToConstruct); //TODO for all fields
-        }//TODO 
-        
-        private void InitExpectedResources(EcsEntity entity, RequiredResourceCount[] requiredResourceToConstruct)
-        {
-            foreach (var resource in requiredResourceToConstruct)
-            {
-                entity.Get<ExpectedTypeAndValueResource>().ResourceTypeValuePair =
-                    new ResourceTypeValuePair(resource.Key, resource.NeedToConstruct);
-            }
+            view.BaseObject.SetActive(true);
+            view.ConstructedObject.SetActive(false);
         }
 
+        private void InitBuildUI(BuildsView view, RequiredResourceCount[] requiredResourceToConstruct)
+        {
+            view.UpdateScore(0,10); //TODO for all fields
+        }
+        
         private void CheckBuildOnStorage(EcsEntity entity, IsStorageOff buildStatus, Recipe currentRecipe)
         {
             if (buildStatus != IsStorageOff.None)

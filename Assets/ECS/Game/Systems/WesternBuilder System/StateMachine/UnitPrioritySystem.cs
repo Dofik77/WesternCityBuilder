@@ -36,17 +36,11 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
         private EcsEntity _rockStorageEntity;
         private EcsEntity _buildUnderConstructionEntity;
         private EcsEntity _unitSkillsEntity;
-       
+        
+        private Priority _priority;
 
         private int _maxWoodTakeUnitResource;
-
-
-        private Priority _priority;
         
-        //idea 
-        //система приоритетов будет выставлять enum для того, что нужно сделать 
-        //и лишь после этого по enum выбирать действия
-
         protected override void Execute(EcsEntity entity)
         {
             CheckingActivities();
@@ -131,31 +125,41 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
         
         private void RecipeUpdate(EcsEntity entity)
         {
+            bool recipeNotVoid = true;
+            var requiredResourceToConstruct = 
+                _buildUnderConstructionEntity.Get<BuildUnderConstruction>().RequiredRecipeResource;
+
+            for (int i = 0; i < requiredResourceToConstruct.Length; i++)
+            {
+                if (requiredResourceToConstruct[i].NeedToConstruct > 0)
+                {
+                    var resourceType = requiredResourceToConstruct[i].Key;
+                    var resourceCount = requiredResourceToConstruct[i].NeedToConstruct;
+                    var targetView = entity.Get<BuildUnderConstruction>().BuildsView;
+                    
+                    entity.Get<UnitPriorityData>().RequiredMining = resourceType;
+                    entity.Get<UnitPriorityData>().TargetBuildsView = targetView;
+                    
+                    var maxTakeUnitResource = _unitSkillsEntity.Get<UnitsSkillScoreComponent>().SkillOfPortability.Get(resourceType).Skill;
+                    var requiredValueForUnit = resourceCount > maxTakeUnitResource ? maxTakeUnitResource : resourceCount;
+                    
+                    _buildUnderConstructionEntity.Get<BuildUnderConstruction>().RequiredRecipeResource[i].NeedToConstruct
+                        -= requiredValueForUnit;
+                    
+                    entity.Get<UnitPriorityData>().RequiredValueResource = requiredValueForUnit;
+                    entity.Get<EventUnitChangeStateComponent>().State = UnitAction.FetchResource;
+                    
+                    recipeNotVoid = false;
+                    break;
+                }
+            }
+            
+            if (recipeNotVoid)
+                entity.Get<EventUnitChangeStateComponent>().State = UnitAction.AwaitNearСonstruction;
+            
             //может быть ситуация, когда в рецепте уже 0, но в постройке ещё не присены все ресрусы
             //для этого, перед каждый началом работы RecipeUpdate, нужно проверять, есть ли в Recipe[key,value]==0?
             //если да, то отправляем его ждать в BuildUnderConstruct
-            var requiredResourceToConstruct = 
-                _buildUnderConstructionEntity.Get<BuildUnderConstruction>().RequiredResourceToConstruct;
-            var currentResourceCollected = 
-                _buildUnderConstructionEntity.Get<BuildUnderConstruction>().CurrentResourceCollected;
-            var targetView = entity.Get<BuildUnderConstruction>().BuildsView;
-
-            foreach (var resource in requiredResourceToConstruct)
-            {
-                var resourceType = resource.Key;
-                var resourceCount = resource.NeedToConstruct;
-
-                entity.Get<UnitPriorityData>().RequiredMining = resourceType;
-                entity.Get<UnitPriorityData>().TargetBuildsView = targetView;
-                
-                // var maxWoodTakeUnitResource = _unitSkillsEntity.Get<UnitsSkillScoreComponent>().SkillOfPortability.Get(resourceType).Skill;
-                // var requiredWoodForUnit = maxWoodInStorage - expectedAmountOfResource;
-                // var requiredValueForUnit = requiredWoodForUnit > maxWoodTakeUnitResource
-                //     ? maxWoodTakeUnitResource : requiredWoodForUnit;
-                
-                
-            }
-
         }
 
         private void WoodStorageUpdate(EcsEntity entity)

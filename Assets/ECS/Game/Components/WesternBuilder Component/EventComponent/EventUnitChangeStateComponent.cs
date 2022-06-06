@@ -28,6 +28,7 @@ namespace ECS.Game.Components.WesternBuilder_Component
         FollowAndSetState,
         
         AwaitNearCampFire,
+        AwaitNearСonstruction,
         
         FetchResource,
         TakeResource,

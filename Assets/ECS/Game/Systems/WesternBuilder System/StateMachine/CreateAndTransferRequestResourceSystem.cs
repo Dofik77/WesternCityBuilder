@@ -64,7 +64,7 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
         private void ResourceExtraction(EcsEntity unitEntity, ObjectMiningView objectMiningView)
         {
             var unitView = unitEntity.Get<LinkComponent>().View as UnitView;
-            var reqMainValue = unitEntity.Get<UnitDataMainValue>().CurrentMainResourceValue;
+            var reqMainValue = unitEntity.Get<UnitMainingValue>().CurrentMainResourceValue;
             var extractTime = ExtractTime(reqMainValue, _unitWoodSpeedMain);
 
             unitView.Entity.Get<EventSetAnimationComponent>().Value = 3;
@@ -81,7 +81,7 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
             
             _delayService.Do(extractTime + 0.1f, () =>
             {
-                var requiredValueForUnit = unitEntity.Get<UnitPriorityData>().RequiredValueResource - unitEntity.Get<UnitDataMainValue>().CurrentMainResourceValue;
+                var requiredValueForUnit = unitEntity.Get<UnitPriorityData>().RequiredValueResource - unitEntity.Get<UnitMainingValue>().CurrentMainResourceValue;
 
                 if (objectMiningView.Entity.IsAlive() && objectMiningView.GetCurrentResourceValue == 0)
                     objectMiningView.Entity.Get<IsDestroyedComponent>();

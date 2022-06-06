@@ -10,6 +10,7 @@ using ECS.Game.Systems.WesternBuilder_System.StateMachine;
 using ECS.Views;
 using ECS.Views.General;
 using Leopotam.Ecs;
+using Runtime.Data.PlayerData.Recipe;
 using SimpleUi.Signals;
 using UnityEngine;
 using Zenject;
@@ -22,28 +23,18 @@ namespace ECS.Game.Systems.WesternBuilder_System
         private readonly EcsFilter<ObjectMiningComponent, LinkComponent> _miningObjects;
         private readonly EcsFilter<UnitsSkillScoreComponent> _unitSkills;
         
-        //если enum == enum который мы запрашиваем
-        
+        private float ClosestResourceMiningPosition = Mathf.Infinity;
         
         private ObjectMiningView _closestMiningView;
         private UnitView _unitView;
-        
-        private EcsEntity _unitSkillsEntity;
-
-        private float ClosestWoodPosition = Mathf.Infinity;
-        
         protected override EcsFilter<EventFindClosestResourceComponent> ReactiveFilter { get; }
 
         protected override void Execute(EcsEntity entity)
         {
-            foreach (var i in _unitSkills)
-                _unitSkillsEntity = _unitSkills.GetEntity(i);
-            
             _unitView = entity.Get<LinkComponent>().View as UnitView;
             var requiredResourceType = entity.Get<UnitPriorityData>().RequiredMining;
             var requiredResourceValue = entity.Get<UnitPriorityData>().RequiredValueResource;
-          
-
+            
             foreach (var i in _miningObjects)
             {
                 var objectMiningView = _miningObjects.Get2(i).View as ObjectMiningView;
@@ -55,10 +46,10 @@ namespace ECS.Game.Systems.WesternBuilder_System
                         Vector3 dif = _unitView.transform.position - objectMiningView.transform.position;
                         float curDistance = dif.magnitude;
                     
-                        if (curDistance < ClosestWoodPosition)
+                        if (curDistance < ClosestResourceMiningPosition)
                         {
                             _closestMiningView = objectMiningView;
-                            ClosestWoodPosition = curDistance;
+                            ClosestResourceMiningPosition = curDistance;
                         }
                     }
                 }
@@ -71,9 +62,14 @@ namespace ECS.Game.Systems.WesternBuilder_System
                 
             _closestMiningView.Entity.Get<RemainingAmountResource>().Value -= requiredMining;
             
-            entity.Get<UnitDataMainValue>().CurrentMainResourceValue = requiredMining;
-            entity.Get<UnitPriorityData>().TargetBuildsView.Entity.Get<ExpectedTypeAndValueResource>().ExpectedValue +=
-                requiredMining;
+            entity.Get<UnitMainingValue>().CurrentMainResourceValue = requiredMining;
+
+            // if (entity.Get<UnitPriorityData>().TargetBuildsView.Entity.Get<ExpectedTypeAndValueResource>()
+            //         .IsStorageOff != IsStorageOff.None)
+            // {
+            //     entity.Get<UnitPriorityData>().TargetBuildsView.Entity.Get<ExpectedTypeAndValueResource>().ExpectedValue +=
+            //         requiredMining;
+            // }
 
             entity.Get<FollowAndSetStateComponent>().FeatureState = UnitAction.TakeResource;
             entity.Get<FollowAndSetStateComponent>().SetDistanceView = _closestMiningView;
@@ -82,7 +78,7 @@ namespace ECS.Game.Systems.WesternBuilder_System
             entity.Get<EventUnitChangeStateComponent>().State = UnitAction.FollowAndSetState;
             entity.Get<CurrentMiningObjectData>().CurrentMiningObject = _closestMiningView;
 
-            ClosestWoodPosition = Mathf.Infinity;
+            ClosestResourceMiningPosition = Mathf.Infinity;
         }
     }
     

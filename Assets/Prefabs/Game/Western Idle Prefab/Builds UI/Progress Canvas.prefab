@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 3.26}
+  m_AnchoredPosition: {x: 0, y: 3.2600098}
   m_SizeDelta: {x: 1219, y: 634}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &3424931991936756201
@@ -82,7 +82,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &7037830253206181519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,6 +215,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8376381375799585545, guid: 59e3ab1b661047d4b9eb4a659e27ff9f, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 8376381375799585545, guid: 59e3ab1b661047d4b9eb4a659e27ff9f, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59e3ab1b661047d4b9eb4a659e27ff9f, type: 3}
 --- !u!224 &6234125880348640774 stripped

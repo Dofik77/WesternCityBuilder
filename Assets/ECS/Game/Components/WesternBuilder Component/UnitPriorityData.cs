@@ -11,7 +11,7 @@ namespace ECS.Game.Components.WesternBuilder_Component
         public RequiredResourceType RequiredMining;
     }
 
-    public struct UnitDataMainValue
+    public struct UnitMainingValue
     {
         public int CurrentMainResourceValue; 
     }

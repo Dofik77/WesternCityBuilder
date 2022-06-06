@@ -46,6 +46,11 @@ namespace ECS.Game.Systems.WesternBuilder_System.Stats.StateMachine
                     entity.Get<ConstructionBuild>();
                     break;
                 
+                case UnitAction.AwaitNearСonstruction :
+                    Debug.Log("AwaitNearСonstruction");
+                    //entity.Get<AwaitNearСonstruction>();
+                    break;
+                
                 case UnitAction.PutResource : 
                     Debug.Log("PutResource");
                     entity.Get<EventBuildUpdate>();

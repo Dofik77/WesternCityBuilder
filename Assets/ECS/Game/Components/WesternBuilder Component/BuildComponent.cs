@@ -16,7 +16,23 @@ namespace ECS.Game.Components.WesternBuilder_Component
         public ResourceTypeValuePair ResourceTypeValuePair;
         
         public int ExpectedValue;
-        
+
+        public IsStorageOff IsStorageOff;
+
+    }
+
+    public struct ExpectedRecipeResource
+    {
+        public ResourceTypeValuePair[] ResourceTypeValuePair;
+
+        public int ExpectedValue;
+    }
+
+    public struct CurrentBuildResource
+    {
+        public ResourceTypeValuePair[] ResourceTypeValuePair;
+
+        public int ExpectedValue;
     }
     
     public struct ResourceTypeValuePair : IHasEnumKey
@@ -41,10 +57,11 @@ namespace ECS.Game.Components.WesternBuilder_Component
     public struct BuildUnderConstruction
     {
         public Recipe Recipe;
-
-        public int CurrentResourceCollected;
+        
         public BuildsView BuildsView;
+        public RequiredResourceCount[] RequiredRecipeResource;
         public RequiredResourceCount[] RequiredResourceToConstruct;
+
     }
     
     public struct BuildCampFireComponent

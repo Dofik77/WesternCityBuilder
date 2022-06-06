@@ -13,6 +13,8 @@ namespace ECS.Views
         [SerializeField] public float StopDistance;
         [SerializeField] public RequiredObjectType ObjectType;
         [SerializeField] public ProgressBar ProgressBar;
+        [SerializeField] public GameObject ConstructedObject;
+        [SerializeField] public GameObject BaseObject;
         
         private int _currentResource;
 

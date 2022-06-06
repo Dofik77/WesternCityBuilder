@@ -20,12 +20,12 @@ MonoBehaviour:
   - Name: BusyLetter
     GameObject: {fileID: 3094909925261188104, guid: e359d35f650ecb6448cffc1391d220b5, type: 3}
   - Name: WoodStorage
-    GameObject: {fileID: 1593121119353188470, guid: 1bccb48dba35363408b7d8f51d272024, type: 3}
+    GameObject: {fileID: 6376575661985212977, guid: 7e8000306e8a6d24c87c0724cc5e724d, type: 3}
   - Name: CampFire
     GameObject: {fileID: 8242270563373547872, guid: e90c5546d9732d44fb5f20849661c52b, type: 3}
   - Name: WoodResourceType
     GameObject: {fileID: 5762262939642190981, guid: 030a558c187484c479654111b3982952, type: 3}
   - Name: RockStorage
-    GameObject: {fileID: 6016696611572077271, guid: ba873e72dfea1b14cac7fd354821af56, type: 3}
+    GameObject: {fileID: 7431248583130227396, guid: d8b42a0a2f329c5468255bf84be8f340, type: 3}
   - Name: RockResourceType
     GameObject: {fileID: 4378127906827903364, guid: 1b0586724468ad14796a66ee0eeff5c9, type: 3}

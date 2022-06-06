@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System.Linq;
+using DG.Tweening;
 using ECS.Core.Utils.ReactiveSystem;
 using ECS.Core.Utils.ReactiveSystem.Components;
 using ECS.Game.Components.Flags;
@@ -29,14 +30,18 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
             var view = entity.Get<LinkComponent>().View as BuildsView;
 
             entity.Get<BuildUnderConstruction>().BuildsView = view;
-            entity.Get<BuildUnderConstruction>().RequiredRecipeResource = requiredResourceToConstruct;
-            entity.Get<BuildUnderConstruction>().RequiredResourceToConstruct = requiredResourceToConstruct;
             
+            // requiredResourceToConstruct.CopyTo(entity.Get<BuildUnderConstruction>().RequiredRecipeResource, 0);
+            // requiredResourceToConstruct.CopyTo(entity.Get<BuildUnderConstruction>().RequiredResourceToConstruct, 0);
+
+            entity.Get<BuildUnderConstruction>().RequiredRecipeResource = (RequiredResourceCount[])requiredResourceToConstruct.Clone();
+            entity.Get<BuildUnderConstruction>().RequiredResourceToConstruct = (RequiredResourceCount[])requiredResourceToConstruct.Clone();
+     
             view.Transform.position = _screenVariables.GetTransformPoint(buildName).position;
             view.Transform.rotation = _screenVariables.GetTransformPoint(buildName).rotation;
 
             ChangeViewObject(view);
-            InitBuildUI(view, requiredResourceToConstruct);
+            //InitBuildUI(view, requiredResourceToConstruct);
             CheckBuildOnStorage(entity, buildStatus, currentRecipe);
             
             
@@ -79,6 +84,5 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
                 }
             }
         }
-        
     }
 }

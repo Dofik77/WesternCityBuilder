@@ -12,7 +12,8 @@ namespace ECS.Views
         //указывать UI для здания и кол-во ресусров ( макс, если надо ) здесь 
         [SerializeField] public float StopDistance;
         [SerializeField] public RequiredObjectType ObjectType;
-        [SerializeField] public ProgressBar ProgressBar;
+        [SerializeField] public ProgressBar ConstructionProgressBar;
+        [SerializeField] public ProgressBar BuildProgressBar;
         [SerializeField] public GameObject ConstructedObject;
         [SerializeField] public GameObject BaseObject;
         
@@ -22,11 +23,10 @@ namespace ECS.Views
 
         public void UpdateScore(int updateValue, int maxValue)
         {
-            ProgressBar.Text.text = $"{updateValue} / {maxValue}";
-            ProgressBar.Repaint(updateValue / maxValue, _barRepaintDuration);
+            ConstructionProgressBar.Text.text = $"{updateValue} / {maxValue}";
+            ConstructionProgressBar.Repaint(updateValue / maxValue, _barRepaintDuration);
         }
-
-
+        
         public int CurrentResource
         {
             get => _currentResource;

@@ -70,7 +70,7 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
             if (!_buildUnderConstructionEntity.IsNull())
                 _priority = Priority.Reciepe;
             else if 
-                (!_woodStorageEntity.IsNull() || !_rockStorageEntity.IsNull())
+                (!_woodStorageEntity.IsNull() || !_rockStorageEntity.IsNull()) 
             {
                 if (!_woodStorageEntity.IsNull() && !_rockStorageEntity.IsNull())
                 {
@@ -135,7 +135,7 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
                 {
                     var resourceType = requiredResourceToConstruct[i].Key;
                     var resourceCount = requiredResourceToConstruct[i].NeedToConstruct;
-                    var targetView = entity.Get<BuildUnderConstruction>().BuildsView;
+                    var targetView = _buildUnderConstructionEntity.Get<BuildUnderConstruction>().BuildsView;
                     
                     entity.Get<UnitPriorityData>().RequiredMining = resourceType;
                     entity.Get<UnitPriorityData>().TargetBuildsView = targetView;

@@ -14,13 +14,13 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
 {
     public class BuildsStatusSystem : ReactiveSystem<EventBuildUpdate>
     {
-        [Inject] private SignalBus _signalBus;
         protected override EcsFilter<EventBuildUpdate> ReactiveFilter { get; }
 
         private readonly EcsFilter<BuildComponent, LinkComponent> _builds;
+        private readonly EcsFilter<UnitComponent, LinkComponent> _units;
 
         private BuildsView _buildsView;
-        private UnitView _unitView;
+      
         private LinkableView _resourceView;
 
         private int _currentValue;
@@ -29,32 +29,104 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
         {
             _buildsView = entity.Get<UnitPriorityData>().TargetBuildsView;
             var unitView = entity.Get<LinkComponent>().View as UnitView;
+            var buildsView = entity.Get<UnitPriorityData>().TargetBuildsView;
+            
+            var resourceCount = unitView.GetTransformPoint().childCount; //размер коллекции
 
-            foreach (var i in _builds)
+            if (buildsView.Entity.Has<BuildUnderConstruction>())
             {
-                var buildsView = _builds.Get2(i).View as BuildsView;
-                
-                if (buildsView.ObjectType == _buildsView.ObjectType)
-                {
-                    var currentResource = buildsView.CurrentResource;
-                    var resourceCount = unitView.GetTransformPoint().childCount; //размер коллекции
-                    var maxStorage = buildsView.Entity.Get<BuildStorageComponent>().MaxResource;
-                    
-                    for (int j = 0; j < resourceCount; j++)
-                    {
-                        unitView.GetTransformPoint().GetChild(j).gameObject.GetComponent<LinkableView>().Entity
-                            .Get<IsDestroyedComponent>(); // коллекцию во вьюшке
-                    }
-
-                    currentResource += resourceCount;
-                    buildsView.CurrentResource = currentResource;
-                    buildsView.UpdateScore(buildsView.CurrentResource, maxStorage);
-                }
+                PutResourcesFromUnit(resourceCount, unitView);
+                UpdateConstructionData(buildsView, entity);
+                CheckConstructionStatus(buildsView.Entity, entity);
+                //UpdateBuildUI();
             }
             
-            entity.Get<EventUpdatePriorityComponent>();
+            else if (buildsView.Entity.Has<BuildStorageComponent>())
+            {
+                PutResourcesFromUnit(resourceCount, unitView);
+                UpdateStorageData(buildsView, resourceCount);
+                entity.Get<EventUpdatePriorityComponent>();
+            }
+
+            // var currentResource = buildsView.CurrentResource;
+            // var maxStorage = buildsView.Entity.Get<BuildStorageComponent>().MaxResource;
+            //         
+            // for (int j = 0; j < resourceCount; j++)
+            // {
+            //     unitView.GetTransformPoint().GetChild(j).gameObject.GetComponent<LinkableView>().Entity
+            //         .Get<IsDestroyedComponent>(); // коллекцию во вьюшке
+            // }
+            //
+            // currentResource += resourceCount;
+            // buildsView.CurrentResource = currentResource;
+            // buildsView.UpdateScore(buildsView.CurrentResource, maxStorage);
+            //
+            // entity.Get<EventUpdatePriorityComponent>();
             
             //проверяем, key,value[] = 0? EventConstruct : EventUpd
+        }
+        
+        private void PutResourcesFromUnit(int resourceCount, UnitView unitView)
+        {
+            for (int j = 0; j < resourceCount; j++)
+            {
+                unitView.GetTransformPoint().GetChild(j).gameObject.GetComponent<LinkableView>().Entity
+                    .Get<IsDestroyedComponent>(); 
+                // коллекцию во вьюшке
+            }
+        }
+
+        private void UpdateConstructionData(BuildsView build, EcsEntity unitEntity)
+        {
+            var requiredResourceToConstruct = build.Entity.Get<BuildUnderConstruction>().RequiredResourceToConstruct;
+            for (int i = 0; i < requiredResourceToConstruct.Length; i++)
+            {
+                if (build.Entity.Get<BuildUnderConstruction>().RequiredResourceToConstruct[i].Key 
+                    == unitEntity.Get<UnitPriorityData>().RequiredMining)
+                {
+                    build.Entity.Get<BuildUnderConstruction>().RequiredResourceToConstruct[i].NeedToConstruct
+                        -= unitEntity.Get<UnitMainingValue>().CurrentMainResourceValue;
+                    UpdateBuildUI(build, unitEntity);
+                }
+            }
+        }
+
+        private void UpdateStorageData(BuildsView builds, int resourceCount)
+        {
+            builds.Entity.Get<BuildStorageComponent>().CurrentResourceInStorage += resourceCount;
+        }
+
+        private void UpdateBuildUI(BuildsView build, EcsEntity unitEntity)
+        {
+            //logic for update UI for per type resource
+        }
+
+        private void CheckConstructionStatus(EcsEntity buildEntity, EcsEntity unitEntity)
+        {
+            bool constructionIsDone = false;
+            
+            var requiredResourceToConstruct 
+                = buildEntity.Get<BuildUnderConstruction>().RequiredResourceToConstruct;
+
+            for (int i = 0; i < requiredResourceToConstruct.Length; i++)
+            {
+                if (requiredResourceToConstruct[i].NeedToConstruct == 0)
+                    constructionIsDone = true;
+                else constructionIsDone = false;
+            }
+
+            if (!constructionIsDone)
+                unitEntity.Get<EventUpdatePriorityComponent>();
+            else
+            {
+                buildEntity.Get<BuildConstruction>();
+
+                foreach (var i in _units)
+                    _units.GetEntity(i).Get<EventUnitChangeStateComponent>().State = UnitAction.Сonstruction;
+            }
+               
+
+
         }
     }
 

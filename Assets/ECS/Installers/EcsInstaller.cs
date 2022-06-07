@@ -43,6 +43,7 @@ namespace ECS.Installers
             Container.BindInterfacesAndSelfTo<BuildCreatedBeforeRuntimeSystem>().AsSingle();
             //Container.BindInterfacesAndSelfTo<BuildingsInitSystem>().AsSingle();
             Container.BindInterfacesAndSelfTo<BuildUnderConstructionInitSystem>().AsSingle();
+            Container.BindInterfacesAndSelfTo<BuildConstructionSystem>().AsSingle();
             Container.BindInterfacesAndSelfTo<MiningResourceObjectInitSystem>().AsSingle();
             Container.BindInterfacesAndSelfTo<UnitInitSystem>().AsSingle();
             Container.BindInterfacesAndSelfTo<SetBaseValuesOfUnitSkill>().AsSingle();

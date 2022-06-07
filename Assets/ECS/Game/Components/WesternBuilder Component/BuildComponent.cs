@@ -12,14 +12,11 @@ namespace ECS.Game.Components.WesternBuilder_Component
         public string Value;
     }
 
-    public struct ExpectedTypeAndValueResource
+    public struct ExpectedValueResource
     {
         public ResourceTypeValuePair ResourceTypeValuePair;
         
         public int ExpectedValue;
-
-        public IsStorageOff IsStorageOff;
-
     }
 
     public struct ExpectedRecipeResource
@@ -82,7 +79,11 @@ namespace ECS.Game.Components.WesternBuilder_Component
     public struct BuildStorageComponent
     {
         public int MaxResource;
-        public int CurrentResource;
+        
+        public IsStorageOff IsStorageOff;
+
+        public int CurrentResourceInStorage;
+        public int LeftToCollectResourceCount;
     }
 
 

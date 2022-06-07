@@ -29,32 +29,22 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
         private readonly EcsFilter<UnitsSkillScoreComponent> _skillsEntity;
 
         private EcsWorld _world;
-
-        private UnitView _unitView;
+        
         private int _extractTime;
         private int _requiredMining;
-        
-        //убрать, скилы нужны будут только в Prioryti
-        private int _unitCurrentLogValue;
-        private int _requiredValueForUnit;
-        private int _unitWoodSpeedMain;
-        private int _unitMaxRock;
-        //
+        private int _unitSpeedMain;
+        private int _currentRemainingResourceInObject;
         
         private EcsEntity _treeMiningWoodEntity;
-        private ObjectMiningView _objectMiningView;
-        private int _currentRemainingResourceInObject;
-
         private EcsEntity _woodEntity;
+        private UnitView _unitView;
+        private ObjectMiningView _objectMiningView;
         private ResourceView _resourceView;
 
         protected override void Execute(EcsEntity entity)
         {
             foreach (var i in _skillsEntity)
-            {
-                _skillsEntity.GetEntity(i);
-                _unitWoodSpeedMain = _skillsEntity.Get1(i).SkillsOfMine.Get(entity.Get<UnitPriorityData>().RequiredMining).Skill;
-            }
+                _unitSpeedMain = _skillsEntity.Get1(i).SkillsOfMine.Get(entity.Get<UnitPriorityData>().RequiredMining).Skill;
             
             var objectMiningView = entity.Get<CurrentMiningObjectData>().CurrentMiningObject as ObjectMiningView;
             ResourceExtraction(entity, objectMiningView);
@@ -65,14 +55,14 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
         {
             var unitView = unitEntity.Get<LinkComponent>().View as UnitView;
             var reqMainValue = unitEntity.Get<UnitMainingValue>().CurrentMainResourceValue;
-            var extractTime = ExtractTime(reqMainValue, _unitWoodSpeedMain);
+            var extractTime = ExtractTime(reqMainValue, _unitSpeedMain);
 
-            unitView.Entity.Get<EventSetAnimationComponent>().Value = 3;
-            unitView.Entity.Get<EventSetAnimationComponent>().StageOfAnim = "Stage";
+            // unitView.Entity.Get<EventSetAnimationComponent>().Value = 3;
+            // unitView.Entity.Get<EventSetAnimationComponent>().StageOfAnim = "Stage";
 
             for (int i = 1; i < reqMainValue + 1; i++)
             {
-                _delayService.Do(_unitWoodSpeedMain * i, () =>
+                _delayService.Do(_unitSpeedMain * i, () =>
                 {
                     _world.CreateResourceType(unitView.GetTransformPoint(), unitEntity.Get<UnitPriorityData>().RequiredMining);
                     objectMiningView.GetCurrentResourceValue--;
@@ -81,12 +71,13 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
             
             _delayService.Do(extractTime + 0.1f, () =>
             {
-                var requiredValueForUnit = unitEntity.Get<UnitPriorityData>().RequiredValueResource - unitEntity.Get<UnitMainingValue>().CurrentMainResourceValue;
+                var requiredValueForUnit =
+                    unitEntity.Get<UnitPriorityData>().RequiredValueResource - unitEntity.Get<UnitMainingValue>().CurrentMainResourceValue;
 
                 if (objectMiningView.Entity.IsAlive() && objectMiningView.GetCurrentResourceValue == 0)
                     objectMiningView.Entity.Get<IsDestroyedComponent>();
 
-                if (requiredValueForUnit != 0)
+                if (requiredValueForUnit > 0)
                 {
                     unitEntity.Get<EventUnitChangeStateComponent>().State = UnitAction.FetchResource;
                 }
@@ -103,11 +94,11 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
             });
         }
 
-        private float ExtractTime(int reqValue, int unitWoodSpeedMain)
+        private float ExtractTime(int reqValue, int unitSpeedMain)
         {
             float extractTime = 0;
             for (int i = 1; i < reqValue+1; i++)
-                extractTime = i * unitWoodSpeedMain;
+                extractTime = i * unitSpeedMain;
 
             Debug.Log(extractTime);
             return extractTime;

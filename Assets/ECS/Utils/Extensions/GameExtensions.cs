@@ -79,7 +79,6 @@ namespace ECS.Utils.Extensions
             var entity = world.NewEntity();
             entity.Get<UIdComponent>().Value = UidGenerator.Next();
             entity.GetAndFire<UnitComponent>();
-            entity.Get<UnitComponent>().CurrentWood = 0;
             entity.GetAndFire<PrefabComponent>().Value = "Player";
             entity.Get<EventUnitChangeStateComponent>();
         }
@@ -125,6 +124,11 @@ namespace ECS.Utils.Extensions
             entity.Get<UIdComponent>().Value = UidGenerator.Next();
             entity.GetAndFire<PrefabComponent>().Value = recipe.GetName();
             entity.GetAndFire<BuildUnderConstruction>().Recipe = recipe;
+        }
+
+        public static void UpdateRequestRecipe(this EcsWorld world, Recipe recipe)
+        {
+            
         }
         
         public static void CreateDistanceTriggers(this EcsWorld world)

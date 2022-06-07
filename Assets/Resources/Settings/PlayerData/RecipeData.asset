@@ -20,9 +20,9 @@ MonoBehaviour:
     _recipeIcon: {fileID: 21300000, guid: b127a858f9ca941d9b037a1fe8a6def9, type: 3}
     _recipeResources:
     - Key: 1
-      NeedToConstruct: 5
+      NeedToConstruct: 4
     - Key: 2
-      NeedToConstruct: 3
+      NeedToConstruct: 2
     _levelOpenData: LV1
     isStorageOff: 1
     _maxResourceStorage: 10
@@ -33,7 +33,7 @@ MonoBehaviour:
     _recipeIcon: {fileID: 21300000, guid: 04880f7536e0c4425b43bbb3c3ea7cf6, type: 3}
     _recipeResources:
     - Key: 1
-      NeedToConstruct: 4
+      NeedToConstruct: 3
     - Key: 2
       NeedToConstruct: 6
     _levelOpenData: LV1

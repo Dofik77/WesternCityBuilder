@@ -7,7 +7,6 @@ namespace ECS.Game.Components.WesternBuilder_Component
         public BuildsView TargetBuildsView;
 
         public int RequiredValueResource;
-        public int CurrentValueResource;
         public RequiredResourceType RequiredMining;
     }
 

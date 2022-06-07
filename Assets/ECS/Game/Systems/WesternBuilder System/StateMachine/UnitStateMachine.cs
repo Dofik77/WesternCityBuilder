@@ -31,6 +31,11 @@ namespace ECS.Game.Systems.WesternBuilder_System.Stats.StateMachine
             
             switch (entity.Get<EventUnitChangeStateComponent>().State)
             {
+                case UnitAction.AwaitNearCampFire :
+                    entity.Get<EventSetDestinationComponent>().DistanceControlObjectView = _campfire;
+                    entity.Get<EventControlDistanceToSetState>().DistanceObjectView = _campfire;
+                    break;
+                
                 case UnitAction.FetchResource :
                     entity.Get<EventFindClosestResourceComponent>();
                     Debug.Log("FindClosestObject");
@@ -41,16 +46,6 @@ namespace ECS.Game.Systems.WesternBuilder_System.Stats.StateMachine
                     Debug.Log("TakeResource");
                     break;
                 
-                case UnitAction.Сonstruction :
-                    Debug.Log("ConstructionBuild");
-                    entity.Get<ConstructionBuild>();
-                    break;
-                
-                case UnitAction.AwaitNearСonstruction :
-                    Debug.Log("AwaitNearСonstruction");
-                    //entity.Get<AwaitNearСonstruction>();
-                    break;
-                
                 case UnitAction.PutResource : 
                     Debug.Log("PutResource");
                     entity.Get<EventBuildUpdate>();
@@ -58,15 +53,23 @@ namespace ECS.Game.Systems.WesternBuilder_System.Stats.StateMachine
              
                 case UnitAction.FollowAndSetState :
                     Debug.Log("FollowAndSetState");
-                    entity.Get<EventControlDistanceToSetState>().FeatureState = entity.Get<FollowAndSetStateComponent>().FeatureState;
-                    entity.Get<EventControlDistanceToSetState>().DistanceObjectView = entity.Get<FollowAndSetStateComponent>().ControlDistanceView;
-                    
-                    entity.Get<EventSetDestinationComponent>().DistanceControlObjectView = entity.Get<FollowAndSetStateComponent>().SetDistanceView;
+                    entity.Get<EventControlDistanceToSetState>().FeatureState 
+                        = entity.Get<FollowAndSetStateComponent>().FeatureState;
+                    entity.Get<EventControlDistanceToSetState>().DistanceObjectView 
+                        = entity.Get<FollowAndSetStateComponent>().ControlDistanceView;
+                    entity.Get<EventSetDestinationComponent>().DistanceControlObjectView 
+                        = entity.Get<FollowAndSetStateComponent>().SetDistanceView;
                     break;
                 
-                case UnitAction.AwaitNearCampFire :
-                    entity.Get<EventSetDestinationComponent>().DistanceControlObjectView = _campfire;
-                    entity.Get<EventControlDistanceToSetState>().DistanceObjectView = _campfire;
+                case UnitAction.AwaitNearСonstruction :
+                    Debug.Log("AwaitNearСonstruction");
+                    break;
+                
+                case UnitAction.Сonstruction :
+                    Debug.Log("Construction");
+                    //entity.Get<UnitPriorityData>().TargetBuildsView.Entity.Get<BuildConstruction>();
+                    //entity.Get<EventSetAnimationComponent>().Value = 1;
+                    //entity.Get<EventSetAnimationComponent>().StageOfAnim = 1;
                     break;
             }
         }

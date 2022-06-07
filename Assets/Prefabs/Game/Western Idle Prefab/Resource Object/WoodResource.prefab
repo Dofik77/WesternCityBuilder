@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47db10e5076a45c190d1c18c0bbeac75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ResourceType: 1
 --- !u!1001 &5761115167879350449
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21,7 +22,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1192031939793972, guid: a8fcca8e1c7993748b5af979b9853c71, type: 3}
       propertyPath: m_Name
-      value: Wood
+      value: WoodResource
       objectReference: {fileID: 0}
     - target: {fileID: 4364391620461804, guid: a8fcca8e1c7993748b5af979b9853c71, type: 3}
       propertyPath: m_RootOrder

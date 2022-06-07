@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Numerics;
+using ECS.Game.Systems.WesternBuilder_System.StateMachine;
 using ECS.Views;
 using Runtime.Data;
 using Runtime.Data.PlayerData.Recipe;
@@ -61,7 +62,6 @@ namespace ECS.Game.Components.WesternBuilder_Component
         public BuildsView BuildsView;
         public RequiredResourceCount[] RequiredRecipeResource;
         public RequiredResourceCount[] RequiredResourceToConstruct;
-
     }
     
     public struct BuildCampFireComponent

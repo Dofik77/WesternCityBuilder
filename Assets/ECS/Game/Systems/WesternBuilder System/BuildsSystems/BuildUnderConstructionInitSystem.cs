@@ -31,12 +31,9 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
 
             entity.Get<BuildUnderConstruction>().BuildsView = view;
             
-            // requiredResourceToConstruct.CopyTo(entity.Get<BuildUnderConstruction>().RequiredRecipeResource, 0);
-            // requiredResourceToConstruct.CopyTo(entity.Get<BuildUnderConstruction>().RequiredResourceToConstruct, 0);
-
             entity.Get<BuildUnderConstruction>().RequiredRecipeResource = (RequiredResourceCount[])requiredResourceToConstruct.Clone();
             entity.Get<BuildUnderConstruction>().RequiredResourceToConstruct = (RequiredResourceCount[])requiredResourceToConstruct.Clone();
-     
+            
             view.Transform.position = _screenVariables.GetTransformPoint(buildName).position;
             view.Transform.rotation = _screenVariables.GetTransformPoint(buildName).rotation;
 

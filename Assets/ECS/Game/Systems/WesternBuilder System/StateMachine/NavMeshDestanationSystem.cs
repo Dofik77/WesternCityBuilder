@@ -33,7 +33,7 @@ namespace ECS.Game.Systems.General.NavMesh
 
                 _unitView.GetAgent().SetDestination(_destanationView.transform.position);
                 _unitView.GetAgent().stoppingDistance = _iDestanationView.GetStopDistance();
-                
+               
                 
                 _views.GetEntity(i).Del<EventSetDestinationComponent>();
                 

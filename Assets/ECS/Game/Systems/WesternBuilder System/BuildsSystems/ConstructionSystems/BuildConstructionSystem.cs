@@ -22,24 +22,27 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
             var constructionValue = entity.Get<BuildUnderConstruction>().Recipe.GetResourceCount();
             var delayToConstruct = CalculatedTimeForConstruct(constructionValue);
             
-            //UpdateConstructUI(buildView); - in another delay
             _delayService.Do(delayToConstruct, () =>
             {
                 entity.Del<BuildUnderConstruction>();
                 entity.Get<BuildComponent>();
 
-                buildView.BaseObject.SetActive(false);
-                buildView.ConstructedObject.SetActive(true);
+                //проверка на левел
+                ChangeObjectStage(buildView);
                 
-
                 foreach (var i in _units)
                     _units.GetEntity(i).Get<EventUpdatePriorityComponent>();
             });
+        }
 
-
-            //постройка = кол-во ресурсов необходимых для постройки ( уже принесенных ).секунд
-            //по завершению удаляем BuildUnderConstruction, даём BuildComp, и обновляем приоритет
-            //( обычно идут чилить / заполнять склады ) 
+        private void ChangeObjectStage(BuildsView buildView)
+        {
+            buildView.BaseObject.SetActive(false);
+            buildView.ResourceCountToConstructionProgressBar.gameObject.SetActive(false);
+            buildView.CounctractProgressBar.gameObject.SetActive(false);
+                
+            buildView.ConstructedObject.SetActive(true);
+            buildView.StorageProgressBar.gameObject.SetActive(true);
         }
 
         private int CalculatedTimeForConstruct(RequiredResourceCount[] resourceCounts)
@@ -51,11 +54,6 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
                 TimeForBuild += resource.NeedToConstruct;
             }
             return TimeForBuild;
-        }
-
-        private void UpdateConstructUI(BuildsView build)
-        {
-            
         }
     }
 

@@ -4,15 +4,22 @@ namespace ECS.Game.Components.WesternBuilder_Component
 {
     public struct UnitPriorityData
     {
+        public int CurrentMining;
+        
         public BuildsView TargetBuildsView;
 
         public int RequiredValueResource;
         public RequiredResourceType RequiredMining;
     }
 
-    public struct UnitMainingValue
+    public struct NextMiningValue
     {
-        public int CurrentMainResourceValue; 
+        public int Value; 
+    }
+
+    public struct UnitCurrentResource
+    {
+        public int Value;
     }
 
 }

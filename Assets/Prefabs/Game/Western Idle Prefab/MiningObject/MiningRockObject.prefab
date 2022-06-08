@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6439703118729602450}
   - component: {fileID: 6439703118722119826}
   - component: {fileID: 6439703118731650344}
+  - component: {fileID: 8855805648940478412}
   m_Layer: 0
   m_Name: MiningRockObject
   m_TagString: Untagged
@@ -117,3 +118,19 @@ MonoBehaviour:
   StopDistance: 2
   CurrentResourceValue: 3
   ResourceType: 2
+--- !u!208 &8855805648940478412
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6439703118731774930}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.766, y: 0.90800005, z: 1.8010001}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.123, y: 0.62600005, z: -0.1}
+  m_TimeToStationary: 0.5

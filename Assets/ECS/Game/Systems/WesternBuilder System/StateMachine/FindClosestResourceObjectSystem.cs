@@ -33,8 +33,7 @@ namespace ECS.Game.Systems.WesternBuilder_System
         {
             _unitView = entity.Get<LinkComponent>().View as UnitView;
             var requiredResourceType = entity.Get<UnitPriorityData>().RequiredMining;
-            var requiredResourceValue = entity.Get<UnitPriorityData>().RequiredValueResource;
-            
+
             foreach (var i in _miningObjects)
             {
                 var objectMiningView = _miningObjects.Get2(i).View as ObjectMiningView;
@@ -59,18 +58,15 @@ namespace ECS.Game.Systems.WesternBuilder_System
                 _closestMiningView.Entity.Get<RemainingAmountResource>().Value <= _unitView.Entity.Get<UnitPriorityData>().RequiredValueResource
                         ? _closestMiningView.Entity.Get<RemainingAmountResource>().Value
                         : _unitView.Entity.Get<UnitPriorityData>().RequiredValueResource;
-                
+
+            // var requiredMining = Mathf.Min(_closestMiningView.Entity.Get<RemainingAmountResource>().Value,
+            //     _unitView.Entity.Get<UnitPriorityData>().RequiredValueResource -
+            //     _unitView.Entity.Get<UnitCurrentResource>().Value);
+            
             _closestMiningView.Entity.Get<RemainingAmountResource>().Value -= requiredMining;
             
-            entity.Get<UnitMainingValue>().CurrentMainResourceValue = requiredMining;
-
-            // if (entity.Get<UnitPriorityData>().TargetBuildsView.Entity.Get<ExpectedTypeAndValueResource>()
-            //         .IsStorageOff != IsStorageOff.None)
-            // {
-            //     entity.Get<UnitPriorityData>().TargetBuildsView.Entity.Get<ExpectedTypeAndValueResource>().ExpectedValue +=
-            //         requiredMining;
-            // }
-
+            entity.Get<NextMiningValue>().Value = requiredMining;
+            
             entity.Get<FollowAndSetStateComponent>().FeatureState = UnitAction.TakeResource;
             entity.Get<FollowAndSetStateComponent>().SetDistanceView = _closestMiningView;
             entity.Get<FollowAndSetStateComponent>().ControlDistanceView = _closestMiningView;

@@ -12,19 +12,32 @@ namespace ECS.Views
         //указывать UI для здания и кол-во ресусров ( макс, если надо ) здесь 
         [SerializeField] public float StopDistance;
         [SerializeField] public RequiredObjectType ObjectType;
-        [SerializeField] public ProgressBar ConstructionProgressBar;
-        [SerializeField] public ProgressBar BuildProgressBar;
+
+        [SerializeField] public Canvas ProgressCanvasGroup;
+        [SerializeField] public ProgressBar ResourceCountToConstructionProgressBar;
+        [SerializeField] public ProgressBar CounctractProgressBar;
+        [SerializeField] public ProgressBar StorageProgressBar;
+        
         [SerializeField] public GameObject ConstructedObject;
         [SerializeField] public GameObject BaseObject;
         
         private int _currentResource;
+        private int _maxResourceForCounstract;
+        
 
         private const float _barRepaintDuration = 0.3f;
 
-        public void UpdateScore(int updateValue, int maxValue)
+        public void UpdateProgressBar(int updateValue)
         {
-            ConstructionProgressBar.Text.text = $"{updateValue} / {maxValue}";
-            ConstructionProgressBar.Repaint(updateValue / maxValue, _barRepaintDuration);
+            _currentResource += updateValue;
+            ResourceCountToConstructionProgressBar.Text.text = $"{_currentResource} / {_maxResourceForCounstract}";
+            ResourceCountToConstructionProgressBar.Repaint(_currentResource / _maxResourceForCounstract, _barRepaintDuration);
+        }
+
+        public void UpdateStorageProgressBar(int newValue, int maxValue)
+        {
+            StorageProgressBar.Text.text = $"{newValue} / {maxValue}";
+            StorageProgressBar.Repaint(newValue / maxValue, _barRepaintDuration);
         }
         
         public int CurrentResource
@@ -37,6 +50,19 @@ namespace ECS.Views
                     return;
 
                 _currentResource = value;
+            }
+        }
+
+        public int MaxResourceForCounstract
+        {
+            get => _maxResourceForCounstract;
+
+            set
+            {
+                if(value < 0)
+                    return;
+
+                _maxResourceForCounstract = value;
             }
         }
         

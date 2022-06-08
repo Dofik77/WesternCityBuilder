@@ -38,13 +38,12 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
                 PutResourcesFromUnit(resourceCount, unitView);
                 UpdateConstructionData(buildsView, entity);
                 CheckConstructionStatus(buildsView.Entity, entity);
-                //UpdateBuildUI();
             }
             
             else if (buildsView.Entity.Has<BuildStorageComponent>())
             {
                 PutResourcesFromUnit(resourceCount, unitView);
-                UpdateStorageData(buildsView, resourceCount);
+                UpdateStorageData(buildsView, entity);
                 entity.Get<EventUpdatePriorityComponent>();
             }
 
@@ -71,7 +70,8 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
             for (int j = 0; j < resourceCount; j++)
             {
                 unitView.GetTransformPoint().GetChild(j).gameObject.GetComponent<LinkableView>().Entity
-                    .Get<IsDestroyedComponent>(); 
+                    .Get<IsDestroyedComponent>();
+                //unitView.Entity.Get<UnitCurrentResource>().Value--;
                 // коллекцию во вьюшке
             }
         }
@@ -84,23 +84,32 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
                 if (build.Entity.Get<BuildUnderConstruction>().RequiredResourceToConstruct[i].Key 
                     == unitEntity.Get<UnitPriorityData>().RequiredMining)
                 {
-                    build.Entity.Get<BuildUnderConstruction>().RequiredResourceToConstruct[i].NeedToConstruct
-                        -= unitEntity.Get<UnitMainingValue>().CurrentMainResourceValue;
-                    UpdateBuildUI(build, unitEntity);
+                    build.Entity.Get<BuildUnderConstruction>().RequiredResourceToConstruct[i].NeedToConstruct 
+                        -= unitEntity.Get<UnitCurrentResource>().Value;
+                    UpdateProgressUI(build, unitEntity.Get<UnitCurrentResource>().Value);
+                    unitEntity.Get<UnitCurrentResource>().Value = 0;
                 }
             }
         }
-
-        private void UpdateStorageData(BuildsView builds, int resourceCount)
+        
+        private void UpdateProgressUI(BuildsView build, int unitBrought)
         {
-            builds.Entity.Get<BuildStorageComponent>().CurrentResourceInStorage += resourceCount;
+            build.UpdateProgressBar(unitBrought);
         }
 
-        private void UpdateBuildUI(BuildsView build, EcsEntity unitEntity)
+        private void UpdateStorageData(BuildsView builds, EcsEntity unitEntity)
         {
-            //logic for update UI for per type resource
+            var value = unitEntity.Get<UnitCurrentResource>().Value;
+            unitEntity.Get<UnitCurrentResource>().Value = 0;
+            builds.Entity.Get<BuildStorageComponent>().CurrentResourceInStorage += value;
+            UpdateStorageUI(builds, builds.Entity.Get<BuildStorageComponent>().CurrentResourceInStorage);
         }
 
+        private void UpdateStorageUI(BuildsView storage, int totalValue)
+        {
+            storage.UpdateStorageProgressBar(totalValue, storage.Entity.Get<BuildStorageComponent>().MaxResource);
+        }
+        
         private void CheckConstructionStatus(EcsEntity buildEntity, EcsEntity unitEntity)
         {
             bool constructionIsDone = false;

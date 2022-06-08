@@ -12,31 +12,35 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
 {
     public class DistanceControlSystem : IEcsUpdateSystem
     {
-        private readonly EcsFilter<LinkComponent, EventControlDistanceToSetState> _distanceControlToUpdateState;
+        private readonly EcsFilter<LinkComponent, EventControlDistanceToSetState> _event;
 
         private UnitView _unitView;
         private LinkableView _destanationView;
         private IHasStopDistance _iDestanationView;
 
-        private Vector3 _distanceObjectPosition;
+        private Vector3 _destanationPosition;
         private float _stopDistance;
         public void Run()
         {
-            foreach (var i in _distanceControlToUpdateState)
+            foreach (var i in _event)
             {
-                _unitView = _distanceControlToUpdateState.Get1(i).View as UnitView;
+                _unitView = _event.Get1(i).View as UnitView;
                 
-                _destanationView = _distanceControlToUpdateState.Get2(i).DistanceObjectView;
-                _iDestanationView= _destanationView as IHasStopDistance;
+                _destanationView = _event.Get2(i).DistanceObjectView;
+                _iDestanationView = _destanationView as IHasStopDistance;
                 
-                _distanceObjectPosition = _destanationView.transform.position;
+                _destanationPosition = _destanationView.transform.position;
                 _stopDistance = _iDestanationView.GetStopDistance();
                 
-                if (Vector3.Distance(_unitView.transform.position, _distanceObjectPosition) < _stopDistance) 
+                if (Vector3.Distance(_unitView.transform.position, _destanationPosition) <= _stopDistance)
                 {
-                    _unitView.Entity.Get<EventUnitChangeStateComponent>().State = _distanceControlToUpdateState.Get2(i).FeatureState;
+                    //_unitView.GetAgent().isStopped = true;
+                    _unitView.transform.LookAt(_destanationView.transform);
+                    _unitView.Entity.Get<EventUnitChangeStateComponent>().State = _event.Get2(i).FeatureState;
                     _unitView.Entity.Get<EventSetAnimationComponent>().Value = 0;
                     _unitView.Entity.Get<EventSetAnimationComponent>().StageOfAnim = "Stage";
+                    
+                    
                     _unitView.Entity.Del<EventControlDistanceToSetState>();
                 }
             }

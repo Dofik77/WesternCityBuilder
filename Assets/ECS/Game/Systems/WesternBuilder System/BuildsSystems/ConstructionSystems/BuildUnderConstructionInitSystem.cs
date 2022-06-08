@@ -40,8 +40,8 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
             view.Transform.position = _screenVariables.GetTransformPoint(buildName).position;
             view.Transform.rotation = _screenVariables.GetTransformPoint(buildName).rotation;
 
-            ChangeViewObject(view);
-            //InitBuildUI(view, requiredResourceToConstruct);
+            //ChangeViewObject(view);
+            InitBuildUI(view, requiredResourceToConstruct);
             CheckBuildOnStorage(entity, buildStatus, currentRecipe);
             
             
@@ -52,24 +52,39 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
         private void ChangeViewObject(BuildsView view)
         {
             //проверка на левел
-            view.BaseObject.SetActive(true);
             view.ConstructedObject.SetActive(false);
+            
         }
 
         private void InitBuildUI(BuildsView view, RequiredResourceCount[] requiredResourceToConstruct)
         {
-            view.UpdateScore(0,10); //TODO for all fields
+            var totalCount = 0;
+            foreach (var resource in requiredResourceToConstruct)
+            {
+                totalCount += resource.NeedToConstruct;
+            }
+
+            view.MaxResourceForCounstract = totalCount;
+            view.UpdateProgressBar(0); 
+            //TODO for all fields
         }
         
         private void CheckBuildOnStorage(EcsEntity entity, IsStorageOff buildStatus, Recipe currentRecipe)
         {
             if (buildStatus != IsStorageOff.None)
             {
+               
+                
                 entity.Get<BuildStorageComponent>().MaxResource = currentRecipe.GetMaxResourceStorage();
                 entity.Get<BuildStorageComponent>().IsStorageOff = currentRecipe.GetIsStorageOffData();
                 
+                var buildView = entity.Get<LinkComponent>().View as BuildsView;
+                buildView.UpdateStorageProgressBar(0, currentRecipe.GetMaxResourceStorage());
+                
                 entity.Get<BuildStorageComponent>().LeftToCollectResourceCount = 
                     currentRecipe.GetMaxResourceStorage() - entity.Get<BuildStorageComponent>().CurrentResourceInStorage;
+                
+                
                 
                 switch (currentRecipe.GetIsStorageOffData())
                 {

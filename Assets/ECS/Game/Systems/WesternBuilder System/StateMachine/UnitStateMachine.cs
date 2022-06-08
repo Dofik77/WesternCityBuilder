@@ -34,6 +34,7 @@ namespace ECS.Game.Systems.WesternBuilder_System.Stats.StateMachine
                 case UnitAction.AwaitNearCampFire :
                     entity.Get<EventSetDestinationComponent>().DistanceControlObjectView = _campfire;
                     entity.Get<EventControlDistanceToSetState>().DistanceObjectView = _campfire;
+                    Debug.Log("AwaitNearCampFire");
                     break;
                 
                 case UnitAction.FetchResource :
@@ -67,7 +68,6 @@ namespace ECS.Game.Systems.WesternBuilder_System.Stats.StateMachine
                 
                 case UnitAction.Сonstruction :
                     Debug.Log("Construction");
-                    //entity.Get<UnitPriorityData>().TargetBuildsView.Entity.Get<BuildConstruction>();
                     //entity.Get<EventSetAnimationComponent>().Value = 1;
                     //entity.Get<EventSetAnimationComponent>().StageOfAnim = 1;
                     break;

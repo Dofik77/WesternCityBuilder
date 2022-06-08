@@ -54,7 +54,7 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
         private void ResourceExtraction(EcsEntity unitEntity, ObjectMiningView objectMiningView)
         {
             var unitView = unitEntity.Get<LinkComponent>().View as UnitView;
-            var reqMainValue = unitEntity.Get<UnitMainingValue>().CurrentMainResourceValue;
+            var reqMainValue = unitEntity.Get<NextMiningValue>().Value;
             var extractTime = ExtractTime(reqMainValue, _unitSpeedMain);
 
             // unitView.Entity.Get<EventSetAnimationComponent>().Value = 3;
@@ -66,19 +66,22 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
                 {
                     _world.CreateResourceType(unitView.GetTransformPoint(), unitEntity.Get<UnitPriorityData>().RequiredMining);
                     objectMiningView.GetCurrentResourceValue--;
+                    unitEntity.Get<UnitCurrentResource>().Value++;
                 });
             }
             
             _delayService.Do(extractTime + 0.1f, () =>
             {
                 var requiredValueForUnit =
-                    unitEntity.Get<UnitPriorityData>().RequiredValueResource - unitEntity.Get<UnitMainingValue>().CurrentMainResourceValue;
-
+                    unitEntity.Get<UnitPriorityData>().RequiredValueResource -
+                    unitEntity.Get<UnitCurrentResource>().Value;
+                
                 if (objectMiningView.Entity.IsAlive() && objectMiningView.GetCurrentResourceValue == 0)
                     objectMiningView.Entity.Get<IsDestroyedComponent>();
 
                 if (requiredValueForUnit > 0)
                 {
+                    unitEntity.Get<UnitPriorityData>().RequiredValueResource = requiredValueForUnit;
                     unitEntity.Get<EventUnitChangeStateComponent>().State = UnitAction.FetchResource;
                 }
                 else

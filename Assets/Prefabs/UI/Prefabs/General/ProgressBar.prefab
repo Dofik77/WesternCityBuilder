@@ -195,14 +195,14 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Score: 0 of 100'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0540207e177934627a3bfac6e3313d1e, type: 2}
-  m_sharedMaterial: {fileID: 6520046113461452524, guid: 0540207e177934627a3bfac6e3313d1e, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294179583
+    rgba: 4283189319
   m_fontColor: {r: 0.2784314, g: 0.28235295, b: 0.29803923, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3

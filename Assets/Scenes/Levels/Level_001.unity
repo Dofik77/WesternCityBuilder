@@ -452,7 +452,7 @@ NavMeshObstacle:
   m_GameObject: {fileID: 118593833}
   m_Enabled: 1
   serializedVersion: 3
-  m_Shape: 1
+  m_Shape: 0
   m_Extents: {x: 1.766, y: 0.90800005, z: 1.8010001}
   m_MoveThreshold: 0.1
   m_Carve: 0
@@ -601,7 +601,7 @@ NavMeshObstacle:
   m_GameObject: {fileID: 256780885}
   m_Enabled: 1
   serializedVersion: 3
-  m_Shape: 1
+  m_Shape: 0
   m_Extents: {x: 1.766, y: 0.90800005, z: 1.8010001}
   m_MoveThreshold: 0.1
   m_Carve: 0
@@ -689,7 +689,7 @@ NavMeshObstacle:
   m_GameObject: {fileID: 262384343}
   m_Enabled: 1
   serializedVersion: 3
-  m_Shape: 1
+  m_Shape: 0
   m_Extents: {x: 1.766, y: 0.90800005, z: 1.8010001}
   m_MoveThreshold: 0.1
   m_Carve: 0
@@ -764,6 +764,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1922860305}
     m_Modifications:
+    - target: {fileID: 6214269127002347088, guid: 5e6c609cb4ee7d14cb751db60479e168, type: 3}
+      propertyPath: m_Carve
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7729978026289639932, guid: 5e6c609cb4ee7d14cb751db60479e168, type: 3}
       propertyPath: StopDistance
       value: 1.5
@@ -1352,7 +1356,7 @@ NavMeshObstacle:
   m_GameObject: {fileID: 532698780}
   m_Enabled: 1
   serializedVersion: 3
-  m_Shape: 1
+  m_Shape: 0
   m_Extents: {x: 1.766, y: 0.90800005, z: 1.8010001}
   m_MoveThreshold: 0.1
   m_Carve: 0
@@ -1671,6 +1675,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1922860305}
     m_Modifications:
+    - target: {fileID: 6214269127002347088, guid: 5e6c609cb4ee7d14cb751db60479e168, type: 3}
+      propertyPath: m_Carve
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7729978026289639932, guid: 5e6c609cb4ee7d14cb751db60479e168, type: 3}
       propertyPath: StopDistance
       value: 1.5
@@ -2699,6 +2707,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1922860305}
     m_Modifications:
+    - target: {fileID: 6214269127002347088, guid: 5e6c609cb4ee7d14cb751db60479e168, type: 3}
+      propertyPath: m_Carve
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7729978026289639932, guid: 5e6c609cb4ee7d14cb751db60479e168, type: 3}
       propertyPath: StopDistance
       value: 1.5
@@ -3235,7 +3247,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1392543135}
   m_LocalRotation: {x: 0, y: 0.9659259, z: -0, w: -0.25881898}
-  m_LocalPosition: {x: -12.36, y: 0.75, z: -7.393}
+  m_LocalPosition: {x: -12.36, y: 0, z: -7.393}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1453918373}
@@ -4089,7 +4101,7 @@ NavMeshObstacle:
   m_GameObject: {fileID: 1665536703}
   m_Enabled: 1
   serializedVersion: 3
-  m_Shape: 1
+  m_Shape: 0
   m_Extents: {x: 1.766, y: 0.90800005, z: 1.8010001}
   m_MoveThreshold: 0.1
   m_Carve: 0
@@ -4103,6 +4115,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1922860305}
     m_Modifications:
+    - target: {fileID: 6214269127002347088, guid: 5e6c609cb4ee7d14cb751db60479e168, type: 3}
+      propertyPath: m_Carve
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7729978026289639932, guid: 5e6c609cb4ee7d14cb751db60479e168, type: 3}
       propertyPath: StopDistance
       value: 1.5
@@ -4230,6 +4246,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1922860305}
     m_Modifications:
+    - target: {fileID: 6214269127002347088, guid: 5e6c609cb4ee7d14cb751db60479e168, type: 3}
+      propertyPath: m_Carve
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7729978026289639932, guid: 5e6c609cb4ee7d14cb751db60479e168, type: 3}
       propertyPath: StopDistance
       value: 1.5
@@ -4299,6 +4319,14 @@ PrefabInstance:
     - target: {fileID: 8210769532058716595, guid: e90c5546d9732d44fb5f20849661c52b, type: 3}
       propertyPath: m_Carve
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8210769532058716595, guid: e90c5546d9732d44fb5f20849661c52b, type: 3}
+      propertyPath: m_Shape
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8210769532058716595, guid: e90c5546d9732d44fb5f20849661c52b, type: 3}
+      propertyPath: m_Extents.z
+      value: 1.641
       objectReference: {fileID: 0}
     - target: {fileID: 8242270563373547872, guid: e90c5546d9732d44fb5f20849661c52b, type: 3}
       propertyPath: m_Name
@@ -4431,7 +4459,7 @@ NavMeshObstacle:
   m_GameObject: {fileID: 1811828158}
   m_Enabled: 1
   serializedVersion: 3
-  m_Shape: 1
+  m_Shape: 0
   m_Extents: {x: 1.766, y: 0.90800005, z: 1.8010001}
   m_MoveThreshold: 0.1
   m_Carve: 0
@@ -4519,7 +4547,7 @@ NavMeshObstacle:
   m_GameObject: {fileID: 1890184548}
   m_Enabled: 1
   serializedVersion: 3
-  m_Shape: 1
+  m_Shape: 0
   m_Extents: {x: 1.766, y: 0.90800005, z: 1.8010001}
   m_MoveThreshold: 0.1
   m_Carve: 0
@@ -5074,6 +5102,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1922860305}
     m_Modifications:
+    - target: {fileID: 6214269127002347088, guid: 5e6c609cb4ee7d14cb751db60479e168, type: 3}
+      propertyPath: m_Carve
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214269127002347088, guid: 5e6c609cb4ee7d14cb751db60479e168, type: 3}
+      propertyPath: m_Center.x
+      value: 0.051000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214269127002347088, guid: 5e6c609cb4ee7d14cb751db60479e168, type: 3}
+      propertyPath: m_Center.y
+      value: 4.202
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214269127002347088, guid: 5e6c609cb4ee7d14cb751db60479e168, type: 3}
+      propertyPath: m_Extents.x
+      value: 2.805
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214269127002347088, guid: 5e6c609cb4ee7d14cb751db60479e168, type: 3}
+      propertyPath: m_Extents.z
+      value: 2.805
+      objectReference: {fileID: 0}
     - target: {fileID: 7729978026289639933, guid: 5e6c609cb4ee7d14cb751db60479e168, type: 3}
       propertyPath: m_Name
       value: MiningWoodObject
@@ -5393,7 +5441,7 @@ NavMeshObstacle:
   m_GameObject: {fileID: 2124422686}
   m_Enabled: 1
   serializedVersion: 3
-  m_Shape: 1
+  m_Shape: 0
   m_Extents: {x: 1.766, y: 0.90800005, z: 1.8010001}
   m_MoveThreshold: 0.1
   m_Carve: 0

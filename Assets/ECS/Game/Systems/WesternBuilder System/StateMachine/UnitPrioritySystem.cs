@@ -142,7 +142,8 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
                     
                     _buildUnderConstructionEntity.Get<BuildUnderConstruction>().RequiredRecipeResource[i].NeedToConstruct
                         -= requiredValueForUnit;
-                    
+
+                    entity.Get<UnitCurrentResource>().Value = 0;
                     entity.Get<UnitPriorityData>().RequiredValueResource = requiredValueForUnit;
                     entity.Get<EventUnitChangeStateComponent>().State = UnitAction.FetchResource;
                     

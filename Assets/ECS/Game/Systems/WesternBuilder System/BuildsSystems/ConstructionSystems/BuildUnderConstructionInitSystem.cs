@@ -17,6 +17,8 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
     public class BuildUnderConstructionInitSystem : ReactiveSystem<EventAddComponent<BuildUnderConstruction>>
     {
         [Inject] private ScreenVariables _screenVariables;
+        [Inject] private SignalBus _signalBus;
+        
         private readonly EcsFilter<UnitComponent, LinkComponent>.Exclude<UnitHasPriority> _units;
         protected override EcsFilter <EventAddComponent<BuildUnderConstruction>> ReactiveFilter { get; }
        
@@ -79,8 +81,7 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
                 entity.Get<BuildStorageComponent>().IsStorageOff = currentRecipe.GetIsStorageOffData();
                 
                 var buildView = entity.Get<LinkComponent>().View as BuildsView;
-                buildView.UpdateStorageProgressBar(0, currentRecipe.GetMaxResourceStorage());
-                
+
                 entity.Get<BuildStorageComponent>().LeftToCollectResourceCount = 
                     currentRecipe.GetMaxResourceStorage() - entity.Get<BuildStorageComponent>().CurrentResourceInStorage;
                 

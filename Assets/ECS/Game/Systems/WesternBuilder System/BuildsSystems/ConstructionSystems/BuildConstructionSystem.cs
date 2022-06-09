@@ -6,6 +6,7 @@ using ECS.Views;
 using Leopotam.Ecs;
 using Runtime.Data.PlayerData.Recipe;
 using Runtime.Services.DelayService;
+using Runtime.Signals;
 using Zenject;
 
 namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
@@ -13,6 +14,7 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
     public class BuildConstructionSystem : ReactiveSystem<BuildConstruction>
     {
         [Inject] private IDelayService _delayService;
+        [Inject] private SignalBus _signalBus;
         
         private readonly EcsFilter<UnitComponent, LinkComponent> _units;
         protected override EcsFilter<BuildConstruction> ReactiveFilter { get; }
@@ -30,11 +32,16 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
                 //проверка на левел
                 ChangeObjectStage(buildView);
                 
+                if (buildView.Entity.Has<BuildStorageComponent>())
+                    _signalBus.Fire(new SignalEnableResourceCounter(buildView));
+                
+                entity.Del<UnitHasPriority>();
+                
                 foreach (var i in _units)
                     _units.GetEntity(i).Get<EventUpdatePriorityComponent>();
             });
         }
-
+        
         private void ChangeObjectStage(BuildsView buildView)
         {
             buildView.BaseObject.SetActive(false);
@@ -42,7 +49,6 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
             buildView.CounctractProgressBar.gameObject.SetActive(false);
                 
             buildView.ConstructedObject.SetActive(true);
-            buildView.StorageProgressBar.gameObject.SetActive(true);
         }
 
         private int CalculatedTimeForConstruct(RequiredResourceCount[] resourceCounts)

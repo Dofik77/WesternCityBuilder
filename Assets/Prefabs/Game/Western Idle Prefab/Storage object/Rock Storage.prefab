@@ -1,5 +1,21 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!208 &125698015024413702
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4437525329196494884}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.7, y: 0.7, z: 0.7}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.24, y: 0.65, z: 0.08}
+  m_TimeToStationary: 0.5
 --- !u!1 &7431248583130227396
 GameObject:
   m_ObjectHideFlags: 0
@@ -51,7 +67,6 @@ MonoBehaviour:
   ProgressCanvasGroup: {fileID: 3766358791143452556}
   ResourceCountToConstructionProgressBar: {fileID: 939054698841873242}
   CounctractProgressBar: {fileID: 4120115797193599263}
-  StorageProgressBar: {fileID: 1907486869944469322}
   ConstructedObject: {fileID: 5866904717736140501}
   BaseObject: {fileID: 4437525329196494884}
 --- !u!1001 &150016752610511874
@@ -159,7 +174,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100020, guid: 803e873639e254f6d860673b42fdfb1c, type: 3}
       propertyPath: m_Name
-      value: Camp_Fire
+      value: Base\
       objectReference: {fileID: 0}
     - target: {fileID: 400020, guid: 803e873639e254f6d860673b42fdfb1c, type: 3}
       propertyPath: m_RootOrder
@@ -374,17 +389,6 @@ MonoBehaviour:
 --- !u!114 &4120115797193599263 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7859966658681466644, guid: 88879d18269aa36418ac9fb60794b838, type: 3}
-  m_PrefabInstance: {fileID: 6069059495670859275}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c2a5f04d9274518bc96f13b9bd74a88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1907486869944469322 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5638894068398244161, guid: 88879d18269aa36418ac9fb60794b838, type: 3}
   m_PrefabInstance: {fileID: 6069059495670859275}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

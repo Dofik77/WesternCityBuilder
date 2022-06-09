@@ -10,6 +10,7 @@ using Runtime.Game.Ui.Extensions;
 using Runtime.Game.Ui.Impls;
 using Runtime.Game.Ui.Objects;
 using Runtime.Game.Ui.Objects.Layouts;
+using Runtime.Game.Ui.Windows.InGameButtons;
 using Runtime.Services.UiData.Data;
 using SimpleUi.Signals;
 using UniRx;
@@ -69,6 +70,8 @@ namespace Runtime.Game.Ui.Windows.Store
             {
                 Recipe recipe = _recipeData.Get().Get(entity.Key);
                 _world.CreateRequestRecipe(recipe);
+                
+                
                 //тут клон передавать
                 //layout - вся страничка
             }

@@ -7,6 +7,7 @@ using ECS.Views;
 using ECS.Views.General;
 using ECS.Views.WesterBuilderView;
 using Leopotam.Ecs;
+using Runtime.Signals;
 using UnityEngine;
 using Zenject;
 
@@ -14,6 +15,8 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
 {
     public class BuildsStatusSystem : ReactiveSystem<EventBuildUpdate>
     {
+        [Inject] private SignalBus _signalBus;
+        
         protected override EcsFilter<EventBuildUpdate> ReactiveFilter { get; }
 
         private readonly EcsFilter<BuildComponent, LinkComponent> _builds;
@@ -44,25 +47,9 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
             {
                 PutResourcesFromUnit(resourceCount, unitView);
                 UpdateStorageData(buildsView, entity);
+                entity.Del<UnitHasPriority>();
                 entity.Get<EventUpdatePriorityComponent>();
             }
-
-            // var currentResource = buildsView.CurrentResource;
-            // var maxStorage = buildsView.Entity.Get<BuildStorageComponent>().MaxResource;
-            //         
-            // for (int j = 0; j < resourceCount; j++)
-            // {
-            //     unitView.GetTransformPoint().GetChild(j).gameObject.GetComponent<LinkableView>().Entity
-            //         .Get<IsDestroyedComponent>(); // коллекцию во вьюшке
-            // }
-            //
-            // currentResource += resourceCount;
-            // buildsView.CurrentResource = currentResource;
-            // buildsView.UpdateScore(buildsView.CurrentResource, maxStorage);
-            //
-            // entity.Get<EventUpdatePriorityComponent>();
-            
-            //проверяем, key,value[] = 0? EventConstruct : EventUpd
         }
         
         private void PutResourcesFromUnit(int resourceCount, UnitView unitView)
@@ -97,19 +84,14 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
             build.UpdateProgressBar(unitBrought);
         }
 
-        private void UpdateStorageData(BuildsView builds, EcsEntity unitEntity)
+        private void UpdateStorageData(BuildsView build, EcsEntity unitEntity)
         {
             var value = unitEntity.Get<UnitCurrentResource>().Value;
             unitEntity.Get<UnitCurrentResource>().Value = 0;
-            builds.Entity.Get<BuildStorageComponent>().CurrentResourceInStorage += value;
-            UpdateStorageUI(builds, builds.Entity.Get<BuildStorageComponent>().CurrentResourceInStorage);
+            build.Entity.Get<BuildStorageComponent>().CurrentResourceInStorage += value;
+            _signalBus.Fire(new SignalStorageUpdate(build));
         }
 
-        private void UpdateStorageUI(BuildsView storage, int totalValue)
-        {
-            storage.UpdateStorageProgressBar(totalValue, storage.Entity.Get<BuildStorageComponent>().MaxResource);
-        }
-        
         private void CheckConstructionStatus(EcsEntity buildEntity, EcsEntity unitEntity)
         {
             bool constructionIsDone = false;

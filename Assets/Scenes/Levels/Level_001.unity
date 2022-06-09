@@ -452,7 +452,7 @@ NavMeshObstacle:
   m_GameObject: {fileID: 118593833}
   m_Enabled: 1
   serializedVersion: 3
-  m_Shape: 0
+  m_Shape: 1
   m_Extents: {x: 1.766, y: 0.90800005, z: 1.8010001}
   m_MoveThreshold: 0.1
   m_Carve: 0
@@ -689,7 +689,7 @@ NavMeshObstacle:
   m_GameObject: {fileID: 262384343}
   m_Enabled: 1
   serializedVersion: 3
-  m_Shape: 0
+  m_Shape: 1
   m_Extents: {x: 1.766, y: 0.90800005, z: 1.8010001}
   m_MoveThreshold: 0.1
   m_Carve: 0
@@ -1356,7 +1356,7 @@ NavMeshObstacle:
   m_GameObject: {fileID: 532698780}
   m_Enabled: 1
   serializedVersion: 3
-  m_Shape: 0
+  m_Shape: 1
   m_Extents: {x: 1.766, y: 0.90800005, z: 1.8010001}
   m_MoveThreshold: 0.1
   m_Carve: 0
@@ -1944,6 +1944,10 @@ PrefabInstance:
     - target: {fileID: 5159786281215618441, guid: 65b8f174d287b664c8a4b84f80ad7079, type: 3}
       propertyPath: m_Name
       value: Current Map
+      objectReference: {fileID: 0}
+    - target: {fileID: 5159786281215618441, guid: 65b8f174d287b664c8a4b84f80ad7079, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1946666094981001736, guid: 65b8f174d287b664c8a4b84f80ad7079, type: 3}
@@ -4101,7 +4105,7 @@ NavMeshObstacle:
   m_GameObject: {fileID: 1665536703}
   m_Enabled: 1
   serializedVersion: 3
-  m_Shape: 0
+  m_Shape: 1
   m_Extents: {x: 1.766, y: 0.90800005, z: 1.8010001}
   m_MoveThreshold: 0.1
   m_Carve: 0
@@ -4459,7 +4463,7 @@ NavMeshObstacle:
   m_GameObject: {fileID: 1811828158}
   m_Enabled: 1
   serializedVersion: 3
-  m_Shape: 0
+  m_Shape: 1
   m_Extents: {x: 1.766, y: 0.90800005, z: 1.8010001}
   m_MoveThreshold: 0.1
   m_Carve: 0
@@ -5441,7 +5445,7 @@ NavMeshObstacle:
   m_GameObject: {fileID: 2124422686}
   m_Enabled: 1
   serializedVersion: 3
-  m_Shape: 0
+  m_Shape: 1
   m_Extents: {x: 1.766, y: 0.90800005, z: 1.8010001}
   m_MoveThreshold: 0.1
   m_Carve: 0

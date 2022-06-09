@@ -143,6 +143,8 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
                     _buildUnderConstructionEntity.Get<BuildUnderConstruction>().RequiredRecipeResource[i].NeedToConstruct
                         -= requiredValueForUnit;
 
+                    entity.Get<UnitHasPriority>();
+
                     entity.Get<UnitCurrentResource>().Value = 0;
                     entity.Get<UnitPriorityData>().RequiredValueResource = requiredValueForUnit;
                     entity.Get<EventUnitChangeStateComponent>().State = UnitAction.FetchResource;
@@ -159,50 +161,6 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
             //для этого, перед каждый началом работы RecipeUpdate, нужно проверять, есть ли в Recipe[key,value]==0?
             //если да, то отправляем его ждать в BuildUnderConstruct
         }
-
-        private void WoodStorageUpdate(EcsEntity entity)
-        {
-            foreach (var i in _unitSkills)
-                _unitSkillsEntity = _unitSkills.GetEntity(i);
-            
-            var maxWoodInStorage = _woodStorageEntity.Get<BuildStorageComponent>().MaxResource;
-            var expectedAmountOfResource = _woodStorageEntity.Get<ExpectedValueResource>().ExpectedValue;
-            
-            var RequiredMining = RequiredResourceType.WoodResource;
-                
-            entity.Get<UnitPriorityData>().RequiredMining = RequiredMining;
-            entity.Get<UnitPriorityData>().TargetBuildsView = _woodStorageEntity.Get<LinkComponent>().View as BuildsView;
-        
-            var maxWoodTakeUnitResource = _unitSkillsEntity.Get<UnitsSkillScoreComponent>().SkillOfPortability.Get(RequiredMining).Skill;
-            var requiredWood = maxWoodInStorage - expectedAmountOfResource;
-            var requiredValueForUnit = requiredWood > maxWoodTakeUnitResource ? maxWoodTakeUnitResource : requiredWood;
-                
-            entity.Get<UnitPriorityData>().RequiredValueResource = requiredValueForUnit;
-            entity.Get<EventUnitChangeStateComponent>().State = UnitAction.FetchResource;
-        }
-
-        private void RockStorageUpdate(EcsEntity entity)
-        {
-            foreach (var i in _unitSkills)
-                _unitSkillsEntity = _unitSkills.GetEntity(i);
-            
-            var maxRockInStorage = _rockStorageEntity.Get<BuildStorageComponent>().MaxResource;
-            var expectedAmountOfResource = _rockStorageEntity.Get<ExpectedValueResource>().ExpectedValue;
-            
-            var RequiredMining = RequiredResourceType.RockResource;
-                
-            entity.Get<UnitPriorityData>().RequiredMining = RequiredMining;
-            entity.Get<UnitPriorityData>().TargetBuildsView = _rockStorageEntity.Get<LinkComponent>().View as BuildsView;
-    
-            var maxRockTakeUnitResource = _unitSkillsEntity.Get<UnitsSkillScoreComponent>().SkillOfPortability.Get(RequiredMining).Skill;
-            var requiredRock = maxRockInStorage - expectedAmountOfResource;
-            var requiredValueForUnit = requiredRock > maxRockTakeUnitResource ? maxRockTakeUnitResource : requiredRock;
-                
-            entity.Get<UnitPriorityData>().RequiredValueResource = requiredValueForUnit;
-            entity.Get<EventUnitChangeStateComponent>().State = UnitAction.FetchResource;
-           
-        }
-        
         
         private void StoragesUpdate(EcsEntity entity, EcsEntity storage, RequiredResourceType resourceType)
         {
@@ -217,6 +175,7 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
 
             storage.Get<BuildStorageComponent>().LeftToCollectResourceCount -= requiredValueForUnit;
             
+            entity.Get<UnitHasPriority>();
             entity.Get<UnitPriorityData>().RequiredValueResource = requiredValueForUnit;
             entity.Get<EventUnitChangeStateComponent>().State = UnitAction.FetchResource;
         }

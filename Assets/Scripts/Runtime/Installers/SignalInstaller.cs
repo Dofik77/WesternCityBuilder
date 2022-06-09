@@ -18,6 +18,8 @@ namespace Runtime.Installers
             Container.DeclareSignal<SignalHpBarUpdate>();
             Container.DeclareSignal<SignalScoreUpdate>();
             Container.DeclareSignal<SignalUpdateCurrency>();
+            Container.DeclareSignal<SignalStorageUpdate>();
+            Container.DeclareSignal<SignalEnableResourceCounter>();
         }
     }
 }

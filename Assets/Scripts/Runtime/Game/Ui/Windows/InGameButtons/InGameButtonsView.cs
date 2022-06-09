@@ -24,7 +24,11 @@ namespace Runtime.Game.Ui.Windows.InGameButtons
         public RectTransform Top;
         public RectTransform Center;
         public RectTransform Bottom;
-        
+
+        public ResourceCounter WoodReserveData;
+        public ResourceCounter RockReserveData;
+        public ResourceCounter FoodReserveData;
+
         public TMP_Text LevelN;
         
         public TMP_Text Score;

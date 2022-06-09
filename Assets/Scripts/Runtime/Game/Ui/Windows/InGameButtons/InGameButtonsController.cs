@@ -1,7 +1,10 @@
 using DG.Tweening;
+using ECS.Game.Components.WesternBuilder_Component;
+using ECS.Views;
 using Leopotam.Ecs;
 using Runtime.Data;
 using Runtime.Data.PlayerData.Levels;
+using Runtime.Data.PlayerData.Recipe;
 using Runtime.Game.Ui.Extensions;
 using Runtime.Game.Ui.Impls;
 using Runtime.Game.Ui.Windows.InGameMenu;
@@ -9,6 +12,7 @@ using Runtime.Game.Ui.Windows.Levels;
 using Runtime.Game.Ui.Windows.Store;
 using Runtime.Signals;
 using SimpleUi.Signals;
+using TMPro;
 using UniRx;
 using UnityEngine;
 using Utils;
@@ -38,9 +42,13 @@ namespace Runtime.Game.Ui.Windows.InGameButtons
             View.Store.OnClickAsObservable().Subscribe(x => _signalBus.OpenWindow<StoreWindow>()).AddTo(View);
             View.Levels.OnClickAsObservable().Subscribe(x => _signalBus.OpenWindow<LevelsWindow>()).AddTo(View);
 
+           
             _signalBus.GetStream<SignalLevelDataUpdate>().Subscribe(x => TryShakeHintButton(ref x.Value.UseRollback))
                 .AddTo(View);
             _signalBus.GetStream<SignalTimerUpdate>().Subscribe(x => View.Timer.Value.text = x.Value.ToString()).AddTo(View);
+            
+            _signalBus.GetStream<SignalStorageUpdate>().Subscribe(x => UpdateResourceCounter(x.BuildsView));
+            _signalBus.GetStream<SignalEnableResourceCounter>().Subscribe(x => EnableResourceCounter(x.BuildsView));
             
             InitTapOnStart();
             BeforeHideEvent = new BeforeActionEvent(OnBeforeHide, _appearDuration);
@@ -70,6 +78,51 @@ namespace Runtime.Game.Ui.Windows.InGameButtons
             }
         }
 
+        public void EnableResourceCounter(BuildsView buildView)
+        {
+            switch (buildView.ObjectType)
+            {
+                case RequiredObjectType.WoodStorage:
+                    View.WoodReserveData.gameObject.SetActive(true);
+                    break;
+                    
+                case RequiredObjectType.RockStorage :
+                    View.RockReserveData.gameObject.SetActive(true);
+                    break;
+                    
+                case RequiredObjectType.FoodStorage :
+                    View.FoodReserveData.gameObject.SetActive(true);
+                    break;
+            }
+
+            UpdateResourceCounter(buildView);
+        }
+        
+        public void UpdateResourceCounter(BuildsView buildsView)
+        {
+            if (buildsView.Entity.Has<BuildStorageComponent>())
+            {
+                var updateValue = buildsView.Entity.Get<BuildStorageComponent>().CurrentResourceInStorage;
+                var maxInStorage = buildsView.Entity.Get<BuildStorageComponent>().MaxResource;
+                
+                switch (@buildsView.ObjectType)
+                {
+                    case RequiredObjectType.WoodStorage:
+                        View.WoodReserveData.CounterText.text = updateValue.ToString() + "/" + maxInStorage.ToString();
+                        break;
+                    
+                    case RequiredObjectType.RockStorage :
+                        View.RockReserveData.CounterText.text = updateValue.ToString() + "/" + maxInStorage.ToString();
+                        break;
+                    
+                    case RequiredObjectType.FoodStorage :
+                        View.FoodReserveData.CounterText.text = updateValue.ToString() + "/" + maxInStorage.ToString();
+                        break;
+                }
+            }
+            
+        }
+
         public override void OnAfterShow()
         {
             // View.LevelN.text = Enum.GetName(typeof(EScene), _commonPlayerData.GetData().Level)?.Replace("_", " ");
@@ -80,7 +133,7 @@ namespace Runtime.Game.Ui.Windows.InGameButtons
             View.Bottom.DoFromPosition(_bottomHidePos, _appearDuration).SetEase(Ease.OutCubic);
             _delayService.Do(_appearDuration, () => EnableInput(true));
         }
-
+        
         public override void OnBeforeHide()
         {
             //TODO

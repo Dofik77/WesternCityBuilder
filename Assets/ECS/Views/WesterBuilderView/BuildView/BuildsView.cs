@@ -16,8 +16,7 @@ namespace ECS.Views
         [SerializeField] public Canvas ProgressCanvasGroup;
         [SerializeField] public ProgressBar ResourceCountToConstructionProgressBar;
         [SerializeField] public ProgressBar CounctractProgressBar;
-        [SerializeField] public ProgressBar StorageProgressBar;
-        
+
         [SerializeField] public GameObject ConstructedObject;
         [SerializeField] public GameObject BaseObject;
         
@@ -33,12 +32,7 @@ namespace ECS.Views
             ResourceCountToConstructionProgressBar.Text.text = $"{_currentResource} / {_maxResourceForCounstract}";
             ResourceCountToConstructionProgressBar.Repaint(_currentResource / _maxResourceForCounstract, _barRepaintDuration);
         }
-
-        public void UpdateStorageProgressBar(int newValue, int maxValue)
-        {
-            StorageProgressBar.Text.text = $"{newValue} / {maxValue}";
-            StorageProgressBar.Repaint(newValue / maxValue, _barRepaintDuration);
-        }
+        
         
         public int CurrentResource
         {
@@ -79,6 +73,7 @@ namespace ECS.Views
         
         WoodStorage,
         RockStorage,
+        FoodStorage,
         OreStorage,
         
         CampFire,

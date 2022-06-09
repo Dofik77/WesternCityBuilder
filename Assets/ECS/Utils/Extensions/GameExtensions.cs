@@ -30,6 +30,7 @@ namespace ECS.Utils.Extensions
             
             world.CreateUnit();
             world.CreateUnit();
+            world.CreateUnit();
 
             world.CreateUnitSkillScoresEntity();
             world.CreateResourceMining();

@@ -58,7 +58,6 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
             {
                 unitView.GetTransformPoint().GetChild(j).gameObject.GetComponent<LinkableView>().Entity
                     .Get<IsDestroyedComponent>();
-                //unitView.Entity.Get<UnitCurrentResource>().Value--;
                 // коллекцию во вьюшке
             }
         }
@@ -103,7 +102,11 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
             {
                 if (requiredResourceToConstruct[i].NeedToConstruct == 0)
                     constructionIsDone = true;
-                else constructionIsDone = false;
+                else
+                {
+                    constructionIsDone = false;
+                    break;
+                }
             }
 
             if (!constructionIsDone)

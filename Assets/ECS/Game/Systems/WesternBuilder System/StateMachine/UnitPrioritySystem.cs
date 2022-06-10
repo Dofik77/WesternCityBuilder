@@ -62,10 +62,6 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
         }
         private void ChoosePriority(EcsEntity unitEntity)
         {
-            //проверять юнита на действия и бездействия ( UnitInAction/UnitHasPriority ) - будет давать и удаляться по факту необходимости
-            //- если поступил рецепт, а они че то добывают
-            //должны добыть до конца, а потом идти делать рецепт
-            
             if (!_buildConstruction.IsEmpty()) 
                 _priority = Priority.Reciepe;
             else if (!_woodStorage.IsEmpty() || !_rockStorage.IsEmpty()) 
@@ -98,6 +94,7 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
             else
                 _priority = Priority.Await;
         }
+        
         private void TransferPriority(Priority priority, EcsEntity entity)
         {
             switch (priority)
@@ -122,7 +119,7 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
         
         private void RecipeUpdate(EcsEntity entity)
         {
-            bool recipeNotVoid = true;
+            bool recipeComplete = true;
             var requiredResourceToConstruct = 
                 _buildUnderConstructionEntity.Get<BuildUnderConstruction>().RequiredRecipeResource;
 
@@ -147,19 +144,17 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
 
                     entity.Get<UnitCurrentResource>().Value = 0;
                     entity.Get<UnitPriorityData>().RequiredValueResource = requiredValueForUnit;
-                    entity.Get<EventUnitChangeStateComponent>().State = UnitAction.FetchResource;
+
+                    if (!ResourceInStoragesAvailable(entity, requiredValueForUnit, resourceType))
+                        entity.Get<EventUnitChangeStateComponent>().State = UnitAction.FetchResource;
                     
-                    recipeNotVoid = false;
+                    recipeComplete = false;
                     break;
                 }
             }
             
-            if (recipeNotVoid)
+            if (recipeComplete)
                 entity.Get<EventUnitChangeStateComponent>().State = UnitAction.AwaitNearСonstruction;
-            
-            //может быть ситуация, когда в рецепте уже 0, но в постройке ещё не присены все ресрусы
-            //для этого, перед каждый началом работы RecipeUpdate, нужно проверять, есть ли в Recipe[key,value]==0?
-            //если да, то отправляем его ждать в BuildUnderConstruct
         }
         
         private void StoragesUpdate(EcsEntity entity, EcsEntity storage, RequiredResourceType resourceType)
@@ -178,6 +173,75 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
             entity.Get<UnitHasPriority>();
             entity.Get<UnitPriorityData>().RequiredValueResource = requiredValueForUnit;
             entity.Get<EventUnitChangeStateComponent>().State = UnitAction.FetchResource;
+        }
+
+        private bool ResourceInStoragesAvailable(EcsEntity unitEntity, int requiredValueForUnit, RequiredResourceType requiredResourceType)
+        {
+            bool StorageNotNull = false;
+
+            switch (requiredResourceType)
+            {
+                case RequiredResourceType.WoodResource :
+                    if (!_woodStorage.IsEmpty())
+                    {
+                        var storageView = _woodStorageEntity.Get<LinkComponent>().View as BuildsView;
+                        if (_woodStorageEntity.Get<BuildStorageComponent>().PromisingResourceValue > 0)
+                        {
+                            var resourceInStorage = _woodStorageEntity.Get<BuildStorageComponent>().PromisingResourceValue;
+                            
+                            requiredValueForUnit = resourceInStorage > requiredValueForUnit
+                                ? requiredValueForUnit
+                                : resourceInStorage;
+                            
+                            unitEntity.Get<NextMiningValue>().Value = requiredValueForUnit;
+                            _woodStorageEntity.Get<BuildStorageComponent>().PromisingResourceValue -=
+                                requiredValueForUnit;
+                            
+                            //for LeftToCollect can be evalute by dif Current-PromisingResourceValue ( 10 - 7 = 3 )
+                            
+                            unitEntity.Get<FollowAndSetStateComponent>().FeatureState = UnitAction.TakeResource;
+                            unitEntity.Get<FollowAndSetStateComponent>().SetDistanceView = _woodStorageEntity.Get<LinkComponent>().View as BuildsView;
+                            unitEntity.Get<FollowAndSetStateComponent>().ControlDistanceView = storageView;
+                            
+                            unitEntity.Get<EventUnitChangeStateComponent>().State = UnitAction.FollowAndSetState;
+                            unitEntity.Get<CurrentMiningObjectData>().CurrentMiningObject = storageView;
+
+                            StorageNotNull = true;
+                        }
+                    }
+                    break;
+                
+                case RequiredResourceType.RockResource :
+                    if (!_rockStorage.IsEmpty())
+                    {
+                        var storageView = _rockStorageEntity.Get<LinkComponent>().View as BuildsView;
+                        if (_rockStorageEntity.Get<BuildStorageComponent>().PromisingResourceValue > 0)
+                        {
+                            var resourceInStorage = _woodStorageEntity.Get<BuildStorageComponent>().PromisingResourceValue;
+                            
+                            requiredValueForUnit = resourceInStorage > requiredValueForUnit
+                                ? requiredValueForUnit
+                                : resourceInStorage;
+                            
+                            unitEntity.Get<NextMiningValue>().Value = requiredValueForUnit;
+                            _rockStorageEntity.Get<BuildStorageComponent>().PromisingResourceValue -=
+                                requiredValueForUnit;
+                            
+                            //for LeftToCollect can be evalute by dif Current-PromisingResourceValue ( 10 - 7 = 3 )
+                            
+                            unitEntity.Get<FollowAndSetStateComponent>().FeatureState = UnitAction.TakeResource;
+                            unitEntity.Get<FollowAndSetStateComponent>().SetDistanceView = _woodStorageEntity.Get<LinkComponent>().View as BuildsView;
+                            unitEntity.Get<FollowAndSetStateComponent>().ControlDistanceView = storageView;
+                            
+                            unitEntity.Get<EventUnitChangeStateComponent>().State = UnitAction.FollowAndSetState;
+                            unitEntity.Get<CurrentMiningObjectData>().CurrentMiningObject = storageView;
+
+                            StorageNotNull = true;
+                        }
+                    }
+                    break;
+            }
+            return StorageNotNull;
         }
     }
 }

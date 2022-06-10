@@ -114,7 +114,23 @@ namespace ECS.Utils.Extensions
         {
             var entity = world.NewEntity();
             entity.Get<UIdComponent>().Value = UidGenerator.Next();
-            entity.GetAndFire<WoodLogComponent>();
+
+            switch (resourceType)
+            {
+                case RequiredResourceType.WoodResource :
+                    entity.Get<ResourceComponent>();
+                    entity.Get<WoodLogComponent>();
+                    break;
+                
+                case RequiredResourceType.RockResource :
+                    entity.Get<ResourceComponent>();
+                    entity.Get<RockComponent>();
+                    break;
+                
+                case RequiredResourceType.FoodResource : 
+                    break;
+            }
+           
             entity.GetAndFire<PrefabComponent>().Value = resourceType.ToString();
             entity.Get<EventMakeObjectAsChild>().Parent = point;
         }

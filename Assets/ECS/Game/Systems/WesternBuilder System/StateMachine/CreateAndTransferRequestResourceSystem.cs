@@ -16,6 +16,7 @@ using Leopotam.Ecs;
 using Runtime.Data;
 using Runtime.Services.DelayService;
 using Runtime.Services.DelayService.Impls;
+using Runtime.Signals;
 using UnityEngine;
 using Zenject;
 
@@ -24,6 +25,7 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
     public class CreateAndTransferRequestResourceSystem : ReactiveSystem<RequestResourceComponent>
     {
         [Inject] private IDelayService _delayService;
+        [Inject] private SignalBus _signalBus;
         protected override EcsFilter<RequestResourceComponent> ReactiveFilter { get; }
 
         private readonly EcsFilter<UnitsSkillScoreComponent> _skillsEntity;
@@ -46,9 +48,16 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
             foreach (var i in _skillsEntity)
                 _unitSpeedMain = _skillsEntity.Get1(i).SkillsOfMine.Get(entity.Get<UnitPriorityData>().RequiredMining).Skill;
             
-            var objectMiningView = entity.Get<CurrentMiningObjectData>().CurrentMiningObject as ObjectMiningView;
-            ResourceExtraction(entity, objectMiningView);
-            
+            if (entity.Get<CurrentMiningObjectData>().CurrentMiningObject.Entity.Has<ObjectMiningComponent>())
+            {
+                var objectMiningView = entity.Get<CurrentMiningObjectData>().CurrentMiningObject as ObjectMiningView;
+                ResourceExtraction(entity, objectMiningView);
+            }
+            else if (entity.Get<CurrentMiningObjectData>().CurrentMiningObject.Entity.Has<BuildStorageComponent>())
+            {
+                var objectMiningView = entity.Get<CurrentMiningObjectData>().CurrentMiningObject as BuildsView;
+                ResourceExtraction(entity, objectMiningView);
+            }
         }
 
         private void ResourceExtraction(EcsEntity unitEntity, ObjectMiningView objectMiningView)
@@ -95,6 +104,51 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
                         unitEntity.Get<UnitPriorityData>().TargetBuildsView;
                 }
             });
+        }
+
+        private void ResourceExtraction(EcsEntity unitEntity, BuildsView storageView)
+        {
+            var unitView = unitEntity.Get<LinkComponent>().View as UnitView;
+            var reqMainValue = unitEntity.Get<NextMiningValue>().Value;
+            var extractTime = ExtractTime(reqMainValue, 1);
+            
+            for (int i = 1; i < reqMainValue + 1; i++)
+            {
+                _delayService.Do(1 * i, () =>
+                {
+                    _world.CreateResourceType(unitView.GetTransformPoint(), unitEntity.Get<UnitPriorityData>().RequiredMining);
+                    
+                    storageView.Entity.Get<BuildStorageComponent>().CurrentResourceInStorage--;
+                    storageView.Entity.Get<BuildStorageComponent>().LeftToCollectResourceCount++;
+                    _signalBus.Fire(new SignalStorageUpdate(storageView));
+                    
+                    unitEntity.Get<UnitCurrentResource>().Value++;
+                });
+            }
+            
+            _delayService.Do(extractTime + 0.1f, () =>
+            {
+                var requiredValueForUnit =
+                    unitEntity.Get<UnitPriorityData>().RequiredValueResource -
+                    unitEntity.Get<UnitCurrentResource>().Value;
+                
+                if (requiredValueForUnit > 0)
+                {
+                    unitEntity.Get<UnitPriorityData>().RequiredValueResource = requiredValueForUnit;
+                    unitEntity.Get<EventUnitChangeStateComponent>().State = UnitAction.FetchResource;
+                }
+                else
+                {
+                    unitEntity.Get<EventUnitChangeStateComponent>().State = UnitAction.FollowAndSetState;
+
+                    unitEntity.Get<FollowAndSetStateComponent>().FeatureState = UnitAction.PutResource;
+                    unitEntity.Get<FollowAndSetStateComponent>().SetDistanceView =
+                        unitEntity.Get<UnitPriorityData>().TargetBuildsView;
+                    unitEntity.Get<FollowAndSetStateComponent>().ControlDistanceView =
+                        unitEntity.Get<UnitPriorityData>().TargetBuildsView;
+                }
+            });
+            
         }
 
         private float ExtractTime(int reqValue, int unitSpeedMain)

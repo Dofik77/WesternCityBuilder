@@ -83,6 +83,8 @@ namespace ECS.Game.Components.WesternBuilder_Component
         public IsStorageOff IsStorageOff;
 
         public int CurrentResourceInStorage;
+        public int PromisingResourceValue;
+        
         public int LeftToCollectResourceCount;
     }
 

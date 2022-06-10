@@ -75,8 +75,6 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
         {
             if (buildStatus != IsStorageOff.None)
             {
-               
-                
                 entity.Get<BuildStorageComponent>().MaxResource = currentRecipe.GetMaxResourceStorage();
                 entity.Get<BuildStorageComponent>().IsStorageOff = currentRecipe.GetIsStorageOffData();
                 
@@ -84,8 +82,6 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
 
                 entity.Get<BuildStorageComponent>().LeftToCollectResourceCount = 
                     currentRecipe.GetMaxResourceStorage() - entity.Get<BuildStorageComponent>().CurrentResourceInStorage;
-                
-                
                 
                 switch (currentRecipe.GetIsStorageOffData())
                 {

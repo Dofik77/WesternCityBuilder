@@ -88,6 +88,7 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
             var value = unitEntity.Get<UnitCurrentResource>().Value;
             unitEntity.Get<UnitCurrentResource>().Value = 0;
             build.Entity.Get<BuildStorageComponent>().CurrentResourceInStorage += value;
+            build.Entity.Get<BuildStorageComponent>().PromisingResourceValue += value;
             _signalBus.Fire(new SignalStorageUpdate(build));
         }
 

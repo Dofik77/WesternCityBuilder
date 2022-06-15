@@ -73,7 +73,7 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
             {
                 _delayService.Do(_unitSpeedMain * i, () =>
                 {
-                    _world.CreateResourceType(unitView.GetTransformPoint(), unitEntity.Get<UnitPriorityData>().RequiredMining);
+                    _world.CreateResourceType(unitView.GetResourceStack(), unitEntity.Get<UnitPriorityData>().RequiredMining);
                     objectMiningView.GetCurrentResourceValue--;
                     unitEntity.Get<UnitCurrentResource>().Value++;
                 });
@@ -116,8 +116,8 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
             {
                 _delayService.Do(1 * i, () =>
                 {
-                    _world.CreateResourceType(unitView.GetTransformPoint(), unitEntity.Get<UnitPriorityData>().RequiredMining);
-                    
+                    _world.CreateResourceType(unitView.GetResourceStack(), unitEntity.Get<UnitPriorityData>().RequiredMining);
+                    //unitView.AddResource(resource)
                     storageView.Entity.Get<BuildStorageComponent>().CurrentResourceInStorage--;
                     storageView.Entity.Get<BuildStorageComponent>().LeftToCollectResourceCount++;
                     _signalBus.Fire(new SignalStorageUpdate(storageView));

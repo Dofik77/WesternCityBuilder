@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3890679181004114823}
   m_Layer: 11
-  m_Name: ResourcePoint
+  m_Name: ResourceStack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,8 +43,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _agent: {fileID: 6166519745912872223}
-  _resourcePosition: {fileID: 6841613532944542396}
+  _resourceStack: {fileID: 6841613532944542396}
   _animator: {fileID: 7351321561924377613}
+  _stackOffsetX: 1
+  _stackOffsetY: 1
+  _stackHeight: 10
+  _interactionDuration: 0.4
 --- !u!195 &6166519745912872223
 NavMeshAgent:
   m_ObjectHideFlags: 0

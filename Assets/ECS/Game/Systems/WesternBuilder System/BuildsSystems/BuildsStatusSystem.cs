@@ -34,7 +34,7 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
             var unitView = entity.Get<LinkComponent>().View as UnitView;
             var buildsView = entity.Get<UnitPriorityData>().TargetBuildsView;
             
-            var resourceCount = unitView.GetTransformPoint().childCount; //размер коллекции
+            var resourceCount = unitView.GetResourceStack().childCount; //размер коллекции
 
             if (buildsView.Entity.Has<BuildUnderConstruction>())
             {
@@ -56,7 +56,7 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
         {
             for (int j = 0; j < resourceCount; j++)
             {
-                unitView.GetTransformPoint().GetChild(j).gameObject.GetComponent<LinkableView>().Entity
+                unitView.GetResourceStack().GetChild(j).gameObject.GetComponent<LinkableView>().Entity
                     .Get<IsDestroyedComponent>();
                 // коллекцию во вьюшке
             }

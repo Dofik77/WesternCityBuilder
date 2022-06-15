@@ -67,7 +67,6 @@ MonoBehaviour:
   ProgressCanvasGroup: {fileID: 4938382881559941009}
   ResourceCountToConstructionProgressBar: {fileID: 9062459646344166215}
   CounctractProgressBar: {fileID: 5323805827540535554}
-  StorageProgressBar: {fileID: 7688950228850141015}
   ConstructedObject: {fileID: 5852780182910972630}
   BaseObject: {fileID: 69765157954282707}
 --- !u!1001 &69765157954380391
@@ -314,17 +313,6 @@ MonoBehaviour:
 --- !u!114 &5323805827540535554 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7859966658681466644, guid: 88879d18269aa36418ac9fb60794b838, type: 3}
-  m_PrefabInstance: {fileID: 2663249407438890518}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c2a5f04d9274518bc96f13b9bd74a88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &7688950228850141015 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5638894068398244161, guid: 88879d18269aa36418ac9fb60794b838, type: 3}
   m_PrefabInstance: {fileID: 2663249407438890518}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

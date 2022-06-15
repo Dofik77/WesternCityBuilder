@@ -64,6 +64,7 @@ namespace ECS.Installers
             
             
             Container.BindInterfacesAndSelfTo<TransformTranslateSystem>().AsSingle();
+            //Container.BindInterfacesAndSelfTo<ResourceTransportationSystem>().AsSingle();
             Container.BindInterfacesAndSelfTo<MakeObjectChildSystem>().AsSingle();
             Container.BindInterfacesAndSelfTo<NavMeshDestanationSystem>().AsSingle();
             Container.BindInterfacesAndSelfTo<PlayerInputSystem>().AsSingle();

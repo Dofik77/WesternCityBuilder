@@ -37,8 +37,7 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
                     _unitView.transform.LookAt(_destanationView.transform);
                     _unitView.Entity.Get<EventUnitChangeStateComponent>().State = _event.Get2(i).FeatureState;
                     _unitView.Entity.Get<EventSetAnimationComponent>().Value = 0;
-                    _unitView.Entity.Get<EventSetAnimationComponent>().StageOfAnim = "Stage";
-                    
+
                     _unitView.Entity.Del<EventControlDistanceToSetState>();
                 }
             }

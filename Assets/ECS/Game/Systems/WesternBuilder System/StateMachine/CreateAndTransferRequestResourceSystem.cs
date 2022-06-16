@@ -65,10 +65,9 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
             var unitView = unitEntity.Get<LinkComponent>().View as UnitView;
             var reqMainValue = unitEntity.Get<NextMiningValue>().Value;
             var extractTime = ExtractTime(reqMainValue, _unitSpeedMain);
-
-            // unitView.Entity.Get<EventSetAnimationComponent>().Value = 3;
-            // unitView.Entity.Get<EventSetAnimationComponent>().StageOfAnim = "Stage";
-
+            
+            unitView.Entity.Get<EventSetAnimationComponent>().Value = objectMiningView.MiningAnimationStage;
+            
             for (int i = 1; i < reqMainValue + 1; i++)
             {
                 _delayService.Do(_unitSpeedMain * i, () =>
@@ -111,6 +110,8 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
             var unitView = unitEntity.Get<LinkComponent>().View as UnitView;
             var reqMainValue = unitEntity.Get<NextMiningValue>().Value;
             var extractTime = ExtractTime(reqMainValue, 1);
+
+            unitView.Entity.Get<EventSetAnimationComponent>().Value = 2;
             
             for (int i = 1; i < reqMainValue + 1; i++)
             {

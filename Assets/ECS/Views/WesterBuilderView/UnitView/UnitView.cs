@@ -23,7 +23,6 @@ namespace ECS.Views.General
 
         [SerializeField] private float _interactionDuration = 0.4f;
         
-        
         private Stack<EcsEntity> _resources;
         
         private int _stackColumn;

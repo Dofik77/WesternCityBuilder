@@ -38,7 +38,6 @@ namespace ECS.Game.Systems.General.NavMesh
                 _views.GetEntity(i).Del<EventSetDestinationComponent>();
                 
                 _unitView.Entity.Get<EventSetAnimationComponent>().Value = 1;
-                _unitView.Entity.Get<EventSetAnimationComponent>().StageOfAnim = "Stage"; 
             }
         }
     }

@@ -118,6 +118,7 @@ MonoBehaviour:
   StopDistance: 1
   CurrentResourceValue: 6
   ResourceType: 1
+  MiningAnimationStage: 4
 --- !u!208 &6214269127002347088
 NavMeshObstacle:
   m_ObjectHideFlags: 0

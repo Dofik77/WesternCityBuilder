@@ -10,6 +10,8 @@ namespace ECS.Views
         [SerializeField] private float StopDistance;
         [SerializeField] private int CurrentResourceValue;
         [SerializeField] public RequiredResourceType ResourceType;
+        
+        [SerializeField] public int MiningAnimationStage;
 
         public float GetStopDistance() => StopDistance;
         public int GetCurrentResourceValue

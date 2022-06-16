@@ -23,7 +23,9 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
             var buildView = entity.Get<LinkComponent>().View as BuildsView;
             var constructionValue = entity.Get<BuildUnderConstruction>().Recipe.GetResourceCount();
             var delayToConstruct = CalculatedTimeForConstruct(constructionValue);
-            
+
+            foreach (var unit in _units)
+                _units.GetEntity(unit).Get<EventSetAnimationComponent>().Value = 5;
             
             _delayService.Do(delayToConstruct, () =>
             {

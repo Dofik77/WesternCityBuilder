@@ -20,7 +20,7 @@ namespace ECS.Game.Systems.WesternBuilder_System
             foreach (var i in _animationUnit)
             {
                 var value = _animationUnit.Get1(i).Value;
-                var name = _animationUnit.Get1(i).StageOfAnim;
+                var name = "Stage";
                 _unitView.SetAnimation(name,value);
             }
            

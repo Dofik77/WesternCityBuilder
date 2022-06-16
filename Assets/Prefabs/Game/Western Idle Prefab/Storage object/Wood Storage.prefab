@@ -179,6 +179,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1976494098290211476}
     m_Modifications:
+    - target: {fileID: 1515427026077145785, guid: 88879d18269aa36418ac9fb60794b838, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2265240842272432003, guid: 88879d18269aa36418ac9fb60794b838, type: 3}
       propertyPath: m_Name
       value: ToCounstractCountProgressBarCanvas

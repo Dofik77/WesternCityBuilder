@@ -24,12 +24,12 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
             var constructionValue = entity.Get<BuildUnderConstruction>().Recipe.GetResourceCount();
             var delayToConstruct = CalculatedTimeForConstruct(constructionValue);
             
+            
             _delayService.Do(delayToConstruct, () =>
             {
                 entity.Del<BuildUnderConstruction>();
                 entity.Get<BuildComponent>();
-
-                //проверка на левел
+                
                 ChangeObjectStage(buildView);
                 
                 if (buildView.Entity.Has<BuildStorageComponent>())
@@ -44,10 +44,9 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
         
         private void ChangeObjectStage(BuildsView buildView)
         {
-            buildView.BaseObject.SetActive(false);
             buildView.ResourceCountToConstructionProgressBar.gameObject.SetActive(false);
-            buildView.CounctractProgressBar.gameObject.SetActive(false);
-                
+            buildView.CounctractProgressBar.gameObject.SetActive(true);
+            buildView.BaseObject.SetActive(false);
             buildView.ConstructedObject.SetActive(true);
         }
 

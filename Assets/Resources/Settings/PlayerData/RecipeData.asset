@@ -22,7 +22,7 @@ MonoBehaviour:
     - Key: 1
       NeedToConstruct: 4
     - Key: 2
-      NeedToConstruct: 2
+      NeedToConstruct: 3
     _levelOpenData: LV1
     isStorageOff: 1
     _maxResourceStorage: 10

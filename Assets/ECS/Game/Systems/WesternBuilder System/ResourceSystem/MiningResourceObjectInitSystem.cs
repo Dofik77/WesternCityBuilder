@@ -18,6 +18,30 @@ namespace ECS.Game.Systems.WesternBuilder_System.ResourceSystem
         {
             _objectMiningView = entity.Get<LinkComponent>().View as ObjectMiningView;
             entity.Get<RemainingAmountResource>().Value = _objectMiningView.GetCurrentResourceValue;
+            entity.Get<ObjectMiningComponent>().MaxResourceValue = _objectMiningView.GetCurrentResourceValue;
+
+            // switch (_objectMiningView.ResourceType)
+            // {
+            //     case RequiredResourceType.WoodResource :
+            //         entity.Get<TreeObjectComponent>();
+            //         break;
+            //     
+            //     case RequiredResourceType.RockResource :
+            //         entity.Get<RockObjectComponent>();
+            //         break;
+            // }
         }
     }
+
+    public struct TreeObjectComponent
+    {
+        
+    }
+
+    public struct RockObjectComponent
+    {
+        
+    }
+    
+    //компонент для каждого типа объектов.
 }

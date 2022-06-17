@@ -27,6 +27,10 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
             foreach (var unit in _units)
                 _units.GetEntity(unit).Get<EventSetAnimationComponent>().Value = 5;
             
+            buildView.ResourceCountToConstructionProgressBar.gameObject.SetActive(false);
+            buildView.CounctractProgressBar.gameObject.SetActive(true); 
+            buildView.CounctractProgressBar.RepaintConstruction(1, delayToConstruct);
+            
             _delayService.Do(delayToConstruct, () =>
             {
                 entity.Del<BuildUnderConstruction>();
@@ -46,10 +50,11 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
         
         private void ChangeObjectStage(BuildsView buildView)
         {
-            buildView.ResourceCountToConstructionProgressBar.gameObject.SetActive(false);
-            buildView.CounctractProgressBar.gameObject.SetActive(true);
             buildView.BaseObject.SetActive(false);
             buildView.ConstructedObject.SetActive(true);
+            buildView.CounctractProgressBar.gameObject.SetActive(false);
+
+            buildView.StopDistance *= 2;
         }
 
         private int CalculatedTimeForConstruct(RequiredResourceCount[] resourceCounts)

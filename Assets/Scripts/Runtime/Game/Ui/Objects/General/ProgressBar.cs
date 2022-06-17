@@ -24,5 +24,12 @@ namespace Runtime.Game.Ui.Objects.General
             progress.DOFillAmount(Mathf.Abs(ratio), 0.1f);
             progress.DOColor(progress.color, duration);
         }
+
+        public void RepaintConstruction(float ratio, float delay)
+        {
+            progress.DOKill();
+            progress.DOFillAmount(Mathf.Abs(ratio), delay);
+            progress.DOColor(progress.color, delay);
+        }
     }
 }

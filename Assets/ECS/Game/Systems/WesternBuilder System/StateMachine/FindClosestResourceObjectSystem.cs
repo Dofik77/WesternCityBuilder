@@ -6,6 +6,7 @@ using ECS.Game.Components.Flags;
 using ECS.Game.Components.General;
 using ECS.Game.Components.WesternBuilder_Component;
 using ECS.Game.Systems.General.NavMesh;
+using ECS.Game.Systems.WesternBuilder_System.ResourceSystem;
 using ECS.Game.Systems.WesternBuilder_System.StateMachine;
 using ECS.Views;
 using ECS.Views.General;
@@ -24,7 +25,7 @@ namespace ECS.Game.Systems.WesternBuilder_System
         private readonly EcsFilter<UnitComponent, LinkComponent> _units;
         private readonly EcsFilter<UnitsSkillScoreComponent> _unitSkills;
         
-        private readonly EcsFilter<ObjectMiningComponent, LinkComponent> _miningObjects;
+        private readonly EcsFilter<ObjectMiningComponent, LinkComponent>.Exclude<DisableMiningObject> _miningObjects;
         private readonly EcsFilter<WoodLogComponent, LinkComponent> _woodLogResource;
         private readonly EcsFilter<RockComponent, LinkComponent> _rockResource;
         

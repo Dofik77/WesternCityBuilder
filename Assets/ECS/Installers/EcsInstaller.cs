@@ -54,7 +54,9 @@ namespace ECS.Installers
             Container.BindInterfacesAndSelfTo<FindClosestResourceObjectSystem>().AsSingle();
             Container.BindInterfacesAndSelfTo<CreateAndTransferRequestResourceSystem>().AsSingle();
             Container.BindInterfacesAndSelfTo<DistanceControlSystem>().AsSingle();
-            
+            Container.BindInterfacesAndSelfTo<MiningObjectLiveCycleEvent>().AsSingle();
+            Container.BindInterfacesAndSelfTo<DisableCounterSystem>().AsSingle();
+
             Container.BindInterfacesAndSelfTo<BuildsStatusSystem>().AsSingle();
             //West Isle Builder Systems 
             

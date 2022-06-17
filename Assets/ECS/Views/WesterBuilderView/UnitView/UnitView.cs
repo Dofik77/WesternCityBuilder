@@ -59,7 +59,5 @@ namespace ECS.Views.General
             resource.Get<MoveTweenEventComponent>().EventType = ETweenEventType.ResourcePickUp;
             resource.Get<Vector3Component<MoveTweenEventComponent>>().Value = new Vector3(0, y, z);
         }
-        
-        
     }
 }

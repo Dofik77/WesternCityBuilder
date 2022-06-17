@@ -143,11 +143,6 @@ namespace ECS.Utils.Extensions
             entity.GetAndFire<BuildUnderConstruction>().Recipe = recipe;
         }
 
-        public static void UpdateRequestRecipe(this EcsWorld world, Recipe recipe)
-        {
-            
-        }
-        
         public static void CreateDistanceTriggers(this EcsWorld world)
         {
             var views = Object.FindObjectsOfType<DistanceTriggerView>(true);

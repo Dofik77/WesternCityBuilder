@@ -59,6 +59,8 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
                 ResourceExtraction(entity, objectMiningView);
             }
         }
+        
+        //объеденить в один метод   
 
         private void ResourceExtraction(EcsEntity unitEntity, ObjectMiningView objectMiningView)
         {
@@ -83,15 +85,19 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
                 var requiredValueForUnit =
                     unitEntity.Get<UnitPriorityData>().RequiredValueResource -
                     unitEntity.Get<UnitCurrentResource>().Value;
-                
+
                 if (objectMiningView.Entity.IsAlive() && objectMiningView.GetCurrentResourceValue == 0)
-                    objectMiningView.Entity.Get<IsDestroyedComponent>();
+                {
+                    objectMiningView.Entity.Get<DisableMiningObject>();
+                }
+                
 
                 if (requiredValueForUnit > 0)
                 {
                     unitEntity.Get<UnitPriorityData>().RequiredValueResource = requiredValueForUnit;
                     unitEntity.Get<EventUnitChangeStateComponent>().State = UnitAction.FetchResource;
                 }
+                
                 else
                 {
                     unitEntity.Get<EventUnitChangeStateComponent>().State = UnitAction.FollowAndSetState;
@@ -111,7 +117,7 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
             var reqMainValue = unitEntity.Get<NextMiningValue>().Value;
             var extractTime = ExtractTime(reqMainValue, 1);
 
-            unitView.Entity.Get<EventSetAnimationComponent>().Value = 2;
+            //unitView.Entity.Get<EventSetAnimationComponent>().Value = 2;
             
             for (int i = 1; i < reqMainValue + 1; i++)
             {

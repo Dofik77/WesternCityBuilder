@@ -51,7 +51,7 @@ namespace ECS.Installers
             Container.BindInterfacesAndSelfTo<UnitPrioritySystem>().AsSingle();
             Container.BindInterfacesAndSelfTo<UnitStateMachine>().AsSingle();
 
-            Container.BindInterfacesAndSelfTo<FindClosestResourceObjectSystem>().AsSingle();
+            Container.BindInterfacesAndSelfTo<FindClosestResourceSystem>().AsSingle();
             Container.BindInterfacesAndSelfTo<CreateAndTransferRequestResourceSystem>().AsSingle();
             Container.BindInterfacesAndSelfTo<DistanceControlSystem>().AsSingle();
             Container.BindInterfacesAndSelfTo<MiningObjectLiveCycleEvent>().AsSingle();

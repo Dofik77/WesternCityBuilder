@@ -16,7 +16,7 @@ MonoBehaviour:
   clientTokens:
   - 
   appIds:
-  - 1212121323233212121321
+  - 1212121323233212121323
   appLabels:
   - Temple
   cookie: 1
@@ -24,7 +24,7 @@ MonoBehaviour:
   status: 1
   xfbml: 0
   frictionlessRequests: 1
-  androidKeystorePath: C:\Users\PurpleSlayerFish.PSY-SANCTUARY\Desktop\WorkProjects\NewGame\Assets\user.keystore
+  androidKeystorePath: C:\Unity\WesternCityBuilder\Assets\user.keystore
   iosURLSuffix: 
   appLinkSchemes:
   - list: []

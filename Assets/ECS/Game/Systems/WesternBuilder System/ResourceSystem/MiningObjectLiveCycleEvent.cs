@@ -36,9 +36,8 @@ namespace ECS.Game.Systems.WesternBuilder_System.ResourceSystem
             var TreeCounter = 0;
             var RockCounter = 0;
 
-            ObjectMiningView MaxTreeDisabled = null;
-            ObjectMiningView MaxRockDisabled = null;
-            
+            ObjectMiningView MaxTreeDisabled = _disablesObject.Get4(1).View as ObjectMiningView;
+            ObjectMiningView MaxRockDisabled =  _disablesObject.Get4(1).View as ObjectMiningView;
             
 
             foreach (var i in _disablesObject)
@@ -78,7 +77,7 @@ namespace ECS.Game.Systems.WesternBuilder_System.ResourceSystem
                 MaxRockDisabled.Entity.Del<DisableMiningObject>();
             }
         }
-
+        
         private void ChooseMaxDisableObject(ObjectMiningView currentView, ObjectMiningView maxViewDisabled)
         {
             if (TreeDisabledMaxCounter > currentView.Entity.Get<DisableCounterComponent>().Counter)
@@ -87,6 +86,7 @@ namespace ECS.Game.Systems.WesternBuilder_System.ResourceSystem
                 maxViewDisabled = currentView;
             }
         }
+        
     }
 
     public struct DisableMiningObject

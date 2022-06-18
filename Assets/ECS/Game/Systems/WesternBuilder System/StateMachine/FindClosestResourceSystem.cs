@@ -20,7 +20,7 @@ using Zenject;
 
 namespace ECS.Game.Systems.WesternBuilder_System
 {
-    public class FindClosestResourceObjectSystem : ReactiveSystem<EventFindClosestResourceComponent>
+    public class FindClosestResourceSystem : ReactiveSystem<EventFindClosestResourceComponent>
     {
         private readonly EcsFilter<UnitComponent, LinkComponent> _units;
         private readonly EcsFilter<UnitsSkillScoreComponent> _unitSkills;
@@ -43,7 +43,10 @@ namespace ECS.Game.Systems.WesternBuilder_System
             _unitView = entity.Get<LinkComponent>().View as UnitView;
             var requiredResourceType = entity.Get<UnitPriorityData>().RequiredMining;
 
-            //if (CheckResourceOnGround(requiredResourceType))
+            if (CheckResourceOnGround(requiredResourceType))
+            {
+                
+            }
            
             
             foreach (var i in _miningObjects)
@@ -89,7 +92,7 @@ namespace ECS.Game.Systems.WesternBuilder_System
         {
             bool resourceExist = false;
 
-            switch (@requiredResourceType)
+            switch (requiredResourceType)
             {
                 case RequiredResourceType.WoodResource :
                     if (!_woodLogResource.IsEmpty())
@@ -129,6 +132,8 @@ namespace ECS.Game.Systems.WesternBuilder_System
                     }
                     break;
             }
+            
+            
             
             return resourceExist;
         }

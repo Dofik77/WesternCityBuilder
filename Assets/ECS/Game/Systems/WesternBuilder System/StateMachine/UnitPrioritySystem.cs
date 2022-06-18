@@ -21,9 +21,6 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
         private readonly EcsFilter<BuildWoodStorageComponent, LinkComponent>.Exclude<BuildUnderConstruction> _woodStorage;
         private readonly EcsFilter<BuildRockStorageComponent, LinkComponent>.Exclude<BuildUnderConstruction> _rockStorage;
         
-        //exclude заполненые склады по компоненту, exclude isBuildingNow, потому что склад сначало строиться,
-        //а потом являеться складом
-        //заменить на единый storageComponent.enum
         protected override EcsFilter<EventUpdatePriorityComponent> ReactiveFilter { get; }
 
         private EcsEntity _campFireEntity;

@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ResourceType: 2
+  StopDistance: 0.5
+  MiningAnimationStage: 6
 --- !u!1001 &7321823836612602454
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30,15 +32,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6439703118732027890, guid: 9431e578ca676b442b8214ffa0a9e0e4, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.05
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6439703118732027890, guid: 9431e578ca676b442b8214ffa0a9e0e4, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.05
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6439703118732027890, guid: 9431e578ca676b442b8214ffa0a9e0e4, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.05
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6439703118732027890, guid: 9431e578ca676b442b8214ffa0a9e0e4, type: 3}
       propertyPath: m_LocalPosition.x

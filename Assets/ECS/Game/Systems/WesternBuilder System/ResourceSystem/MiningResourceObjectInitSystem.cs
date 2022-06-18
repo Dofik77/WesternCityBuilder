@@ -32,16 +32,4 @@ namespace ECS.Game.Systems.WesternBuilder_System.ResourceSystem
             // }
         }
     }
-
-    public struct TreeObjectComponent
-    {
-        
-    }
-
-    public struct RockObjectComponent
-    {
-        
-    }
-    
-    //компонент для каждого типа объектов.
 }

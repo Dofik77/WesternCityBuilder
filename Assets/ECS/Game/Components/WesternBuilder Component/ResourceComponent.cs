@@ -5,12 +5,12 @@
         
     }
 
-    public struct WoodLogComponent
+    public struct WoodResourceComponent
     {
        
     }
 
-    public struct RockComponent
+    public struct RockResourceComponent
     {
         
     }

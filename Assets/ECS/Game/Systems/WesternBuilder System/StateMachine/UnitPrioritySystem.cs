@@ -193,9 +193,7 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
                             unitEntity.Get<NextMiningValue>().Value = requiredValueForUnit;
                             _woodStorageEntity.Get<BuildStorageComponent>().PromisingResourceValue -=
                                 requiredValueForUnit;
-                            
-                            //for LeftToCollect can be evalute by dif Current-PromisingResourceValue ( 10 - 7 = 3 )
-                            
+
                             unitEntity.Get<FollowAndSetStateComponent>().FeatureState = UnitAction.TakeResource;
                             unitEntity.Get<FollowAndSetStateComponent>().SetDistanceView = _woodStorageEntity.Get<LinkComponent>().View as BuildsView;
                             unitEntity.Get<FollowAndSetStateComponent>().ControlDistanceView = storageView;

@@ -9,6 +9,7 @@ using ECS.Game.Systems.WesternBuilder_System;
 using ECS.Game.Systems.WesternBuilder_System.StateMachine;
 using ECS.Views;
 using ECS.Views.General;
+using ECS.Views.WesterBuilderView;
 using Leopotam.Ecs;
 using Runtime.Data.PlayerData.Recipe;
 using Runtime.Game.Ui.Windows.TouchPad;
@@ -34,13 +35,9 @@ namespace ECS.Utils.Extensions
 
             world.CreateUnitSkillScoresEntity();
             world.CreateResourceMining();
+            world.CreateResourceOnGround();
             world.CreateCampFire();
         }
-        
-        //разделить на два класса?
-        //один вызывает все методы при инициализации игры
-        //другой вызывает методы в runtime
-
         public static EcsEntity GetInput(this EcsWorld world)
         {
             return world.GetEntity<InputComponent>();
@@ -99,7 +96,7 @@ namespace ECS.Utils.Extensions
         
         public static void CreateCampFire(this EcsWorld world)
         {
-            var views = Object.FindObjectsOfType<BuildsView>(true); // сделать под костёр уникальную View
+            var views = Object.FindObjectsOfType<BuildsView>(true);
 
             foreach (var view in views)
             {
@@ -119,12 +116,12 @@ namespace ECS.Utils.Extensions
             {
                 case RequiredResourceType.WoodResource :
                     entity.Get<ResourceComponent>();
-                    entity.Get<WoodLogComponent>();
+                    entity.Get<WoodResourceComponent>();
                     break;
                 
                 case RequiredResourceType.RockResource :
                     entity.Get<ResourceComponent>();
-                    entity.Get<RockComponent>();
+                    entity.Get<RockResourceComponent>();
                     break;
                 
                 case RequiredResourceType.FoodResource : 
@@ -133,6 +130,30 @@ namespace ECS.Utils.Extensions
            
             entity.GetAndFire<PrefabComponent>().Value = resourceType.ToString();
             entity.Get<EventMakeObjectAsChild>().Parent = point;
+        }
+
+        public static void CreateResourceOnGround(this EcsWorld world)
+        {
+            var views = Object.FindObjectsOfType<ResourceView>(true);
+
+            foreach (var view in views)
+            {
+                var entity = world.NewEntity();
+                entity.Get<UIdComponent>().Value = UidGenerator.Next();
+                entity.Get<ResourceComponent>();
+
+                switch (view.ResourceType)
+                {
+                    case RequiredResourceType.WoodResource :
+                        entity.Get<WoodResourceComponent>();
+                        break;
+                    
+                    case RequiredResourceType.RockResource :
+                        entity.Get<RockResourceComponent>();
+                        break;
+                }
+                entity.LinkView(view);
+            }
         }
 
         public static void CreateRequestRecipe(this EcsWorld world, Recipe recipe)
@@ -167,32 +188,3 @@ namespace ECS.Utils.Extensions
         }
     }
 }
-
-// public static void CreateWoodStorage(this EcsWorld world)
-// {
-//     var entity = world.NewEntity();
-//     entity.Get<UIdComponent>().Value = UidGenerator.Next();
-//     //entity.GetAndFire<BuildComponent>().Value = "Storage";
-//     entity.GetAndFire<PrefabComponent>().Value = "Storage";
-//             
-//     entity.Get<BuildWoodStorageComponent>();
-//
-//     //единый метод что сохранит enum
-//     entity.GetAndFire<BuildStorageComponent>();
-//     entity.Get<BuildStorageComponent>().MaxResource = 10;
-//     entity.Get<BuildStorageComponent>().CurrentResource = 0;
-// }
-//         
-// public static void CreateRockStorage(this EcsWorld world)
-// {
-//     var entity = world.NewEntity();
-//     entity.Get<UIdComponent>().Value = UidGenerator.Next();
-//     //entity.GetAndFire<BuildComponent>().Value = "RockStorage";
-//     entity.GetAndFire<PrefabComponent>().Value = "RockStorage";
-//             
-//     entity.Get<BuildRockStorageComponent>();
-//             
-//     entity.GetAndFire<BuildStorageComponent>();
-//     entity.Get<BuildStorageComponent>().MaxResource = 5;
-//     entity.Get<BuildStorageComponent>().CurrentResource = 0;
-// }

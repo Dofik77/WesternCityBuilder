@@ -17,6 +17,7 @@ using SimpleUi.Signals;
 using UnityEngine;
 using UnityEngine.ProBuilder;
 using Zenject;
+using Zenject.ReflectionBaking.Mono.Cecil;
 
 namespace ECS.Game.Systems.WesternBuilder_System
 {
@@ -26,8 +27,8 @@ namespace ECS.Game.Systems.WesternBuilder_System
         private readonly EcsFilter<UnitsSkillScoreComponent> _unitSkills;
         
         private readonly EcsFilter<ObjectMiningComponent, LinkComponent>.Exclude<DisableMiningObject> _miningObjects;
-        private readonly EcsFilter<WoodLogComponent, LinkComponent> _woodLogResource;
-        private readonly EcsFilter<RockComponent, LinkComponent> _rockResource;
+        private readonly EcsFilter<WoodResourceComponent, LinkComponent>.Exclude<ResourceObjectUnavailable> _woodLogResource;
+        private readonly EcsFilter<RockResourceComponent, LinkComponent>.Exclude<ResourceObjectUnavailable> _rockResource;
         
         private float ClosestResourceMiningPosition = Mathf.Infinity;
         private float ClosestResourcePosition = Mathf.Infinity;
@@ -42,13 +43,67 @@ namespace ECS.Game.Systems.WesternBuilder_System
         {
             _unitView = entity.Get<LinkComponent>().View as UnitView;
             var requiredResourceType = entity.Get<UnitPriorityData>().RequiredMining;
-
-            if (CheckResourceOnGround(requiredResourceType))
-            {
-                
-            }
-           
             
+            if (CheckResourceOnGround(requiredResourceType))
+                DelegateTask(entity, _closestResourceView, 1);
+            else
+                FindClosestMiningObject(entity, requiredResourceType);
+        }
+        
+        private bool CheckResourceOnGround(RequiredResourceType requiredResourceType)
+        {
+            bool resourceExist = false;
+
+            switch (requiredResourceType)
+            {
+                case RequiredResourceType.WoodResource :
+                    if (!_woodLogResource.IsEmpty())
+                    {
+                        foreach (var i in _woodLogResource)
+                        {
+                            var WoodResourceView = _woodLogResource.Get2(i).View as ResourceView;
+                            Vector3 dif = _unitView.transform.position - WoodResourceView.transform.position;
+                            float curDistance = dif.magnitude;
+                            
+                            if (curDistance < ClosestResourcePosition)
+                            {
+                                _closestResourceView = WoodResourceView;
+                                ClosestResourcePosition = curDistance;
+                            }
+                        }
+                        resourceExist = true;
+                    }
+                    break;
+                
+                case RequiredResourceType.RockResource :
+                    if (!_rockResource.IsEmpty())
+                    {
+                        foreach (var i in _woodLogResource)
+                        {
+                            var RockResourceView = _rockResource.Get2(i).View as ResourceView;
+                            Vector3 dif = _unitView.transform.position - RockResourceView.transform.position;
+                            float curDistance = dif.magnitude;
+                            
+                            if (curDistance < ClosestResourcePosition)
+                            {
+                                _closestResourceView = RockResourceView;
+                                ClosestResourcePosition = curDistance;
+                            }
+                        }
+                        resourceExist = true;
+                    }
+                    break;
+            }
+            
+            ClosestResourcePosition = Mathf.Infinity;
+            
+            if(resourceExist)
+                _closestResourceView.Entity.Get<ResourceObjectUnavailable>();
+            
+            return resourceExist;
+        }
+        private void FindClosestMiningObject(EcsEntity entity, RequiredResourceType requiredResourceType)
+        {
             foreach (var i in _miningObjects)
             {
                 var objectMiningView = _miningObjects.Get2(i).View as ObjectMiningView;
@@ -59,7 +114,7 @@ namespace ECS.Game.Systems.WesternBuilder_System
                     {
                         Vector3 dif = _unitView.transform.position - objectMiningView.transform.position;
                         float curDistance = dif.magnitude;
-                    
+                
                         if (curDistance < ClosestResourceMiningPosition)
                         {
                             _closestMiningView = objectMiningView;
@@ -78,69 +133,31 @@ namespace ECS.Game.Systems.WesternBuilder_System
             
             entity.Get<NextMiningValue>().Value = requiredMining;
             
-            entity.Get<FollowAndSetStateComponent>().FeatureState = UnitAction.TakeResource;
-            entity.Get<FollowAndSetStateComponent>().SetDistanceView = _closestMiningView;
-            entity.Get<FollowAndSetStateComponent>().ControlDistanceView = _closestMiningView;
-
-            entity.Get<EventUnitChangeStateComponent>().State = UnitAction.FollowAndSetState;
-            entity.Get<CurrentMiningObjectData>().CurrentMiningObject = _closestMiningView;
-
+            DelegateTask(entity, _closestMiningView, requiredMining);
+            
             ClosestResourceMiningPosition = Mathf.Infinity;
         }
-
-        public bool CheckResourceOnGround(RequiredResourceType requiredResourceType)
+        private void DelegateTask(EcsEntity entity, LinkableView targetView, int NextMiningValue)
         {
-            bool resourceExist = false;
-
-            switch (requiredResourceType)
-            {
-                case RequiredResourceType.WoodResource :
-                    if (!_woodLogResource.IsEmpty())
-                    {
-                        foreach (var i in _woodLogResource)
-                        {
-                            var WoodResourceView = _woodLogResource.Get2(i).View as ResourceView;
-                            Vector3 dif = _unitView.transform.position - WoodResourceView.transform.position;
-                            float curDistance = dif.magnitude;
-                            
-                            if (curDistance < ClosestResourcePosition)
-                            {
-                                _closestResourceView = WoodResourceView;
-                                ClosestResourceMiningPosition = curDistance;
-                            }
-                        }
-                        resourceExist = true;
-                    }
-                    break;
+            entity.Get<NextMiningValue>().Value = NextMiningValue;
                 
-                case RequiredResourceType.RockResource :
-                    if (!_woodLogResource.IsEmpty())
-                    {
-                        foreach (var i in _woodLogResource)
-                        {
-                            var RockResourceView = _woodLogResource.Get2(i).View as ResourceView;
-                            Vector3 dif = _unitView.transform.position - RockResourceView.transform.position;
-                            float curDistance = dif.magnitude;
-                            
-                            if (curDistance < ClosestResourcePosition)
-                            {
-                                _closestResourceView = RockResourceView;
-                                ClosestResourceMiningPosition = curDistance;
-                            }
-                        }
-                        resourceExist = true;
-                    }
-                    break;
-            }
-            
-            
-            
-            return resourceExist;
+            entity.Get<FollowAndSetStateComponent>().FeatureState = UnitAction.TakeResource;
+            entity.Get<FollowAndSetStateComponent>().SetDistanceView = targetView;
+            entity.Get<FollowAndSetStateComponent>().ControlDistanceView = targetView;
+                
+            entity.Get<EventUnitChangeStateComponent>().State = UnitAction.FollowAndSetState;
+            entity.Get<CurrentMiningObjectData>().CurrentMiningObject = targetView;
+
+            ClosestResourcePosition = Mathf.Infinity;
         }
-        
     }
     
     public struct EventFindClosestResourceComponent
+    {
+        
+    }
+
+    public struct ResourceObjectUnavailable
     {
         
     }

@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ResourceType: 1
+  StopDistance: 0.5
+  MiningAnimationStage: 6
 --- !u!1001 &5761115167879350449
 PrefabInstance:
   m_ObjectHideFlags: 0

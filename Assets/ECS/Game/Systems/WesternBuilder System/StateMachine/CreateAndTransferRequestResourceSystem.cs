@@ -58,10 +58,52 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
                 var objectMiningView = entity.Get<CurrentMiningObjectData>().CurrentMiningObject as BuildsView;
                 ResourceExtraction(entity, objectMiningView);
             }
+            else if (entity.Get<CurrentMiningObjectData>().CurrentMiningObject.Entity.Has<ResourceComponent>())
+            {
+                var objectMiningView = entity.Get<CurrentMiningObjectData>().CurrentMiningObject as ResourceView;
+                ResourceExtraction(entity, objectMiningView);
+            }
         }
         
-        //объеденить в один метод   
+        private void ResourceExtraction(EcsEntity unitEntity, ResourceView resourceView)
+        {
+            var unitView = unitEntity.Get<LinkComponent>().View as UnitView;
+            var reqMainValue = unitEntity.Get<NextMiningValue>().Value;
+            var extractTime = ExtractTime(reqMainValue, 1);
+            
+            unitView.Entity.Get<EventSetAnimationComponent>().Value = resourceView.MiningAnimationStage;
+            unitEntity.Get<UnitCurrentResource>().Value++;
+            
+            _delayService.Do(extractTime + 0.1f, () =>
+            {
+                unitEntity.Get<CurrentMiningObjectData>().CurrentMiningObject.Entity.Get<EventMakeObjectAsChild>()
+                        .Parent =
+                    unitView.GetResourceStack();
+                
+                var requiredValueForUnit =
+                    unitEntity.Get<UnitPriorityData>().RequiredValueResource -
+                    unitEntity.Get<UnitCurrentResource>().Value;
+                
+                if (requiredValueForUnit > 0)
+                {
+                    unitEntity.Get<UnitPriorityData>().RequiredValueResource = requiredValueForUnit;
+                    unitEntity.Get<EventUnitChangeStateComponent>().State = UnitAction.FetchResource;
+                }
+                
+                else
+                {
+                    unitEntity.Get<EventUnitChangeStateComponent>().State = UnitAction.FollowAndSetState;
 
+                    unitEntity.Get<FollowAndSetStateComponent>().FeatureState = UnitAction.PutResource;
+                    unitEntity.Get<FollowAndSetStateComponent>().SetDistanceView =
+                        unitEntity.Get<UnitPriorityData>().TargetBuildsView;
+                    unitEntity.Get<FollowAndSetStateComponent>().ControlDistanceView =
+                        unitEntity.Get<UnitPriorityData>().TargetBuildsView;
+                }
+            });
+            
+        }
+        
         private void ResourceExtraction(EcsEntity unitEntity, ObjectMiningView objectMiningView)
         {
             var unitView = unitEntity.Get<LinkComponent>().View as UnitView;
@@ -91,13 +133,11 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
                     objectMiningView.Entity.Get<DisableMiningObject>();
                 }
                 
-
                 if (requiredValueForUnit > 0)
                 {
                     unitEntity.Get<UnitPriorityData>().RequiredValueResource = requiredValueForUnit;
                     unitEntity.Get<EventUnitChangeStateComponent>().State = UnitAction.FetchResource;
                 }
-                
                 else
                 {
                     unitEntity.Get<EventUnitChangeStateComponent>().State = UnitAction.FollowAndSetState;
@@ -157,6 +197,8 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
             });
             
         }
+
+       
 
         private float ExtractTime(int reqValue, int unitSpeedMain)
         {

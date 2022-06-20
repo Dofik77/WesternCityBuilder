@@ -11,6 +11,7 @@ namespace ECS.Views
     {
         [SerializeField] public float StopDistance;
         [SerializeField] public RequiredObjectType ObjectType;
+        [SerializeField] public int MiningAnimationStage;
 
         [SerializeField] public Canvas ProgressCanvasGroup;
         [SerializeField] public ProgressBar ResourceCountToConstructionProgressBar;

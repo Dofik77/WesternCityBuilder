@@ -166,7 +166,7 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
             var extractTime = ExtractTime(reqMainValue, 1);
             var minedInCycle = 0;
 
-            //unitView.Entity.Get<EventSetAnimationComponent>().Value = 2;
+            unitView.Entity.Get<EventSetAnimationComponent>().Value = storageView.MiningAnimationStage;
             
             for (int i = 1; i < reqMainValue + 1; i++)
             {

@@ -16,7 +16,7 @@ MonoBehaviour:
   - Name: Camera
     GameObject: {fileID: 2181769509312897065, guid: 98159cdb47afa4a48839a7dad7e4a2cd, type: 3}
   - Name: Player
-    GameObject: {fileID: 7445344910305056461, guid: b6516db4ac8d89447ac725cada8020b6, type: 3}
+    GameObject: {fileID: 7445344910305056461, guid: 2d6babde6a6192545990cfbbc03c3ebb, type: 3}
   - Name: BusyLetter
     GameObject: {fileID: 3094909925261188104, guid: e359d35f650ecb6448cffc1391d220b5, type: 3}
   - Name: CampFire

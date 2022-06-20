@@ -14,7 +14,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 1
+  m_Fog: 0
   m_FogColor: {r: 0.43529415, g: 0.33333334, b: 0.28235295, a: 1}
   m_FogMode: 1
   m_FogDensity: 0.01
@@ -282,7 +282,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6439703118731650344, guid: 9431e578ca676b442b8214ffa0a9e0e4, type: 3}
       propertyPath: StopDistance
-      value: 3
+      value: 2.6
       objectReference: {fileID: 0}
     - target: {fileID: 6439703118731774930, guid: 9431e578ca676b442b8214ffa0a9e0e4, type: 3}
       propertyPath: m_Name
@@ -516,7 +516,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6439703118731650344, guid: 9431e578ca676b442b8214ffa0a9e0e4, type: 3}
       propertyPath: StopDistance
-      value: 3.5
+      value: 2.6
       objectReference: {fileID: 0}
     - target: {fileID: 6439703118731774930, guid: 9431e578ca676b442b8214ffa0a9e0e4, type: 3}
       propertyPath: m_Name
@@ -612,7 +612,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6439703118731650344, guid: 9431e578ca676b442b8214ffa0a9e0e4, type: 3}
       propertyPath: StopDistance
-      value: 3
+      value: 2.6
       objectReference: {fileID: 0}
     - target: {fileID: 6439703118731774930, guid: 9431e578ca676b442b8214ffa0a9e0e4, type: 3}
       propertyPath: m_Name
@@ -777,7 +777,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6439703118731650344, guid: 9431e578ca676b442b8214ffa0a9e0e4, type: 3}
       propertyPath: StopDistance
-      value: 3.5
+      value: 2.6
       objectReference: {fileID: 0}
     - target: {fileID: 6439703118731774930, guid: 9431e578ca676b442b8214ffa0a9e0e4, type: 3}
       propertyPath: m_Name
@@ -873,7 +873,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6439703118731650344, guid: 9431e578ca676b442b8214ffa0a9e0e4, type: 3}
       propertyPath: StopDistance
-      value: 3.5
+      value: 2.6
       objectReference: {fileID: 0}
     - target: {fileID: 6439703118731774930, guid: 9431e578ca676b442b8214ffa0a9e0e4, type: 3}
       propertyPath: m_Name
@@ -1819,7 +1819,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6439703118731650344, guid: 9431e578ca676b442b8214ffa0a9e0e4, type: 3}
       propertyPath: StopDistance
-      value: 3.5
+      value: 2.6
       objectReference: {fileID: 0}
     - target: {fileID: 6439703118731774930, guid: 9431e578ca676b442b8214ffa0a9e0e4, type: 3}
       propertyPath: m_Name
@@ -78095,7 +78095,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6439703118731650344, guid: 9431e578ca676b442b8214ffa0a9e0e4, type: 3}
       propertyPath: StopDistance
-      value: 3.5
+      value: 2.6
       objectReference: {fileID: 0}
     - target: {fileID: 6439703118731774930, guid: 9431e578ca676b442b8214ffa0a9e0e4, type: 3}
       propertyPath: m_Name
@@ -78489,7 +78489,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6439703118731650344, guid: 9431e578ca676b442b8214ffa0a9e0e4, type: 3}
       propertyPath: StopDistance
-      value: 3.5
+      value: 2.6
       objectReference: {fileID: 0}
     - target: {fileID: 6439703118731774930, guid: 9431e578ca676b442b8214ffa0a9e0e4, type: 3}
       propertyPath: m_Name
@@ -78615,7 +78615,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6439703118731650344, guid: 9431e578ca676b442b8214ffa0a9e0e4, type: 3}
       propertyPath: StopDistance
-      value: 3.5
+      value: 2.6
       objectReference: {fileID: 0}
     - target: {fileID: 6439703118731774930, guid: 9431e578ca676b442b8214ffa0a9e0e4, type: 3}
       propertyPath: m_Name
@@ -79407,7 +79407,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6439703118731650344, guid: 9431e578ca676b442b8214ffa0a9e0e4, type: 3}
       propertyPath: StopDistance
-      value: 3
+      value: 2.6
       objectReference: {fileID: 0}
     - target: {fileID: 6439703118731774930, guid: 9431e578ca676b442b8214ffa0a9e0e4, type: 3}
       propertyPath: m_Name
@@ -79710,7 +79710,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6439703118731650344, guid: 9431e578ca676b442b8214ffa0a9e0e4, type: 3}
       propertyPath: StopDistance
-      value: 3.5
+      value: 2.6
       objectReference: {fileID: 0}
     - target: {fileID: 6439703118731774930, guid: 9431e578ca676b442b8214ffa0a9e0e4, type: 3}
       propertyPath: m_Name

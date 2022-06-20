@@ -367,8 +367,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78cb2da51d5a4b01ae31653b1f63714b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StopDistance: 1
+  StopDistance: 1.15
   ObjectType: 2
+  MiningAnimationStage: 0
   ProgressCanvasGroup: {fileID: 3766358791143452556}
   ResourceCountToConstructionProgressBar: {fileID: 939054698841873242}
   CounctractProgressBar: {fileID: 6716381185539325444}
@@ -518,6 +519,18 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6010792498787730321, guid: ba873e72dfea1b14cac7fd354821af56, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6010792498787730321, guid: ba873e72dfea1b14cac7fd354821af56, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 6010792498787730321, guid: ba873e72dfea1b14cac7fd354821af56, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6010792498787730321, guid: ba873e72dfea1b14cac7fd354821af56, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -564,6 +577,18 @@ PrefabInstance:
     - target: {fileID: 6016696611572077271, guid: ba873e72dfea1b14cac7fd354821af56, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8280476514497077327, guid: ba873e72dfea1b14cac7fd354821af56, type: 3}
+      propertyPath: m_Carve
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8280476514497077327, guid: ba873e72dfea1b14cac7fd354821af56, type: 3}
+      propertyPath: m_Shape
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8280476514497077327, guid: ba873e72dfea1b14cac7fd354821af56, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8909363311661519620, guid: ba873e72dfea1b14cac7fd354821af56, type: 3}
       propertyPath: m_LocalPosition.z

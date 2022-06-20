@@ -32,7 +32,7 @@ namespace ECS.Game.Systems.WesternBuilder_System
             _unitView.Axe.SetActive(false);
             _unitView.Pick.SetActive(false);
             
-            var randomSkin = Random.Range(0, 7);
+            var randomSkin = Random.Range(0, 3);
             _unitView.gameObject.transform.GetChild(randomSkin).gameObject.SetActive(true);
             
 

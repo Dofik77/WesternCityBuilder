@@ -41,20 +41,29 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
                 if (buildView.Entity.Has<BuildStorageComponent>())
                     _signalBus.Fire(new SignalEnableResourceCounter(buildView));
                 
-                entity.Del<UnitHasPriority>();
-                
                 foreach (var i in _units)
+                {
+                    _units.GetEntity(i).Del<UnitHasPriority>();
                     _units.GetEntity(i).Get<EventUpdatePriorityComponent>();
+                }
             });
         }
         
+        //give true status on some tools
         private void ChangeObjectStage(BuildsView buildView)
         {
             buildView.BaseObject.SetActive(false);
-            buildView.ConstructedObject.SetActive(true);
             buildView.CounctractProgressBar.gameObject.SetActive(false);
 
-            buildView.StopDistance *= 2;
+            if (buildView.ObjectType != RequiredObjectType.ToolRecipe)
+            {
+                buildView.ConstructedObject.SetActive(true);
+                buildView.StopDistance *= 2;
+            }
+            else
+            {
+                buildView.Entity.Get<IsDestroyedComponent>();
+            }
         }
 
         private int CalculatedTimeForConstruct(RequiredResourceCount[] resourceCounts)

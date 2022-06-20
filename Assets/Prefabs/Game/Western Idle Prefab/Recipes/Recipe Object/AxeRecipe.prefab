@@ -426,7 +426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StopDistance: 1
-  ObjectType: 6
+  ObjectType: 7
   ProgressCanvasGroup: {fileID: 4774126807010074459}
   ResourceCountToConstructionProgressBar: {fileID: 8866990705489652621}
   CounctractProgressBar: {fileID: 3112182294206942931}
@@ -811,7 +811,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6016696611572077271, guid: ba873e72dfea1b14cac7fd354821af56, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3570576484655597003, guid: ba873e72dfea1b14cac7fd354821af56, type: 3}

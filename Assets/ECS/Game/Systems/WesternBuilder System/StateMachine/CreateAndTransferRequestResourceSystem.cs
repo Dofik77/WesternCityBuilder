@@ -106,6 +106,8 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
         
         private void ResourceExtraction(EcsEntity unitEntity, ObjectMiningView objectMiningView)
         {
+            unitEntity.Get<EventToolsControl>().ResourceType = objectMiningView.ResourceType;
+            
             var unitView = unitEntity.Get<LinkComponent>().View as UnitView;
             var reqMainValue = unitEntity.Get<NextMiningValue>().Value;
             var extractTime = ExtractTime(reqMainValue, _unitSpeedMain);
@@ -113,6 +115,7 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
             var minedInCycle = 0;
             
             unitView.Entity.Get<EventSetAnimationComponent>().Value = objectMiningView.MiningAnimationStage;
+            
             
             for (int i = 1; i < reqMainValue + 1; i++)
             {
@@ -148,9 +151,11 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
                     unitEntity.Get<FollowAndSetStateComponent>().ControlDistanceView =
                         unitEntity.Get<UnitPriorityData>().TargetBuildsView;
                 }
-                
+
                 if (objectMiningView.Entity.IsAlive() && objectMiningView.GetCurrentResourceValue == 0)
                     objectMiningView.Entity.Get<DisableMiningObject>();
+
+                unitEntity.Get<EventToolsControl>().Tools = Tools.None;
             });
         }
 

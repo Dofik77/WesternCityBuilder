@@ -41,12 +41,12 @@ namespace ECS.Installers
             //West Isle Builder Systems 
             Container.BindInterfacesAndSelfTo<SetAnimationSystem>().AsSingle();
             Container.BindInterfacesAndSelfTo<BuildCreatedBeforeRuntimeSystem>().AsSingle();
-            //Container.BindInterfacesAndSelfTo<BuildingsInitSystem>().AsSingle();
             Container.BindInterfacesAndSelfTo<BuildUnderConstructionInitSystem>().AsSingle();
             Container.BindInterfacesAndSelfTo<BuildConstructionSystem>().AsSingle();
             Container.BindInterfacesAndSelfTo<MiningResourceObjectInitSystem>().AsSingle();
             Container.BindInterfacesAndSelfTo<UnitInitSystem>().AsSingle();
             Container.BindInterfacesAndSelfTo<SetBaseValuesOfUnitSkill>().AsSingle();
+            Container.BindInterfacesAndSelfTo<ToolsControlSystem>().AsSingle();
             
             Container.BindInterfacesAndSelfTo<UnitPrioritySystem>().AsSingle();
             Container.BindInterfacesAndSelfTo<UnitStateMachine>().AsSingle();

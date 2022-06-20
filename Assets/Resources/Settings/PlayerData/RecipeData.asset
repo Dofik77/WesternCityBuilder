@@ -15,14 +15,14 @@ MonoBehaviour:
   _recipes:
   - _key: craft_Axe
     _dependKey: 
-    _name: WoodStorage
-    _description: Alows storing wood. Upgrade to increase the capacity
+    _name: Axe
+    _description: 'Allows you to mine wood '
     _recipeIcon: {fileID: 21300000, guid: 4b22615be6e5b44f0b679f47d4da0191, type: 3}
     _recipeResources:
     - Key: 1
       NeedToConstruct: 4
     - Key: 2
-      NeedToConstruct: 3
+      NeedToConstruct: 4
     _levelOpenData: LV1
     isStorageOff: 0
     _maxResourceStorage: 0
@@ -30,7 +30,7 @@ MonoBehaviour:
     _dependKey: 
     _name: WoodStorage
     _description: Alows storing wood. Upgrade to increase the capacity
-    _recipeIcon: {fileID: 21300000, guid: b127a858f9ca941d9b037a1fe8a6def9, type: 3}
+    _recipeIcon: {fileID: 21300000, guid: 1057d0412e412420d87bd31cc654072d, type: 3}
     _recipeResources:
     - Key: 1
       NeedToConstruct: 4

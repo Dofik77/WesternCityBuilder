@@ -24,14 +24,19 @@ namespace ECS.Game.Systems.WesternBuilder_System
         protected override bool DeleteEvent => true;
         protected override void Execute(EcsEntity entity)
         {
+            entity.Get<UnitComponent>().AxeAvailable = false;
+            entity.Get<UnitComponent>().PickAvailable = false;
+            
             _unitView = entity.Get<LinkComponent>().View as UnitView;
+            
+            _unitView.Axe.SetActive(false);
+            _unitView.Pick.SetActive(false);
             
             var randomSkin = Random.Range(0, 7);
             _unitView.gameObject.transform.GetChild(randomSkin).gameObject.SetActive(true);
             
 
             var offsetPos = Random.Range(5, 10);
-
             _unitView.transform.position = _screenVariables.GetTransformPoint(PLAYER_START).position + new Vector3(offsetPos,0,0);
             _unitView.transform.rotation = _screenVariables.GetTransformPoint(PLAYER_START).rotation;
             

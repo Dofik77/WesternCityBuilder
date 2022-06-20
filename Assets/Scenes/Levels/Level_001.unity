@@ -2243,6 +2243,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6068f0d0298633f4d97cd682123592b9, type: 3}
+--- !u!1 &678489449
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 678489450}
+  m_Layer: 0
+  m_Name: AxeCraftPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &678489450
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678489449}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: -0.2, y: 0, z: 3.19}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1453918373}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1001 &701746692
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -77462,7 +77492,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6007632924041603832, guid: dd68f25f30357fe4f9227fea6cfeb1fa, type: 3}
       propertyPath: _points.Array.size
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6007632924041603832, guid: dd68f25f30357fe4f9227fea6cfeb1fa, type: 3}
       propertyPath: _points.Array.data[6].Key
@@ -77473,6 +77503,10 @@ PrefabInstance:
       value: RockStorage
       objectReference: {fileID: 0}
     - target: {fileID: 6007632924041603832, guid: dd68f25f30357fe4f9227fea6cfeb1fa, type: 3}
+      propertyPath: _points.Array.data[8].Key
+      value: Axe
+      objectReference: {fileID: 0}
+    - target: {fileID: 6007632924041603832, guid: dd68f25f30357fe4f9227fea6cfeb1fa, type: 3}
       propertyPath: _points.Array.data[6].Transform
       value: 
       objectReference: {fileID: 1392543136}
@@ -77480,6 +77514,10 @@ PrefabInstance:
       propertyPath: _points.Array.data[7].Transform
       value: 
       objectReference: {fileID: 1470048246}
+    - target: {fileID: 6007632924041603832, guid: dd68f25f30357fe4f9227fea6cfeb1fa, type: 3}
+      propertyPath: _points.Array.data[8].Transform
+      value: 
+      objectReference: {fileID: 678489450}
     - target: {fileID: 6007632924041603833, guid: dd68f25f30357fe4f9227fea6cfeb1fa, type: 3}
       propertyPath: m_RootOrder
       value: 2

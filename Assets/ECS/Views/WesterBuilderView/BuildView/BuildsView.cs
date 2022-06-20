@@ -9,7 +9,6 @@ namespace ECS.Views
 {
     public class BuildsView : LinkableView, IHasStopDistance
     {
-        //указывать UI для здания и кол-во ресусров ( макс, если надо ) здесь 
         [SerializeField] public float StopDistance;
         [SerializeField] public RequiredObjectType ObjectType;
 
@@ -78,6 +77,7 @@ namespace ECS.Views
         
         CampFire,
         
-        Recipe
+        BuildRecipe,
+        ToolRecipe
     }
 }

@@ -46,7 +46,6 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
             InitBuildUI(view, requiredResourceToConstruct);
             CheckBuildOnStorage(entity, buildStatus, currentRecipe);
             
-            
             foreach (var i in _units)
                 _units.GetEntity(i).Get<EventUpdatePriorityComponent>();
         }

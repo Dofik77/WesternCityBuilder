@@ -15,6 +15,10 @@ namespace ECS.Views.General
         [SerializeField] private NavMeshAgent _agent;
         [SerializeField] private GameObject _resourceStack;
         [SerializeField] private Animator _animator;
+
+        [Header("Tool Fields")] 
+        [SerializeField] public GameObject Axe;
+        [SerializeField] public GameObject Pick;
         
         [Header("DotWeen Fields")] 
         [SerializeField] private float _stackOffsetX = 1;

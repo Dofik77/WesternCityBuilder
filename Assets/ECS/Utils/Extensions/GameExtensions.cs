@@ -111,16 +111,16 @@ namespace ECS.Utils.Extensions
         {
             var entity = world.NewEntity();
             entity.Get<UIdComponent>().Value = UidGenerator.Next();
-
+            entity.Get<ResourceComponent>();
+            entity.Get<ResourceObjectUnavailable>();
+            
             switch (resourceType)
             {
                 case RequiredResourceType.WoodResource :
-                    entity.Get<ResourceComponent>();
                     entity.Get<WoodResourceComponent>();
                     break;
                 
                 case RequiredResourceType.RockResource :
-                    entity.Get<ResourceComponent>();
                     entity.Get<RockResourceComponent>();
                     break;
                 

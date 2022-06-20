@@ -13,6 +13,19 @@ MonoBehaviour:
   m_Name: RecipeData
   m_EditorClassIdentifier: 
   _recipes:
+  - _key: craft_Axe
+    _dependKey: 
+    _name: WoodStorage
+    _description: Alows storing wood. Upgrade to increase the capacity
+    _recipeIcon: {fileID: 21300000, guid: 4b22615be6e5b44f0b679f47d4da0191, type: 3}
+    _recipeResources:
+    - Key: 1
+      NeedToConstruct: 4
+    - Key: 2
+      NeedToConstruct: 3
+    _levelOpenData: LV1
+    isStorageOff: 0
+    _maxResourceStorage: 0
   - _key: craft_woodStorage
     _dependKey: 
     _name: WoodStorage

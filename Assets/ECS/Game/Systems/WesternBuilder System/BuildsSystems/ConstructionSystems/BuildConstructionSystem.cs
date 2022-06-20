@@ -26,7 +26,7 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
 
             foreach (var unit in _units)
                 _units.GetEntity(unit).Get<EventSetAnimationComponent>().Value = 5;
-            
+
             buildView.ResourceCountToConstructionProgressBar.gameObject.SetActive(false);
             buildView.CounctractProgressBar.gameObject.SetActive(true); 
             buildView.CounctractProgressBar.RepaintConstruction(1, delayToConstruct);

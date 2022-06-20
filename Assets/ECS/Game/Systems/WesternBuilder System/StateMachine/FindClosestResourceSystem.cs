@@ -71,6 +71,7 @@ namespace ECS.Game.Systems.WesternBuilder_System
                                 ClosestResourcePosition = curDistance;
                             }
                         }
+                        _closestResourceView.Entity.Get<ResourceObjectUnavailable>();
                         resourceExist = true;
                     }
                     break;
@@ -78,7 +79,7 @@ namespace ECS.Game.Systems.WesternBuilder_System
                 case RequiredResourceType.RockResource :
                     if (!_rockResource.IsEmpty())
                     {
-                        foreach (var i in _woodLogResource)
+                        foreach (var i in _rockResource)
                         {
                             var RockResourceView = _rockResource.Get2(i).View as ResourceView;
                             Vector3 dif = _unitView.transform.position - RockResourceView.transform.position;
@@ -90,6 +91,7 @@ namespace ECS.Game.Systems.WesternBuilder_System
                                 ClosestResourcePosition = curDistance;
                             }
                         }
+                        _closestResourceView.Entity.Get<ResourceObjectUnavailable>();
                         resourceExist = true;
                     }
                     break;
@@ -97,8 +99,8 @@ namespace ECS.Game.Systems.WesternBuilder_System
             
             ClosestResourcePosition = Mathf.Infinity;
             
-            if(resourceExist)
-                _closestResourceView.Entity.Get<ResourceObjectUnavailable>();
+            // if(resourceExist)
+            //     _closestResourceView.Entity.Get<ResourceObjectUnavailable>();
             
             return resourceExist;
         }

@@ -29,7 +29,7 @@ namespace ECS.Utils.Extensions
             world.CreateDistanceTriggers();
             world.CreateNavMeshLinks();
             
-            world.CreateUnit();
+            // world.CreateUnit();
             world.CreateUnit();
             world.CreateUnit();
 

@@ -73,6 +73,7 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
             
             unitView.Entity.Get<EventSetAnimationComponent>().Value = resourceView.MiningAnimationStage;
             unitEntity.Get<UnitCurrentResource>().Value++;
+            var minedInCycle = 1;
             
             _delayService.Do(extractTime + 0.1f, () =>
             {
@@ -82,14 +83,13 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
                 
                 var requiredValueForUnit =
                     unitEntity.Get<UnitPriorityData>().RequiredValueResource -
-                    unitEntity.Get<UnitCurrentResource>().Value;
+                    minedInCycle;
                 
                 if (requiredValueForUnit > 0)
                 {
                     unitEntity.Get<UnitPriorityData>().RequiredValueResource = requiredValueForUnit;
                     unitEntity.Get<EventUnitChangeStateComponent>().State = UnitAction.FetchResource;
                 }
-                
                 else
                 {
                     unitEntity.Get<EventUnitChangeStateComponent>().State = UnitAction.FollowAndSetState;
@@ -109,6 +109,8 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
             var unitView = unitEntity.Get<LinkComponent>().View as UnitView;
             var reqMainValue = unitEntity.Get<NextMiningValue>().Value;
             var extractTime = ExtractTime(reqMainValue, _unitSpeedMain);
+
+            var minedInCycle = 0;
             
             unitView.Entity.Get<EventSetAnimationComponent>().Value = objectMiningView.MiningAnimationStage;
             
@@ -119,19 +121,17 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
                     _world.CreateResourceType(unitView.GetResourceStack(), unitEntity.Get<UnitPriorityData>().RequiredMining);
                     objectMiningView.GetCurrentResourceValue--;
                     unitEntity.Get<UnitCurrentResource>().Value++;
+                    minedInCycle++;
                 });
             }
+
+            //minedInCycle += reqMainValue;
             
             _delayService.Do(extractTime + 0.1f, () =>
             {
                 var requiredValueForUnit =
                     unitEntity.Get<UnitPriorityData>().RequiredValueResource -
-                    unitEntity.Get<UnitCurrentResource>().Value;
-
-                if (objectMiningView.Entity.IsAlive() && objectMiningView.GetCurrentResourceValue == 0)
-                {
-                    objectMiningView.Entity.Get<DisableMiningObject>();
-                }
+                    minedInCycle;
                 
                 if (requiredValueForUnit > 0)
                 {
@@ -148,6 +148,9 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
                     unitEntity.Get<FollowAndSetStateComponent>().ControlDistanceView =
                         unitEntity.Get<UnitPriorityData>().TargetBuildsView;
                 }
+                
+                if (objectMiningView.Entity.IsAlive() && objectMiningView.GetCurrentResourceValue == 0)
+                    objectMiningView.Entity.Get<DisableMiningObject>();
             });
         }
 
@@ -156,6 +159,7 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
             var unitView = unitEntity.Get<LinkComponent>().View as UnitView;
             var reqMainValue = unitEntity.Get<NextMiningValue>().Value;
             var extractTime = ExtractTime(reqMainValue, 1);
+            var minedInCycle = 0;
 
             //unitView.Entity.Get<EventSetAnimationComponent>().Value = 2;
             
@@ -164,12 +168,12 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
                 _delayService.Do(1 * i, () =>
                 {
                     _world.CreateResourceType(unitView.GetResourceStack(), unitEntity.Get<UnitPriorityData>().RequiredMining);
-                    //unitView.AddResource(resource)
                     storageView.Entity.Get<BuildStorageComponent>().CurrentResourceInStorage--;
                     storageView.Entity.Get<BuildStorageComponent>().LeftToCollectResourceCount++;
                     _signalBus.Fire(new SignalStorageUpdate(storageView));
                     
                     unitEntity.Get<UnitCurrentResource>().Value++;
+                    minedInCycle++;
                 });
             }
             
@@ -177,7 +181,7 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
             {
                 var requiredValueForUnit =
                     unitEntity.Get<UnitPriorityData>().RequiredValueResource -
-                    unitEntity.Get<UnitCurrentResource>().Value;
+                    minedInCycle;
                 
                 if (requiredValueForUnit > 0)
                 {
@@ -197,9 +201,7 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
             });
             
         }
-
-       
-
+        
         private float ExtractTime(int reqValue, int unitSpeedMain)
         {
             float extractTime = 0;

@@ -18,6 +18,13 @@ namespace ECS.Views.General
         public float InitialSize => _initialSize;
         [SerializeField] private float _initialSize = 0;
 
+        public Transform[] CameraRelocationPosition => _cameraRelocationPosition;
+        [SerializeField] private Transform[] _cameraRelocationPosition;
+        
+        public float CameraRelocationDuration => _cameraRelocationDuration;
+        [SerializeField] private float _cameraRelocationDuration;
+        
+
         private Camera _camera;
         private float _targetAspect;
         public ref float GetTargetAspect() => ref _targetAspect;
@@ -43,7 +50,12 @@ namespace ECS.Views.General
         {
             return 2 * Mathf.Atan(Mathf.Tan(hFovInDeg * Mathf.Deg2Rad / 2) / aspectRatio) * Mathf.Rad2Deg;
         }
-        
+
+        public void LerpCamera()
+        {
+            _camera.transform.position = Vector3.Lerp(_camera.transform.position, new Vector3(-8.5f, 14f, 28f),
+                1);
+        }
         
     }
 }

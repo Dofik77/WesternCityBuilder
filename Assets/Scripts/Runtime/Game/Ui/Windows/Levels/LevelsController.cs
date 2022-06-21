@@ -88,6 +88,7 @@ namespace Runtime.Game.Ui.Windows.Levels
 
             void OnButton(UiGeneratedEntity entity, UiGeneratedLayout layout)
             {
+                //TODO FOR DISABLE BUTTON 
                 Level level = _levelsData.Get().Get(entity.Key);
                 var data = _commonPlayerData.GetData();
                 Action sceneLoadAction = null;

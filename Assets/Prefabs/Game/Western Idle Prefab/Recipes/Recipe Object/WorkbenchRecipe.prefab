@@ -488,8 +488,8 @@ NavMeshObstacle:
   m_GameObject: {fileID: 5168009550116176357}
   m_Enabled: 1
   serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.50100005, y: 0.356, z: 0.624}
+  m_Shape: 0
+  m_Extents: {x: 0.624, y: 0.356, z: 0.624}
   m_MoveThreshold: 0.1
   m_Carve: 0
   m_CarveOnlyStationary: 1
@@ -558,8 +558,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78cb2da51d5a4b01ae31653b1f63714b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StopDistance: 1
-  ObjectType: 6
+  StopDistance: 1.4
+  ObjectType: 5
   MiningAnimationStage: 0
   ProgressCanvasGroup: {fileID: 4774126807010074459}
   ResourceCountToConstructionProgressBar: {fileID: 8866990705489652621}

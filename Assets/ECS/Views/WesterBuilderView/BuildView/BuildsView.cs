@@ -66,39 +66,18 @@ namespace ECS.Views
         }
         
     }
+    
 
     public enum RequiredObjectType
     {
         Default,
         
-        CampFire,
-        
         WoodStorage,
         RockStorage,
         FoodStorage,
-        OreStorage,
-        
-        BuildRecipe,
-        ToolRecipe
-    }
 
-    public enum Tool
-    {
-        Axe,
-        Pick
-    }
-
-    public enum Storage
-    {
-        WoodStorage,
-        RockStorage,
-        FoodStorage
-    }
-
-    public enum Build
-    {
+        ToolRecipe,
         Workbench,
         Tower
     }
-    
 }

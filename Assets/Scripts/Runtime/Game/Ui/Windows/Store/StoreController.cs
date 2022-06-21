@@ -70,6 +70,7 @@ namespace Runtime.Game.Ui.Windows.Store
             {
                 Recipe recipe = _recipeData.Get().Get(entity.Key);
                 _world.CreateRequestRecipe(recipe);
+                OnBack();
                 
                 //тут клон передавать
                 //layout - вся страничка

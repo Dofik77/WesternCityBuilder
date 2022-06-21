@@ -8,6 +8,7 @@ using ECS.Game.Systems.General.Player;
 using ECS.Game.Systems.View;
 using ECS.Game.Systems.WesternBuilder_System;
 using ECS.Game.Systems.WesternBuilder_System.BuildsSystems;
+using ECS.Game.Systems.WesternBuilder_System.BuildsSystems.BuildEffectSystem;
 using ECS.Game.Systems.WesternBuilder_System.ResourceSystem;
 using ECS.Game.Systems.WesternBuilder_System.StateMachine;
 using ECS.Game.Systems.WesternBuilder_System.Stats;
@@ -43,6 +44,10 @@ namespace ECS.Installers
             Container.BindInterfacesAndSelfTo<BuildCreatedBeforeRuntimeSystem>().AsSingle();
             Container.BindInterfacesAndSelfTo<BuildUnderConstructionInitSystem>().AsSingle();
             Container.BindInterfacesAndSelfTo<BuildConstructionSystem>().AsSingle();
+            Container.BindInterfacesAndSelfTo<BuildingEffectSystem>().AsSingle();
+            
+            Container.BindInterfacesAndSelfTo<TowerEffectSystem>().AsSingle();
+
             Container.BindInterfacesAndSelfTo<MiningResourceObjectInitSystem>().AsSingle();
             Container.BindInterfacesAndSelfTo<UnitInitSystem>().AsSingle();
             Container.BindInterfacesAndSelfTo<SetBaseValuesOfUnitSkill>().AsSingle();
@@ -65,6 +70,8 @@ namespace ECS.Installers
             Container.BindInterfacesAndSelfTo<LevelStartSystem>().AsSingle();
             
             
+            
+            
             Container.BindInterfacesAndSelfTo<TransformTranslateSystem>().AsSingle();
             //Container.BindInterfacesAndSelfTo<ResourceTransportationSystem>().AsSingle();
             Container.BindInterfacesAndSelfTo<MakeObjectChildSystem>().AsSingle();
@@ -75,7 +82,7 @@ namespace ECS.Installers
             Container.BindInterfacesAndSelfTo<RaycastSystem>().AsSingle();
             
             Container.BindInterfacesAndSelfTo<HoverSystem>().AsSingle();
-            
+
             Container.BindInterfacesAndSelfTo<LevelStateSystem>().AsSingle();
             Container.BindInterfacesAndSelfTo<PlayerInputCleanUpSystem>().AsSingle();
             Container.BindInterfacesAndSelfTo<DelayCleanUpSystem>().AsSingle();

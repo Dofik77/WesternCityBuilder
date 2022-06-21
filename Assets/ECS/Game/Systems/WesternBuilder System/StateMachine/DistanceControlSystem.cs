@@ -34,6 +34,7 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
                 
                 if (Vector3.Distance(_unitView.transform.position, _destanationPosition) <= _stopDistance)
                 {
+                    //_unitView.GetAgent().isStopped = true;
                     _unitView.transform.LookAt(_destanationView.transform);
                     _unitView.Entity.Get<EventUnitChangeStateComponent>().State = _event.Get2(i).FeatureState;
                     _unitView.Entity.Get<EventSetAnimationComponent>().Value = 0;

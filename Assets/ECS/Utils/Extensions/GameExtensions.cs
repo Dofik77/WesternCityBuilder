@@ -29,9 +29,16 @@ namespace ECS.Utils.Extensions
             world.CreateDistanceTriggers();
             world.CreateNavMeshLinks();
             
+            world.CreateUnit();
+            world.CreateUnit();
             // world.CreateUnit();
-            world.CreateUnit();
-            world.CreateUnit();
+            // world.CreateUnit();
+            // world.CreateUnit();
+            // world.CreateUnit();
+            // world.CreateUnit();
+            // world.CreateUnit();
+            // world.CreateUnit();
+            // world.CreateUnit();
 
             world.CreateUnitSkillScoresEntity();
             world.CreateResourceMining();
@@ -80,7 +87,7 @@ namespace ECS.Utils.Extensions
             entity.GetAndFire<PrefabComponent>().Value = "Player";
             entity.Get<EventUnitChangeStateComponent>();
         }
-        
+
         public static void CreateResourceMining(this EcsWorld world)
         {
             var views = Object.FindObjectsOfType<ObjectMiningView>();

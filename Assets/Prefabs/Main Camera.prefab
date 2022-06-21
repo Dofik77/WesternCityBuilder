@@ -116,6 +116,9 @@ MonoBehaviour:
   _defaultResolution: {x: 1080, y: 1920}
   _widthOrHeight: 0
   _initialSize: 0
+  _cameraRelocationPosition:
+  - {fileID: 0}
+  _cameraRelocationDuration: 4
 --- !u!114 &6425902903736858518
 MonoBehaviour:
   m_ObjectHideFlags: 0

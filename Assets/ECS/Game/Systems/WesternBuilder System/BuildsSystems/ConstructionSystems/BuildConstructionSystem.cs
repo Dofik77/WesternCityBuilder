@@ -34,13 +34,11 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
             _delayService.Do(delayToConstruct, () =>
             {
                 entity.Del<BuildUnderConstruction>();
+                
                 entity.Get<BuildComponent>();
+                entity.Get<BuildingEffect>();
                 
                 ChangeObjectStage(buildView);
-                
-                //перенести в Building Effect
-                if (buildView.Entity.Has<BuildStorageComponent>())
-                    _signalBus.Fire(new SignalEnableResourceCounter(buildView));
                 
                 foreach (var i in _units)
                 {
@@ -59,11 +57,7 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
             if (buildView.ObjectType != RequiredObjectType.ToolRecipe)
             {
                 buildView.ConstructedObject.SetActive(true);
-                buildView.StopDistance *= 2;
-            }
-            else
-            {
-                buildView.Entity.Get<IsDestroyedComponent>();
+                buildView.StopDistance *= 1.4f;
             }
         }
 

@@ -368,7 +368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StopDistance: 1.15
-  ObjectType: 3
+  ObjectType: 2
   MiningAnimationStage: 0
   ProgressCanvasGroup: {fileID: 3766358791143452556}
   ResourceCountToConstructionProgressBar: {fileID: 939054698841873242}
@@ -580,7 +580,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8280476514497077327, guid: ba873e72dfea1b14cac7fd354821af56, type: 3}
       propertyPath: m_Carve
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8280476514497077327, guid: ba873e72dfea1b14cac7fd354821af56, type: 3}
       propertyPath: m_Shape

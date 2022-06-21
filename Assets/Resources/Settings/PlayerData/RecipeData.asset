@@ -65,6 +65,19 @@ MonoBehaviour:
     _levelOpenData: LV1
     isStorageOff: 0
     _maxResourceStorage: 0
+  - _key: craft_Pick
+    _dependKey: 
+    _name: Pick
+    _description: Alows mining rock
+    _recipeIcon: {fileID: 21300000, guid: 5bd958101b18aca43b0072937ad168e1, type: 3}
+    _recipeResources:
+    - Key: 1
+      NeedToConstruct: 15
+    - Key: 2
+      NeedToConstruct: 9
+    _levelOpenData: LV1
+    isStorageOff: 0
+    _maxResourceStorage: 0
   - _key: craft_rockStorage
     _dependKey: 
     _name: RockStorage

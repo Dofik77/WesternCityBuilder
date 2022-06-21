@@ -38,6 +38,7 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
                 
                 ChangeObjectStage(buildView);
                 
+                //перенести в Building Effect
                 if (buildView.Entity.Has<BuildStorageComponent>())
                     _signalBus.Fire(new SignalEnableResourceCounter(buildView));
                 

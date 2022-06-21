@@ -426,7 +426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StopDistance: 1.15
-  ObjectType: 1
+  ObjectType: 2
   MiningAnimationStage: 6
   ProgressCanvasGroup: {fileID: 4938382881559941009}
   ResourceCountToConstructionProgressBar: {fileID: 9062459646344166215}

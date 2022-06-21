@@ -15,10 +15,10 @@ MonoBehaviour:
   _layoutSprite:
   - Type: 0
     Name: WoodResource
-    Icon: {fileID: 21300000, guid: 3c014263f3d364907880536586b4a02d, type: 3}
+    Icon: {fileID: 21300000, guid: e25c8418b02501144ae8822ca6137137, type: 3}
   - Type: 1
     Name: RockResource
-    Icon: {fileID: 21300000, guid: f9b128325b38a4cc487ead2aba521985, type: 3}
+    Icon: {fileID: 21300000, guid: 7a3004caa0467d34a8c4d4aa75c54506, type: 3}
   - Type: 3
     Name: FoodResource
     Icon: {fileID: 21300000, guid: 4248c560055564d49ac7f7b56a4ec7e9, type: 3}

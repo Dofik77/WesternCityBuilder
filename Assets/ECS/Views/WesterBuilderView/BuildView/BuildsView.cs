@@ -71,14 +71,34 @@ namespace ECS.Views
     {
         Default,
         
+        CampFire,
+        
         WoodStorage,
         RockStorage,
         FoodStorage,
         OreStorage,
         
-        CampFire,
-        
         BuildRecipe,
         ToolRecipe
     }
+
+    public enum Tool
+    {
+        Axe,
+        Pick
+    }
+
+    public enum Storage
+    {
+        WoodStorage,
+        RockStorage,
+        FoodStorage
+    }
+
+    public enum Build
+    {
+        Workbench,
+        Tower
+    }
+    
 }

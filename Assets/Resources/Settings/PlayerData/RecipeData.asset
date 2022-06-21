@@ -22,7 +22,7 @@ MonoBehaviour:
     - Key: 1
       NeedToConstruct: 4
     - Key: 2
-      NeedToConstruct: 4
+      NeedToConstruct: 3
     _levelOpenData: LV1
     isStorageOff: 0
     _maxResourceStorage: 0
@@ -35,10 +35,36 @@ MonoBehaviour:
     - Key: 1
       NeedToConstruct: 4
     - Key: 2
-      NeedToConstruct: 3
+      NeedToConstruct: 4
     _levelOpenData: LV1
     isStorageOff: 1
     _maxResourceStorage: 10
+  - _key: craft_Workbench
+    _dependKey: 
+    _name: Workbench
+    _description: Allows you to create tools and buildings.
+    _recipeIcon: {fileID: 21300000, guid: 2190e3ff61fcbb54e86239ee3d7afeac, type: 3}
+    _recipeResources:
+    - Key: 1
+      NeedToConstruct: 5
+    - Key: 2
+      NeedToConstruct: 4
+    _levelOpenData: LV1
+    isStorageOff: 0
+    _maxResourceStorage: 0
+  - _key: craft_Tower
+    _dependKey: 
+    _name: Tower
+    _description: Unlocks new territories.
+    _recipeIcon: {fileID: 21300000, guid: c326f0b2b25bcad40bc97881f2b1c3d4, type: 3}
+    _recipeResources:
+    - Key: 1
+      NeedToConstruct: 4
+    - Key: 2
+      NeedToConstruct: 4
+    _levelOpenData: LV1
+    isStorageOff: 0
+    _maxResourceStorage: 0
   - _key: craft_rockStorage
     _dependKey: 
     _name: RockStorage
@@ -51,19 +77,4 @@ MonoBehaviour:
       NeedToConstruct: 6
     _levelOpenData: LV1
     isStorageOff: 2
-    _maxResourceStorage: 5
-  - _key: craft_testRecipe
-    _dependKey: 
-    _name: TestRecipe
-    _description: Show capabilities adaptive ui
-    _recipeIcon: {fileID: 21300000, guid: df257e5fc6bfc4ccba70d45b25d556d0, type: 3}
-    _recipeResources:
-    - Key: 2
-      NeedToConstruct: -10
-    - Key: 1
-      NeedToConstruct: -10
-    - Key: 4
-      NeedToConstruct: -10
-    _levelOpenData: LV3
-    isStorageOff: 0
     _maxResourceStorage: 5

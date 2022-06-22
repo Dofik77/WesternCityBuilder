@@ -13,21 +13,22 @@ MonoBehaviour:
   m_Name: RecipeData
   m_EditorClassIdentifier: 
   _recipes:
-  - _key: craft_Axe
+  - _key: craftAxe
     _dependKey: 
     _name: Axe
     _description: 'Allows you to mine wood '
     _recipeIcon: {fileID: 21300000, guid: 4b22615be6e5b44f0b679f47d4da0191, type: 3}
     _recipeResources:
     - Key: 1
-      NeedToConstruct: 4
+      NeedToConstruct: 1
     - Key: 2
-      NeedToConstruct: 3
+      NeedToConstruct: 1
     _levelOpenData: LV1
     isStorageOff: 0
     _maxResourceStorage: 0
-  - _key: craft_woodStorage
-    _dependKey: 
+    _finalRecipe: 0
+  - _key: craftWoodStorage
+    _dependKey: craftAxe
     _name: WoodStorage
     _description: Alows storing wood. Upgrade to increase the capacity
     _recipeIcon: {fileID: 21300000, guid: 1057d0412e412420d87bd31cc654072d, type: 3}
@@ -39,8 +40,9 @@ MonoBehaviour:
     _levelOpenData: LV1
     isStorageOff: 1
     _maxResourceStorage: 10
-  - _key: craft_Workbench
-    _dependKey: 
+    _finalRecipe: 0
+  - _key: craftWorkbench
+    _dependKey: craftWoodStorage
     _name: Workbench
     _description: Allows you to create tools and buildings.
     _recipeIcon: {fileID: 21300000, guid: 2190e3ff61fcbb54e86239ee3d7afeac, type: 3}
@@ -52,8 +54,9 @@ MonoBehaviour:
     _levelOpenData: LV1
     isStorageOff: 0
     _maxResourceStorage: 0
-  - _key: craft_Tower
-    _dependKey: 
+    _finalRecipe: 0
+  - _key: craftTower
+    _dependKey: craftWorkbench
     _name: Tower
     _description: Unlocks new territories.
     _recipeIcon: {fileID: 21300000, guid: c326f0b2b25bcad40bc97881f2b1c3d4, type: 3}
@@ -65,8 +68,9 @@ MonoBehaviour:
     _levelOpenData: LV1
     isStorageOff: 0
     _maxResourceStorage: 0
-  - _key: craft_Pick
-    _dependKey: 
+    _finalRecipe: 0
+  - _key: craftPick
+    _dependKey: craftTower
     _name: Pick
     _description: Alows mining rock
     _recipeIcon: {fileID: 21300000, guid: 5bd958101b18aca43b0072937ad168e1, type: 3}
@@ -78,8 +82,9 @@ MonoBehaviour:
     _levelOpenData: LV1
     isStorageOff: 0
     _maxResourceStorage: 0
-  - _key: craft_rockStorage
-    _dependKey: 
+    _finalRecipe: 0
+  - _key: craftRockStorage
+    _dependKey: craftPick
     _name: RockStorage
     _description: Alows storing rock. Upgrade to increase the capacity
     _recipeIcon: {fileID: 21300000, guid: 04880f7536e0c4425b43bbb3c3ea7cf6, type: 3}
@@ -91,3 +96,4 @@ MonoBehaviour:
     _levelOpenData: LV1
     isStorageOff: 2
     _maxResourceStorage: 5
+    _finalRecipe: 0

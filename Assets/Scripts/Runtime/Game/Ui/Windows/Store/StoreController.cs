@@ -1,7 +1,10 @@
+using System;
+using System.Linq;
 using DG.Tweening;
 using ECS.Utils.Extensions;
 using Leopotam.Ecs;
 using Lofelt.NiceVibrations;
+using ModestTree;
 using Runtime.Data;
 using Runtime.Data.PlayerData.Currency;
 using Runtime.Data.PlayerData.Recipe;
@@ -12,6 +15,7 @@ using Runtime.Game.Ui.Objects;
 using Runtime.Game.Ui.Objects.Layouts;
 using Runtime.Game.Ui.Windows.InGameButtons;
 using Runtime.Services.UiData.Data;
+using Runtime.Signals;
 using SimpleUi.Signals;
 using UniRx;
 using UnityEngine;
@@ -37,6 +41,7 @@ namespace Runtime.Game.Ui.Windows.Store
         public void Initialize()
         {
             View.BackBtn.OnClickAsObservable().Subscribe(x => OnBack()).AddTo(View.BackBtn);
+            _signalBus.GetStream<SignalRecipeUpdate>().Subscribe(x => AddRecipeName(x.Key));
             BeforeHideEvent = new BeforeActionEvent(OnBeforeHide, _appearDuration);
             InitValues();
             InitUiData();
@@ -54,25 +59,43 @@ namespace Runtime.Game.Ui.Windows.Store
             View.RebuildUiData(uiData.StoreUiData);
             
         }
-        
+
+        //передавать клон рецепта
+        //layout - вся страничка
         public void InitValues()
         {
             var data = _commonPlayerData.GetData();
+            var dataRecipe = _commonPlayerData.GetData().Recipes;
             
             View.InitCurrencies(ref data.Money, _currenciesData);
-            //для 2 и 3го key дописать логику ( рецепт закрыт по уровню и т.д) 
+
             View.LayoutContainer.Init(_recipeData.Get(), data, OnButton,
-                key => key.StartsWith("cube_locked_") || key.StartsWith("background_locked_"),
-                null, 
-                key => data.CurrentCubeSkinKey == key || data.CurrentBackgroundSkinKey == key);
+                key => !String.IsNullOrEmpty(_recipeData.Get().Get(key).GetDependKey())
+                       && !dataRecipe.Contain(_recipeData.Get().Get(key).GetDependKey()),
+                null,
+                key => _recipeData.Get().Get(key)._finalRecipe);
+            
+            
             
             void OnButton(UiGeneratedEntity entity, UiGeneratedLayout layout)
             {
+                if(entity.CurrentUiState != EUiEntityState.Action)
+                    return;
+                
                 Recipe recipe = _recipeData.Get().Get(entity.Key);
                 _world.CreateRequestRecipe(recipe);
+                entity.CurrentUiState = EUiEntityState.Grey;
+
+                switch (entity.CurrentUiState)
+                {
+                    case EUiEntityState.Available:
+                        entity.SetState(EUiEntityState.Action);
+                        break;
+                    case EUiEntityState.Grey:
+                        entity.SetState(EUiEntityState.Grey);
+                        break;
+                }
                 OnBack();
-                
-                
             }
 
             void SelectImpact(UiGeneratedEntity entity, HapticPatterns.PresetType type, float duration)
@@ -87,6 +110,22 @@ namespace Runtime.Game.Ui.Windows.Store
             //     var go = _uiSpawnService.Spawn("uiStars");
             //     go.transform.SetParent(objective.transform);
             // }
+        }
+        
+        public void AddRecipeName(string name)
+        {
+            var data = _commonPlayerData.GetData().Recipes;
+            data.Add(name);
+
+            foreach (var entity in View.LayoutContainer.LayoutGroups[0].GeneratedLayout.Entities)
+            {
+                Recipe recipe = _recipeData.Get().Get(entity.Key);
+                
+                if (recipe.GetDependKey().ToLower() == name)
+                {
+                    entity.SetState(EUiEntityState.Action);
+                }
+            }
         }
 
         public override void OnAfterShow()

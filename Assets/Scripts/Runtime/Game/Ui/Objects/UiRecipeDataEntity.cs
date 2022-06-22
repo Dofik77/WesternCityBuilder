@@ -24,7 +24,7 @@ namespace Runtime.Game.Ui.Objects
         [SerializeField] private TMP_Text _recipeName;
         [SerializeField] private TMP_Text _recipeDescription;
         [SerializeField] private TMP_Text _levelOpenData;
-        [SerializeField] private LayoutGroup _layoutResourceData;
+        [SerializeField] public LayoutGroup _layoutResourceData;
 
         public override void InitEntity(IProvideUiGeneratedEntity dataEntity, string greyStateText, string actionStateText, string rejectState, Sprite currencyIcon)
         {

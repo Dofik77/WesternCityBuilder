@@ -33,8 +33,6 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
             
             _delayService.Do(delayToConstruct, () =>
             {
-                entity.Del<BuildUnderConstruction>();
-                
                 entity.Get<BuildComponent>();
                 entity.Get<BuildingEffect>();
                 
@@ -45,6 +43,12 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
                     _units.GetEntity(i).Del<UnitHasPriority>();
                     _units.GetEntity(i).Get<EventUpdatePriorityComponent>();
                 }
+
+                var key = entity.Get<BuildUnderConstruction>().Recipe.GetLowerKey();
+                
+                _signalBus.Fire(new SignalRecipeUpdate(key));
+                
+                entity.Del<BuildUnderConstruction>();
             });
         }
         

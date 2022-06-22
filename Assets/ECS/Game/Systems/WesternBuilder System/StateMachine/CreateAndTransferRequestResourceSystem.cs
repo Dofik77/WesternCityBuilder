@@ -4,6 +4,7 @@ using ECS.Core.Utils.ReactiveSystem;
 using ECS.Game.Components.Flags;
 using ECS.Game.Components.General;
 using ECS.Game.Components.WesternBuilder_Component;
+using ECS.Game.Components.WesternBuilder_Component.dotween_components;
 using ECS.Game.Systems.General;
 using ECS.Game.Systems.General.NavMesh;
 using ECS.Game.Systems.WesternBuilder_System.ResourceSystem;
@@ -71,6 +72,9 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
             var reqMainValue = unitEntity.Get<NextMiningValue>().Value;
             var extractTime = ExtractTime(reqMainValue, 1);
             
+            // resourceView.Entity.Get<ResourceTravel>().UnitView = unitView;
+            // unitView.AddResource(ref resourceView.Entity);
+            
             unitView.Entity.Get<EventSetAnimationComponent>().Value = resourceView.MiningAnimationStage;
             unitEntity.Get<UnitCurrentResource>().Value++;
             var minedInCycle = 1;
@@ -121,7 +125,11 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
             {
                 _delayService.Do(_unitSpeedMain * i, () =>
                 {
-                    _world.CreateResourceType(unitView.GetResourceStack(), unitEntity.Get<UnitPriorityData>().RequiredMining);
+                    EcsEntity resourceEntity = _world.CreateResourceType(unitView.GetResourceStack(), unitEntity.Get<UnitPriorityData>().RequiredMining);
+                    
+                    // resourceEntity.Get<ResourceTravel>().UnitView = unitView;
+                    // unitView.AddResource(ref resourceEntity);
+                    
                     objectMiningView.GetCurrentResourceValue--;
                     unitEntity.Get<UnitCurrentResource>().Value++;
                     minedInCycle++;

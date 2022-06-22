@@ -1759,7 +1759,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8939936104485748423, guid: 03368478eebe1364a885a1cb829158c8, type: 3}
       propertyPath: _dataKeyMask
-      value: craft_
+      value: craft
       objectReference: {fileID: 0}
     - target: {fileID: 8939936104485748423, guid: 03368478eebe1364a885a1cb829158c8, type: 3}
       propertyPath: _uiPrefabName
@@ -1767,7 +1767,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8939936104485748423, guid: 03368478eebe1364a885a1cb829158c8, type: 3}
       propertyPath: _greyStateText
-      value: In Progress
+      value: Done
       objectReference: {fileID: 0}
     - target: {fileID: 8939936104485748423, guid: 03368478eebe1364a885a1cb829158c8, type: 3}
       propertyPath: _actionStateText

@@ -18,10 +18,15 @@ namespace ECS.Game.Systems.WesternBuilder_System.ResourceSystem
             var resourceView = entity.Get<LinkComponent>().View as ResourceView;
             
             resourceView.transform.DOKill();
+            
             resourceView.transform.SetParent(unitView.GetResourceStack());
             
             resourceView.Transform.DOLocalMove(entity.Get<Vector3Component<MoveTweenEventComponent>>().Value,
                 unitView.GetInteractionDuration()).SetEase(Ease.Linear);
+
+            resourceView.transform.rotation = unitView.GetResourceStack().transform.rotation;
+
+
         }
     }
 }

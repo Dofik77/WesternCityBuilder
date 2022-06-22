@@ -36,8 +36,7 @@ namespace Runtime.Game.Ui.Objects.Layouts
             {
                 group = _layoutGroups[i];
                 group.GeneratedLayout.Init(data);
-                group.GeneratedLayout.UpdateGeneratedLayoutData(data, playerData, onButton, rejectStagePredicate,
-                    purchaseStagePredicate, greyStatePredicate);
+                group.GeneratedLayout.UpdateGeneratedLayoutData(data, playerData, onButton, rejectStagePredicate, purchaseStagePredicate, greyStatePredicate);
                 group.LabelLayout.gameObject.SetActive(false);
                 group.GeneratedLayout.gameObject.SetActive(false);
             }

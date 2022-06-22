@@ -37,6 +37,9 @@ namespace Runtime.Data.PlayerData.Recipe
 
         [Header("StorageInfo")] 
         [SerializeField] private int _maxResourceStorage;
+
+        [Header("FinalRecipe")] [SerializeField]
+        public bool _finalRecipe;
         public int GetMaxResourceStorage() => _maxResourceStorage;
         //wanna hide if StorageOff == none
 

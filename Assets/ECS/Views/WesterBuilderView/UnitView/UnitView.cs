@@ -21,13 +21,13 @@ namespace ECS.Views.General
         [SerializeField] public GameObject Pick;
         
         [Header("DotWeen Fields")] 
-        [SerializeField] private float _stackOffsetX = 1;
-        [SerializeField] private float _stackOffsetY = 1;
+        [SerializeField] private float _stackOffsetX = 0.1f;
+        [SerializeField] private float _stackOffsetY = 0.1f;
         [SerializeField] private int _stackHeight = 10;
 
-        [SerializeField] private float _interactionDuration = 0.4f;
+        private float _interactionDuration = 0.4f;
         
-        private Stack<EcsEntity> _resources;
+        Stack<EcsEntity> _resources = new Stack<EcsEntity>();
         
         private int _stackColumn;
         private int _stackRow;
@@ -51,17 +51,18 @@ namespace ECS.Views.General
         public void AddResource(ref EcsEntity resource)
         {
             _resources.Push(resource);
-            var z = _stackColumn * _stackOffsetX;
+            var x = _stackColumn * _stackOffsetX;
             var y = _stackRow * _stackOffsetY;
             _stackRow++;
+            
             if (_resources.Count >= _stackHeight * _stackColumn)
             {
                 _stackColumn++;
                 _stackRow = 1;
             }
-            // Attach to stack
+            
             resource.Get<MoveTweenEventComponent>().EventType = ETweenEventType.ResourcePickUp;
-            resource.Get<Vector3Component<MoveTweenEventComponent>>().Value = new Vector3(0, y, z);
+            resource.Get<Vector3Component<MoveTweenEventComponent>>().Value = new Vector3(x, 0, 0);
         }
     }
 }

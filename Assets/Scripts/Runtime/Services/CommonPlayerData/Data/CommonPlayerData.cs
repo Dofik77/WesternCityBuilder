@@ -19,6 +19,8 @@ namespace Runtime.Services.CommonPlayerData.Data
         
         public bool IsAdsOff;
 
+        public Recipes Recipes;
+
         public CommonPlayerData()
         {
             var defaultCubeSkin = "cube_default";
@@ -36,6 +38,8 @@ namespace Runtime.Services.CommonPlayerData.Data
 
             Levels = new Levels {Properties = Array.Empty<Levels.LevelProperty>()};
             SetNextLevel("Level_001");
+
+            Recipes = new Recipes{Keys = Array.Empty<string>()};
         }
 
         public void SetNextLevel(string nextLevelKey)
@@ -121,6 +125,32 @@ namespace Runtime.Services.CommonPlayerData.Data
                 Value = 0;
             }
         }
+    }
+
+
+    [Serializable]
+    public struct Recipes : IStringKeyData
+    {
+        public string[] Keys;
+        
+        public bool Contain(string key)
+        {
+            for (int i = 0; i < Keys.Length; i++)
+                if (Keys[i] == key)
+                    return true;
+            return false;
+        }
+        
+
+        public void Add(string key)
+        {
+            if (Contain(key))
+                return;
+            Array.Resize(ref Keys, Keys.Length + 1);
+            Keys[Keys.Length - 1] = key;
+        }
+        
+        
     }
 
     [Serializable]

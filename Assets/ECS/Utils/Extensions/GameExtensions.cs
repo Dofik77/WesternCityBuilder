@@ -116,7 +116,7 @@ namespace ECS.Utils.Extensions
             }
         }
         
-        public static void CreateResourceType(this EcsWorld world, Transform point, RequiredResourceType resourceType)
+        public static EcsEntity CreateResourceType(this EcsWorld world, Transform point, RequiredResourceType resourceType)
         {
             var entity = world.NewEntity();
             entity.Get<UIdComponent>().Value = UidGenerator.Next();
@@ -139,6 +139,8 @@ namespace ECS.Utils.Extensions
            
             entity.GetAndFire<PrefabComponent>().Value = resourceType.ToString();
             entity.Get<EventMakeObjectAsChild>().Parent = point;
+
+            return entity;
         }
 
         public static void CreateResourceOnGround(this EcsWorld world)

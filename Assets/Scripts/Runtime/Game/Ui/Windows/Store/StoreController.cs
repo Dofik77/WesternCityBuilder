@@ -72,8 +72,7 @@ namespace Runtime.Game.Ui.Windows.Store
                 _world.CreateRequestRecipe(recipe);
                 OnBack();
                 
-                //тут клон передавать
-                //layout - вся страничка
+                
             }
 
             void SelectImpact(UiGeneratedEntity entity, HapticPatterns.PresetType type, float duration)

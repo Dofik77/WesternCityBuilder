@@ -78,7 +78,7 @@ namespace ECS.Utils.Extensions
             entity.GetAndFire<UnitsSkillScoreComponent>();
         }
 
-        public static void CreateUnit(this EcsWorld world)
+        public static EcsEntity CreateUnit(this EcsWorld world)
         {
             //TODO - skin, posOfStart, etc...
             var entity = world.NewEntity();
@@ -86,6 +86,8 @@ namespace ECS.Utils.Extensions
             entity.GetAndFire<UnitComponent>();
             entity.GetAndFire<PrefabComponent>().Value = "Player";
             entity.Get<EventUnitChangeStateComponent>();
+
+            return entity;
         }
 
         public static void CreateResourceMining(this EcsWorld world)

@@ -1,4 +1,5 @@
-﻿using Leopotam.Ecs;
+﻿using DG.Tweening;
+using Leopotam.Ecs;
 using Lofelt.NiceVibrations;
 using UnityEngine;
 
@@ -53,8 +54,7 @@ namespace ECS.Views.General
 
         public void LerpCamera()
         {
-            _camera.transform.position = Vector3.Lerp(_camera.transform.position, new Vector3(-8.5f, 14f, 28f),
-                1);
+            _camera.transform.DOMove(new Vector3(-8.5f, 14f, 28f), _cameraRelocationDuration);
         }
         
     }

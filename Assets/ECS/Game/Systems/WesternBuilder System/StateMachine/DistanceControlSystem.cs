@@ -40,6 +40,7 @@ namespace ECS.Game.Systems.WesternBuilder_System.StateMachine
                     _unitView.Entity.Get<EventSetAnimationComponent>().Value = 0;
 
                     _unitView.Entity.Del<EventControlDistanceToSetState>();
+                    
                 }
             }
         }

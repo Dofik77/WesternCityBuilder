@@ -30,7 +30,7 @@ namespace ECS.Utils.Extensions
             world.CreateNavMeshLinks();
             
             world.CreateUnit();
-            world.CreateUnit();
+            //world.CreateUnit();
             // world.CreateUnit();
             // world.CreateUnit();
             // world.CreateUnit();

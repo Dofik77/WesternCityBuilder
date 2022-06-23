@@ -54,7 +54,8 @@ namespace ECS.Views.General
 
         public void LerpCamera()
         {
-            _camera.transform.DOMove(new Vector3(-8.5f, 14f, 28f), _cameraRelocationDuration);
+            //_camera.transform.DOMove(new Vector3(-8.5f, 14f, 28f), _cameraRelocationDuration);
+            _initialSize = 12;
         }
         
     }

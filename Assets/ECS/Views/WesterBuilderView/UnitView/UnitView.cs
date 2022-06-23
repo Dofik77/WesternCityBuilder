@@ -21,7 +21,7 @@ namespace ECS.Views.General
         [SerializeField] public GameObject Pick;
         
         [Header("DotWeen Fields")] 
-        [SerializeField] private float _stackOffsetX = 0.1f;
+        [SerializeField] private float _stackOffsetX = -0.2f;
         [SerializeField] private float _stackOffsetY = 0.1f;
         [SerializeField] private int _stackHeight = 10;
 

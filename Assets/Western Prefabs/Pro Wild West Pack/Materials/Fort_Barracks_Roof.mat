@@ -8,9 +8,9 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Fort_Barracks_Roof
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _NORMALMAP
-  m_LightmapFlags: 5
+  m_Shader: {fileID: 4800000, guid: ccfc7d68845db8341944b3091b59be55, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 0da445226e232b64db29a13e6095f40e, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -40,7 +40,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: db7e16504c53fe04ba71dd7005bc5eb9, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -55,6 +55,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Ramp:
+        m_Texture: {fileID: 2800000, guid: abc83c21d57d4a74cabe12065fa1a8b2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -64,17 +68,34 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _DstBlendOutline: 10
+    - _GlossMapScale: 1
     - _Glossiness: 0.319
+    - _GlossyReflections: 1
     - _Metallic: 0.134
     - _Mode: 0
     - _OcclusionStrength: 1
+    - _Offset1: 0
+    - _Offset2: 0
+    - _Outline: 1
     - _Parallax: 0.02
-    - _Shininess: 0.22
+    - _RampSmooth: 1
+    - _RampThreshold: 0.763
+    - _Shininess: 2
+    - _SmoothnessTextureChannel: 0
+    - _SpecSmooth: 0
+    - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _SrcBlendOutline: 5
+    - _TexLod: 5
     - _UVSec: 0
+    - _ZSmooth: -0.5
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.6911765, g: 0.6911765, b: 0.6911765, a: 1}
+    - _Color: {r: 0.24705882, g: 0.51204556, b: 0.8117647, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _SpecColor: {r: 0.5147059, g: 0.5147059, b: 0.5147059, a: 0}
+    - _HColor: {r: 0.785, g: 0.785, b: 0.785, a: 1}
+    - _OutlineColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _SColor: {r: 0.19499993, g: 0.19499993, b: 0.19499993, a: 1}
+    - _SpecColor: {r: 0, g: 0.32982045, b: 0.4528302, a: 1}
   m_BuildTextureStacks: []

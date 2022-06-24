@@ -13,19 +13,21 @@ namespace Runtime.Game.Ui.Windows.DeveloperMode
         public float FpsCheckTime = 0.5f;
 
         private float _elapsed;
+        private int _count;
 
         private void Update()
         {
             if (!UiBox.gameObject.activeSelf)
                 return;
             _elapsed += Time.deltaTime;
+            _count++;
             if (_elapsed >= FpsCheckTime)
             {
+                // FpsCounter.text = Mathf.RoundToInt(1.0f / Time.deltaTime).ToString();
+                FpsCounter.text = Mathf.RoundToInt(1.0f / (_elapsed / _count)).ToString();
                 _elapsed = 0;
-                FpsCounter.text = Mathf.RoundToInt(1.0f / Time.deltaTime).ToString();
+                _count = 0;
             }
-
-            
         }
     }
 }

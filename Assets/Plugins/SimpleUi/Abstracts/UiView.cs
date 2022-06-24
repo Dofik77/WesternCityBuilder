@@ -6,17 +6,18 @@ namespace SimpleUi.Abstracts
 {
 	public abstract class UiView : UIBehaviour, IUiView
 	{
+		[SerializeField] private Canvas _canvas;
 		public bool IsShow { get; private set; }
 
 		public virtual void Show()
 		{
-			gameObject.SetActive(true);
+			_canvas.enabled = true;
 			IsShow = true;
 		}
 
 		public virtual void Hide()
 		{
-			gameObject.SetActive(false);
+			_canvas.enabled = false;
 			IsShow = false;
 		}
 

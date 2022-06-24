@@ -8,6 +8,6 @@ namespace Runtime.Game.Ui.Objects.Layouts
     {
         [SerializeField] private Image _tapSelectedImage;
 
-        public void SetSelected(bool value) => _tapSelectedImage.gameObject.SetActive(value);
+        public void SetSelected(bool value) => _tapSelectedImage?.gameObject.SetActive(value);
     }
 }

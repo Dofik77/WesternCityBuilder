@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics.CodeAnalysis;
 using DG.Tweening;
 using ECS.Game.Components.General;
 using ECS.Utils.Extensions;
@@ -11,9 +10,11 @@ using Runtime.Game.Ui.Extensions;
 using Runtime.Game.Ui.Objects.General;
 using Runtime.Game.Ui.Objects.UiObjectives;
 using Runtime.Services.AnalyticsService;
+using Runtime.Services.AnalyticsService.Impls;
 using Runtime.Services.CommonPlayerData;
 using Runtime.Services.CommonPlayerData.Data;
 using Runtime.Services.DelayService;
+using Runtime.Services.MonetizationService;
 using Runtime.Services.SceneLoading;
 using Runtime.Signals;
 using SimpleUi.Abstracts;
@@ -25,7 +26,6 @@ using Object = UnityEngine.Object;
 
 namespace Runtime.Game.Ui.Windows.LevelComplete
 {
-    [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     public class LevelCompleteController : UiController<LevelCompleteView>, IInitializable
     {
         [Inject] private IAnalyticsService _analyticsService;
@@ -35,6 +35,7 @@ namespace Runtime.Game.Ui.Windows.LevelComplete
         [Inject] private readonly IDelayService _delayService;
         [Inject] private readonly ILevelsData _levelsData;
         [Inject] private readonly ICurrenciesData _currenciesData;
+        [Inject] private readonly IMonetizationService _monetizationService;
 
         private EcsWorld _world;
 
@@ -64,6 +65,7 @@ namespace Runtime.Game.Ui.Windows.LevelComplete
         private UiBinaryObjective CurrentFirstObjective;
         private UiBinaryObjective CurrentSecondObjective;
         private UiBinaryObjective CurrentThirdObjective;
+        private Level _levelData;
 
         public LevelCompleteController(EcsWorld world) => _world = world;
 
@@ -75,40 +77,41 @@ namespace Runtime.Game.Ui.Windows.LevelComplete
 
         private void OnNextLevel()
         {
+            _monetizationService.ShowInterstitial("level_complete");
             _sceneLoadingManager.LoadScene(_commonPlayerData.GetData().CurrentLevel);
         }
 
         public override void OnAfterShow()
         {
-            _analyticsService.SendRequest("level_complete");
-
             var data = _commonPlayerData.GetData();
             // rewards must be inited before saved
             InitValues(ref data);
             SaveData(ref data);
             InitUiAppear();
             InitTweens(data);
+            
+            // _analyticsService.SendProgressionEvent(GAProgressionStatus.Complete, _levelData.GetLowerKey());
         }
 
         public void InitValues(ref CommonPlayerData data)
         {
             ref var levelDataComponent = ref _world.GetEntity<LevelComponent>().Get<LevelDataComponent>();
-            var levelData = _levelsData.Get().Get(data.CurrentLevel);
+            _levelData = _levelsData.Get().Get(data.CurrentLevel);
             var property = data.GetCurrentLevel();
 
-            _rewardCurrency = levelData.GetRewardCurrency();
+            _rewardCurrency = _levelData.GetRewardCurrency();
             _currentBox = _rewardCurrency == ECurrency.Soft ? View.SoftCurrency : View.HardCurrency;
 
-            _firstObjectiveReward = levelData.GetFirstObjectiveReward();
-            _secondObjectiveReward = levelData.GetSecondObjectiveReward();
-            _thirdObjectiveReward = levelData.GetThirdObjectiveReward();
+            _firstObjectiveReward = _levelData.GetFirstObjectiveReward();
+            _secondObjectiveReward = _levelData.GetSecondObjectiveReward();
+            _thirdObjectiveReward = _levelData.GetThirdObjectiveReward();
 
             _isVip = data.CurrentLevel.StartsWith(_vip_mask);
             if (_isVip)
             {
-                _isFirstObjectiveComplete = _timer < levelData.GetFirstObjective();
-                _isSecondObjectiveComplete = _timer < levelData.GetSecondObjective();
-                _isThirdObjectiveComplete = _timer < levelData.GetThirdObjective();
+                _isFirstObjectiveComplete = _timer < _levelData.GetFirstObjective();
+                _isSecondObjectiveComplete = _timer < _levelData.GetSecondObjective();
+                _isThirdObjectiveComplete = _timer < _levelData.GetThirdObjective();
 
                 CurrentFirstObjective = View.FirstObjective;
                 CurrentSecondObjective = View.SecondObjective;
@@ -118,9 +121,9 @@ namespace Runtime.Game.Ui.Windows.LevelComplete
                 var valueDone = "Done";
                 var valueFail = "Fail";
 
-                CurrentFirstObjective.Text.text = text + TimeFormat(levelData.GetFirstObjective());
-                CurrentSecondObjective.Text.text = text + TimeFormat(levelData.GetSecondObjective());
-                CurrentThirdObjective.Text.text = text + TimeFormat(levelData.GetThirdObjective());
+                CurrentFirstObjective.Text.text = text + TimeFormat(_levelData.GetFirstObjective());
+                CurrentSecondObjective.Text.text = text + TimeFormat(_levelData.GetSecondObjective());
+                CurrentThirdObjective.Text.text = text + TimeFormat(_levelData.GetThirdObjective());
 
                 CurrentFirstObjective.Value.text = _isFirstObjectiveComplete ? valueDone : valueFail;
                 CurrentSecondObjective.Value.text = _isSecondObjectiveComplete ? valueDone : valueFail;
@@ -189,24 +192,26 @@ namespace Runtime.Game.Ui.Windows.LevelComplete
                 data.SetNextLevel(levelData.GetNextLevelKey());
             data.Money.Add(_rewardCurrency, _currentTotalReward);
             _commonPlayerData.Save(data);
+            
+            _analyticsService.SendDesignEvent(AnalyticsState.Get, Enum.GetName(typeof(ECurrency), _rewardCurrency), _currentTotalReward.ToString());
         }
 
         public void InitUiAppear()
         {
             View.Back.DoAppearColor(_fadeDuration).SetEase(Ease.InQuart);
-            View.Top.DoFromPosition(new Vector2(0, 650f), _uiAppearDuration).SetDelay(_fadeDuration)
-                .SetEase(Ease.OutQuart);
-            View.Center.DoFromPosition(new Vector2(1500f, 0), _uiAppearDuration).SetDelay(_fadeDuration)
-                .SetEase(Ease.OutQuart);
-            View.Bottom.DoFromPosition(new Vector2(0, -800f), _uiAppearDuration).SetDelay(_fadeDuration)
-                .SetEase(Ease.OutQuart);
+            View.Top.Init(new Vector2(0, 650f),_uiAppearDuration);
+            View.Center.Init(new Vector2(1500f, 0),_uiAppearDuration);
+            View.Bottom.Init(new Vector2(0, -800f),_uiAppearDuration);
+            View.Top.DoToDefault().SetDelay(_fadeDuration).SetEase(Ease.OutQuart);
+            View.Center.DoToDefault().SetDelay(_fadeDuration).SetEase(Ease.OutQuart);
+            View.Bottom.DoToDefault().SetDelay(_fadeDuration).SetEase(Ease.OutQuart);
         }
 
         public void InitTweens(CommonPlayerData data)
         {
-            var scorePos = View.ScoreBar.rectTransform.anchoredPosition;
+            var scorePos = View.ScoreBar.RectTransform.anchoredPosition;
 
-            ObjectiveAppear(CurrentFirstObjective.rectTransform, 1)
+            ObjectiveAppear(CurrentFirstObjective, 1)
                 .OnComplete(() =>
                     CurrentFirstObjective.SetComplete(_isFirstObjectiveComplete)
                         .DoAppear(_iconAppearDuration).SetDelay(_beforeAppearDuration).SetEase(Ease.InQuad)
@@ -218,7 +223,7 @@ namespace Runtime.Game.Ui.Windows.LevelComplete
                             UpdateScore();
                         }));
 
-            ObjectiveAppear(CurrentSecondObjective.rectTransform, 2)
+            ObjectiveAppear(CurrentSecondObjective, 2)
                 .OnComplete(() =>
                     CurrentSecondObjective.SetComplete(_isSecondObjectiveComplete)
                         .DoAppear(_iconAppearDuration).SetDelay(_beforeAppearDuration).SetEase(Ease.InQuad)
@@ -230,7 +235,7 @@ namespace Runtime.Game.Ui.Windows.LevelComplete
                             UpdateScore();
                         }));
 
-            ObjectiveAppear(CurrentThirdObjective.rectTransform, 3)
+            ObjectiveAppear(CurrentThirdObjective, 3)
                 .OnComplete(() =>
                     CurrentThirdObjective.SetComplete(_isThirdObjectiveComplete)
                         .DoAppear(_iconAppearDuration).SetDelay(_beforeAppearDuration).SetEase(Ease.InQuad)
@@ -242,8 +247,8 @@ namespace Runtime.Game.Ui.Windows.LevelComplete
                             UpdateScore();
                         }));
 
-            ObjectiveAppear(View.Time.rectTransform, 4);
-            ObjectiveAppear(View.Reward.rectTransform, 5);
+            ObjectiveAppear(View.Time, 4);
+            ObjectiveAppear(View.Reward, 5);
 
             _delayService.Do(GetTweenDelay(6), () =>
             {
@@ -259,8 +264,11 @@ namespace Runtime.Game.Ui.Windows.LevelComplete
                     });
             });
 
-            Tweener ObjectiveAppear(RectTransform rectTransform, int id) => rectTransform.DoFromPosition(scorePos,
-                _objectivesDuration * id).SetDelay(GetTweenDelay(id)).SetEase(Ease.InCubic);
+            Tweener ObjectiveAppear(CustomUiObject rectTransform, int id)
+            {
+                rectTransform.Init(scorePos, _objectivesDuration * id);
+                return rectTransform.DoToDefault().SetDelay(GetTweenDelay(id)).SetEase(Ease.InCubic);
+            }
 
             float GetTweenDelay(int order) => _fadeDuration + _uiAppearDuration + _betweenMoveDuration * order;
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Runtime.Services.AnalyticsService;
 using Runtime.Services.CommonPlayerData;
 using Runtime.Services.CommonPlayerData.Data;
 using Runtime.Services.DelayService;
@@ -18,6 +19,7 @@ namespace Runtime.Game.Ui.Impls
         [Inject] protected readonly ICommonPlayerDataService<CommonPlayerData> _commonPlayerData;
         [Inject] protected readonly IUiDataService<UiData> _uiData;
         [Inject] protected readonly ISceneLoadingManager _sceneLoadingManager;
+        [Inject] protected readonly IAnalyticsService _analyticsService;
         [Inject] protected readonly SignalBus _signalBus;
         [Inject] protected readonly IPauseService _pauseService;
         [Inject] protected readonly IUiSpawnService _uiSpawnService;

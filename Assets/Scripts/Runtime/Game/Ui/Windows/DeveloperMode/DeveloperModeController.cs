@@ -1,25 +1,18 @@
 using Leopotam.Ecs;
 using Runtime.Game.Ui.Extensions;
-using Runtime.Services.CommonPlayerData;
+using Runtime.Game.Ui.Impls;
 using Runtime.Services.CommonPlayerData.Data;
-using Runtime.Services.DelayService;
-using Runtime.Services.SceneLoading;
-using Runtime.Services.UiData;
+using Runtime.Services.MonetizationService;
 using Runtime.Services.UiData.Data;
 using Runtime.Signals;
-using SimpleUi.Abstracts;
 using UniRx;
 using Zenject;
 
 namespace Runtime.Game.Ui.Windows.DeveloperMode
 {
-    public class DeveloperModeController : UiController<DeveloperModeView>, IInitializable
+    public class DeveloperModeController : UiControllerExtended<DeveloperModeView>, IInitializable
     {
-        [Inject] private readonly ICommonPlayerDataService<CommonPlayerData> _commonPlayerData;
-        [Inject] private readonly IUiDataService<UiData> _uiData;
-        [Inject] private readonly ISceneLoadingManager _sceneLoadingManager;
-        [Inject] private readonly SignalBus _signalBus;
-        [Inject] private readonly IDelayService _delayService;
+        [Inject] private readonly IMonetizationService _monetizationService;
 
         private EcsWorld _world;
 
@@ -36,6 +29,9 @@ namespace Runtime.Game.Ui.Windows.DeveloperMode
 
         public void OnDropProggress()
         {
+#if  UNITY_EDITOR
+            _monetizationService.SetAdsRemoved(false);
+#endif
             _commonPlayerData.Save(new CommonPlayerData());
             _uiData.Save(new UiData());
             _sceneLoadingManager.LoadScene(_commonPlayerData.GetData().CurrentLevel);

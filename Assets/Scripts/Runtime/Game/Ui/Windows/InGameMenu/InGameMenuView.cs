@@ -1,4 +1,6 @@
 ﻿using CustomSelectables;
+using Runtime.Game.Ui.Impls;
+using Runtime.Game.Ui.Objects.General;
 using SimpleUi.Abstracts;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,9 +13,7 @@ namespace Runtime.Game.Ui.Windows.InGameMenu
         public string TermsOfUseURL;
         
         public Image Background;
-        public RectTransform Top;
-        public RectTransform Center;
-        public RectTransform Bottom;
+        public CustomUiObject UiBox;
 
         public CustomButton Back;
         public CustomButton SoundOn;

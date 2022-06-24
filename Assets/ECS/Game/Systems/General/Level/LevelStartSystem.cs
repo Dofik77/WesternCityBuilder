@@ -51,7 +51,6 @@ namespace ECS.Game.Systems.General.Level
             started = true;
             _world.SetStage(EGameStage.Play);
             _signalBus.OpenWindow<GameHudWindow>();
-            _analyticsService.SendRequest("level_start");
             
 
             InitCameraTween();

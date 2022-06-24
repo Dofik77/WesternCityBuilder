@@ -7,11 +7,13 @@ using Runtime.Game.Ui.Windows.InGameButtons;
 using Runtime.Game.Ui.Windows.InGameMenu;
 using Runtime.Game.Ui.Windows.LevelComplete;
 using Runtime.Game.Ui.Windows.Levels;
+using Runtime.Game.Ui.Windows.Purchases;
 using Runtime.Game.Ui.Windows.Store;
 using Runtime.Initializers;
 using Runtime.Services.AnalyticsService.Impls;
 using Runtime.Services.DelayService.Impls;
 using Runtime.Services.FxSpawnService.Impls;
+using Runtime.Services.MonetizationService.Impls;
 using Runtime.Services.PauseService.Impls;
 using Runtime.Services.UiSpawnService.Impls;
 using Runtime.Services.VibrationService.Impl;
@@ -39,6 +41,7 @@ namespace Runtime.Installers
             Container.BindInterfacesAndSelfTo<DeveloperModeWindow>().AsSingle();
             Container.BindInterfacesAndSelfTo<StoreWindow>().AsSingle();
             Container.BindInterfacesAndSelfTo<LevelsWindow>().AsSingle();
+            Container.BindInterfacesAndSelfTo<PurchasesWindow>().AsSingle();
         }
 
         private void BindServices()
@@ -50,6 +53,7 @@ namespace Runtime.Installers
             Container.BindInterfacesTo<AnalyticsService>().AsSingle();
             Container.BindInterfacesTo<VibrationService>().AsSingle();
             Container.BindInterfacesTo<DelayService>().AsSingle();
+            Container.BindInterfacesTo<MonetizationService>().AsSingle();
         }
     }
 }

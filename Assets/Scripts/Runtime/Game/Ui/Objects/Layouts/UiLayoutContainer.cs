@@ -5,6 +5,7 @@ using Runtime.Game.Ui.Extensions;
 using Runtime.Game.Ui.Objects.General;
 using Runtime.Services.CommonPlayerData.Data;
 using UniRx;
+using UniRx.Triggers;
 using UnityEngine;
 using Utils;
 
@@ -26,6 +27,10 @@ namespace Runtime.Game.Ui.Objects.Layouts
         private Vector2 _labelOffset;
         private Vector2 _layoutOffset;
 
+        private Predicate<string> _rejectStagePredicate;
+        private Predicate<string> _purchaseStagePredicate;
+        private Predicate<string> _greyStatePredicate;
+
         public void Init<T>(T[] data, CommonPlayerData playerData,
             Action<UiGeneratedEntity, UiGeneratedLayout> onButton, Predicate<string> rejectStagePredicate = null,
             Predicate<string> purchaseStagePredicate = null, Predicate<string> greyStatePredicate = null)
@@ -34,9 +39,15 @@ namespace Runtime.Game.Ui.Objects.Layouts
             LayoutGroup group;
             for (int i = 0; i < _layoutGroups.Length; i++)
             {
+                _rejectStagePredicate = rejectStagePredicate;
+                _purchaseStagePredicate = purchaseStagePredicate;
+                _greyStatePredicate = greyStatePredicate;
+                
                 group = _layoutGroups[i];
                 group.GeneratedLayout.Init(data);
-                group.GeneratedLayout.UpdateGeneratedLayoutData(data, playerData, onButton, rejectStagePredicate, purchaseStagePredicate, greyStatePredicate);
+                group.GeneratedLayout.UpdateGeneratedLayoutData(data, playerData, _rejectStagePredicate,
+                    _purchaseStagePredicate, _greyStatePredicate);
+                group.GeneratedLayout.InitOnButton(onButton);
                 group.LabelLayout.gameObject.SetActive(false);
                 group.GeneratedLayout.gameObject.SetActive(false);
             }
@@ -44,7 +55,7 @@ namespace Runtime.Game.Ui.Objects.Layouts
             group = _layoutGroups[0];
             _currentLabel = group.LabelLayout;
             _currentLabel.gameObject.SetActive(true);
-            _currentLayout = group.GeneratedLayout.rectTransform;
+            _currentLayout = group.GeneratedLayout.RectTransform;
             _currentLayout.gameObject.SetActive(true);
             _labelOffset = new Vector2(_currentLabel.rect.width + _layoutDistance, 0);
             _layoutOffset = new Vector2(_currentLayout.rect.width + _layoutDistance, 0);
@@ -68,6 +79,18 @@ namespace Runtime.Game.Ui.Objects.Layouts
         {
             foreach (var group in _layoutGroups)
                 group.GeneratedLayout.UpdatePurchaseStates(providedData, ref currencyValues);
+        }
+
+        public void UpdateGeneratedLayoutData<T>(T[] data, CommonPlayerData playerData)
+            where T : IProvideUiGeneratedEntity
+        {
+            LayoutGroup group;
+            for (int i = 0; i < _layoutGroups.Length; i++)
+            {
+                group = _layoutGroups[i];
+                group.GeneratedLayout.UpdateGeneratedLayoutData(data, playerData, _rejectStagePredicate,
+                    _purchaseStagePredicate, _greyStatePredicate);
+            }
         }
 
         public void LeafTo(int index)
@@ -125,7 +148,7 @@ namespace Runtime.Game.Ui.Objects.Layouts
 
             var group = _layoutGroups[_groupIndex];
             _currentLabel = group.LabelLayout;
-            _currentLayout = group.GeneratedLayout.rectTransform;
+            _currentLayout = group.GeneratedLayout.RectTransform;
             _currentLabel.gameObject.SetActive(true);
             _currentLayout.gameObject.SetActive(true);
 

@@ -202,6 +202,13 @@
         "com.unity.modules.imgui": "1.0.0"
       }
     },
+    "studio.beardy.grid-layout-group": {
+      "version": "https://github.com/mrbeardy/BeardyGridLayout.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "8b1d7f44366b24df55dae32c674cf70adc6d04b7"
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,

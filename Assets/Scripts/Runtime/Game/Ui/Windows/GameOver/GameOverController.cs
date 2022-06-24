@@ -5,6 +5,7 @@ using Runtime.Services.CommonPlayerData.Data;
 using Runtime.Services.SceneLoading;
 using SimpleUi.Abstracts;
 using UniRx;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace Runtime.Game.Ui.Windows.GameOver 
@@ -34,7 +35,7 @@ namespace Runtime.Game.Ui.Windows.GameOver
             var data = _commonPlayerData.GetData();
             View.Show(data);
             // ShowScore();
-            _analyticsService.SendRequest("level_failed");
+            // _analyticsService.SendProgressionEvent(GAProgressionStatus.Complete, SceneManager.GetActiveScene().name);
         }
 
         // private void ShowScore()

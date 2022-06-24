@@ -1,6 +1,9 @@
-﻿using SimpleUi.Abstracts;
+﻿using System;
+using SimpleUi.Abstracts;
+using SimpleUi.Interfaces;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using CustomSelectables;
 
 namespace Runtime.Game.Ui.Windows.ConsentPopUp

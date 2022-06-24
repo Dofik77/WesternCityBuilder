@@ -6,6 +6,7 @@ using Runtime.Game.Ui.Windows.InGameButtons;
 using Runtime.Game.Ui.Windows.InGameMenu;
 using Runtime.Game.Ui.Windows.LevelComplete;
 using Runtime.Game.Ui.Windows.Levels;
+using Runtime.Game.Ui.Windows.Purchases;
 using Runtime.Game.Ui.Windows.Store;
 using Runtime.Game.Ui.Windows.TouchPad;
 using SimpleUi;
@@ -31,6 +32,7 @@ namespace Runtime.Installers
         [SerializeField] private DeveloperModeView developerModeView;
         [SerializeField] private StoreView storeView;
         [SerializeField] private LevelsView levelsView;
+        [SerializeField] private PurchasesView purchasesView;
 
         public override void InstallBindings()
         {
@@ -45,7 +47,7 @@ namespace Runtime.Installers
             Container.Bind<Camera>().FromInstance(camera).AsSingle().WithConcreteId(ECameraType.GameCamera).NonLazy();
 
             Container.BindUiView<InGameMenuController, InGameMenuView>(inGameMenu, canvasTransform);
-            Container.BindUiView<FocusViewController, FocusView>(focusView, null);
+            // Container.BindUiView<FocusViewController, FocusView>(focusView, null);
             Container.BindUiView<ConsentPopUpViewController, ConsentPopUpTarget>(consentPopUpTarget, canvasTransform);
             Container.BindUiView<TouchpadViewController, TouchpadView>(touchpadView, canvasTransform);
             Container.BindUiView<GameOverController, GameOverView>(gameOverView, canvasTransform);
@@ -54,6 +56,7 @@ namespace Runtime.Installers
             Container.BindUiView<DeveloperModeController, DeveloperModeView>(developerModeView, canvasTransform);
             Container.BindUiView<StoreController, StoreView>(storeView, canvasTransform);
             Container.BindUiView<LevelsController, LevelsView>(levelsView, canvasTransform);
+            Container.BindUiView<PurchasesController, PurchasesView>(purchasesView, canvasTransform);
         }
     }
 }

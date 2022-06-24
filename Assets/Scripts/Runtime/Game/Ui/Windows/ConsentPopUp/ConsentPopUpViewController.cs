@@ -7,6 +7,7 @@ using SimpleUi.Interfaces;
 using SimpleUi.Signals;
 using UniRx;
 using UnityEngine.EventSystems;
+using Utils.UiExtensions;
 using Zenject;
 
 namespace Runtime.Game.Ui.Windows.ConsentPopUp

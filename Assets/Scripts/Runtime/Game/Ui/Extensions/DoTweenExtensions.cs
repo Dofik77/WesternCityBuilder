@@ -54,6 +54,7 @@ namespace Utils
             });
         }
         
+        [Obsolete]
         public static Tweener DoFromPosition(this RectTransform rectTransform, Vector2 from, float duration)
         {
             var oldPos = rectTransform.anchoredPosition;
@@ -61,6 +62,7 @@ namespace Utils
             return rectTransform.DOAnchorPos(oldPos, duration);
         }
         
+        [Obsolete]
         public static Tweener DoToPosition(this RectTransform rectTransform, Vector2 to, float duration, Action afterComplete = default)
         {
             var oldPos = rectTransform.anchoredPosition;

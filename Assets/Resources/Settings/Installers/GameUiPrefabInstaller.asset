@@ -23,3 +23,4 @@ MonoBehaviour:
   developerModeView: {fileID: 1401423803131489734, guid: a1365be70e6fe934d90e1e42dba57db9, type: 3}
   storeView: {fileID: 5395717644166240318, guid: 22ffe090b1f9a1c4abc9a23ec616f568, type: 3}
   levelsView: {fileID: 1830013312195924518, guid: bebcd9529976a0b46a35422cdd1f3096, type: 3}
+  purchasesView: {fileID: 6822163349398864475, guid: 34bd7c9f390a60e4596674853db3c8b4, type: 3}

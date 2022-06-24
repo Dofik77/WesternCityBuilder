@@ -7,9 +7,7 @@ using Leopotam.Ecs;
 using Lofelt.NiceVibrations;
 using Runtime.Game.Ui.Extensions;
 using Runtime.Game.Ui.Impls;
-using Runtime.Services.PauseService;
 using Runtime.Services.PlayerSettings;
-using Runtime.Services.SceneLoading;
 using SimpleUi.Signals;
 using UniRx;
 using UnityEngine;
@@ -20,10 +18,7 @@ namespace Runtime.Game.Ui.Windows.InGameMenu
 {
     public class InGameMenuController : UiControllerExtended<InGameMenuView>, IInitializable
     {
-        [Inject] private readonly ISceneLoadingManager _sceneLoadingManager;
         [Inject] private readonly IPlayerSettingsService _playerSettings;
-        [Inject] private readonly SignalBus _signalBus;
-        [Inject] private readonly IPauseService _pauseService;
         private readonly EcsWorld _world;
 
         private const float _fadeDuration = 0.45f;
@@ -42,6 +37,8 @@ namespace Runtime.Game.Ui.Windows.InGameMenu
             View.VibrationOn.OnClickAsObservable().Subscribe(x => OnVibration(false)).AddTo(View.Back);
             View.VibrationOff.OnClickAsObservable().Subscribe(x => OnVibration(true)).AddTo(View.Back);
 
+            View.UiBox.Init(_bottomHidePos, _appearDuration);
+            
             VibrationSwitch(_playerSettings.PlayerSettings.UseVibration);
             
             BeforeHideEvent = new BeforeActionEvent(OnBeforeHide, _appearDuration);
@@ -50,18 +47,15 @@ namespace Runtime.Game.Ui.Windows.InGameMenu
         public override void OnAfterShow()
         {
             _pauseService.PauseGame(true);
-            View.Back.gameObject.SetActive(true);
-            View.Center.gameObject.SetActive(true);
             View.Background.DoAppearColor(_fadeDuration).SetEase(Ease.InQuart);
-            View.Center.DoFromPosition(new Vector2(0f, 1500), _appearDuration).SetDelay(_fadeDuration)
+            View.UiBox.DoToDefault().SetDelay(_fadeDuration)
                 .SetEase(Ease.OutCubic);
-            _delayService.Do(_appearDuration, () => EnableInput(true));
+            _delayService.Do(_fadeDuration + _appearDuration, () => EnableInput(true));
         }
 
         public override void OnBeforeHide()
         {
-            View.Background.DoDisappearColor(_appearDuration, () => View.Back.gameObject.SetActive(false))
-                .SetEase(Ease.OutQuart);
+            View.Background.DoDisappearColor(_appearDuration).SetEase(Ease.OutQuart);
         }
         
         public override void EnableInput(bool value)
@@ -76,9 +70,8 @@ namespace Runtime.Game.Ui.Windows.InGameMenu
         private void OnBack()
         {
             EnableInput(false);
-            View.Center.DoToPosition(_bottomHidePos, _appearDuration, () =>
+            View.UiBox.DoOutOfBounds().OnComplete(() =>
             {
-                View.Center.gameObject.SetActive(false);
                 _signalBus.OpenWindow<GameHudWindow>();
                 _pauseService.PauseGame(false);
             }).SetEase(Ease.InCubic);
@@ -92,7 +85,11 @@ namespace Runtime.Game.Ui.Windows.InGameMenu
             playerSettings.UseVibration = value;
             _playerSettings.SaveSettings(playerSettings);
             
-           //_world.GetEntity<CameraComponent>().Get<LinkComponent>().Get<CameraView>().HapticReceiver.hapticsEnabled = value;
+            _world.GetEntity<CameraComponent>().
+                    Get<LinkComponent>().
+                    Get<CameraView>().
+                    HapticReceiver.
+                    hapticsEnabled = value;
             
             if (value)
                 HapticPatterns.PlayPreset(HapticPatterns.PresetType.SoftImpact);

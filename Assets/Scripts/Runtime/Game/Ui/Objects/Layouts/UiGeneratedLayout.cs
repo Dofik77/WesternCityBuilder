@@ -77,8 +77,7 @@ namespace Runtime.Game.Ui.Objects.Layouts
 
 
         public void UpdateGeneratedLayoutData<T>(T[] providedData,
-            CommonPlayerData playerData, Action<UiGeneratedEntity, UiGeneratedLayout> onButton,
-            Predicate<string> rejectStagePredicate = null,
+            CommonPlayerData playerData, Predicate<string> rejectStagePredicate = null,
             Predicate<string> purchaseStagePredicate = null,
             Predicate<string> greyStagePredicate = null) where T : IProvideUiGeneratedEntity
         {
@@ -97,7 +96,15 @@ namespace Runtime.Game.Ui.Objects.Layouts
                 }
                 else
                     entity.SetState(EUiEntityState.Action);
-                
+            }
+        }
+
+        public void InitOnButton(Action<UiGeneratedEntity, UiGeneratedLayout> onButton)
+        {
+            var entities = Entities;
+            for (int i = 0; i < entities.Length; i++)
+            {
+                var entity = entities[i];
                 entity.Button.OnClickAsObservable().Subscribe(x => OnButton()).AddTo(entity.Button);
                 void OnButton() => onButton.Invoke(entity, this);
             }

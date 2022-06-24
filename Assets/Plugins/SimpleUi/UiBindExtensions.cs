@@ -38,7 +38,10 @@ namespace SimpleUi
 				.UnderTransform(parent).AsSingle()
 				.OnInstantiated((context, o) =>
 				{
-					((MonoBehaviour) o).gameObject.SetActive(enable);
+					if (enable)
+						((IUiView) o).Show();
+					else
+						((IUiView) o).Hide();
 				});
 		}
 

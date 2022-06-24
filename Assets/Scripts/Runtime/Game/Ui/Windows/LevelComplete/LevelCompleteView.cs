@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using CustomSelectables;
 using Runtime.Game.Ui.Impls;
+using Runtime.Game.Ui.Objects;
 using Runtime.Game.Ui.Objects.General;
 using Runtime.Game.Ui.Objects.UiObjectives;
 using TMPro;
@@ -17,9 +18,9 @@ namespace Runtime.Game.Ui.Windows.LevelComplete
         public CustomButton NextLevel;
 
         public Image Back;
-        public RectTransform Top;
-        public RectTransform Center;
-        public RectTransform Bottom;
+        public CustomUiObject Top;
+        public CustomUiObject Center;
+        public CustomUiObject Bottom;
 
         public ProgressBar ScoreBar;
         public UiBinaryObjective LevelComplete;

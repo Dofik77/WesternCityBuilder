@@ -195,8 +195,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Score: 0 of 100'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 08a6bb2c45fd44d40a5970ab76d60a81, type: 2}
+  m_sharedMaterial: {fileID: 1879531767885751204, guid: 08a6bb2c45fd44d40a5970ab76d60a81, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -390,14 +390,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5168009550116176357}
-  m_LocalRotation: {x: -0, y: -0.56426567, z: -0, w: 0.8255933}
-  m_LocalPosition: {x: 0.006, y: 0, z: 0.132}
+  m_LocalRotation: {x: -0, y: -0.5928187, z: -0, w: 0.805336}
+  m_LocalPosition: {x: -0.051, y: 0, z: 0.16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6036997024687141413}
   m_Father: {fileID: 3459241932923206817}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: -68.703, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -72.715, z: 0}
 --- !u!33 &5168009550119534053
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -751,9 +751,25 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4334760207912833897, guid: f692ef62bb607cf45abb31c29d2c42e2, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 08a6bb2c45fd44d40a5970ab76d60a81, type: 2}
+    - target: {fileID: 4334760207912833897, guid: f692ef62bb607cf45abb31c29d2c42e2, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 1879531767885751204, guid: 08a6bb2c45fd44d40a5970ab76d60a81, type: 2}
+    - target: {fileID: 4334760207912833897, guid: f692ef62bb607cf45abb31c29d2c42e2, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8291292504619994618, guid: f692ef62bb607cf45abb31c29d2c42e2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.017028809
+      objectReference: {fileID: 0}
     - target: {fileID: 8291292504619994618, guid: f692ef62bb607cf45abb31c29d2c42e2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -959.21
+      value: -959.17
       objectReference: {fileID: 0}
     - target: {fileID: 8303628137026490080, guid: f692ef62bb607cf45abb31c29d2c42e2, type: 3}
       propertyPath: m_IsActive

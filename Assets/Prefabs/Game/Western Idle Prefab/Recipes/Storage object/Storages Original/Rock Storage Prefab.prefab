@@ -30,8 +30,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StopDistance: 3
   ObjectType: 2
-  ConstructionProgressBar: {fileID: 0}
-  BuildProgressBar: {fileID: 0}
+  MiningAnimationStage: 0
+  ProgressCanvasGroup: {fileID: 0}
+  ResourceCountToConstructionProgressBar: {fileID: 0}
+  CounctractProgressBar: {fileID: 0}
   ConstructedObject: {fileID: 0}
   BaseObject: {fileID: 0}
 --- !u!1001 &6015599561985325507
@@ -51,11 +53,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4833468818274898, guid: c045d8e313a8e304f846177d95269414, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.73758084
+      value: 0.7375808
+      objectReference: {fileID: 0}
+    - target: {fileID: 4833468818274898, guid: c045d8e313a8e304f846177d95269414, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.7375808
       objectReference: {fileID: 0}
     - target: {fileID: 4833468818274898, guid: c045d8e313a8e304f846177d95269414, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.73758084
+      value: 0.7375808
       objectReference: {fileID: 0}
     - target: {fileID: 4833468818274898, guid: c045d8e313a8e304f846177d95269414, type: 3}
       propertyPath: m_LocalPosition.x

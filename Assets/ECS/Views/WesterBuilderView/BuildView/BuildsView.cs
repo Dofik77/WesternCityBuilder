@@ -30,7 +30,7 @@ namespace ECS.Views
         {
             _currentResource += updateValue;
             ResourceCountToConstructionProgressBar.Text.text = $"{_currentResource} / {_maxResourceForCounstract}";
-            ResourceCountToConstructionProgressBar.Repaint(_currentResource / _maxResourceForCounstract, _barRepaintDuration);
+            ResourceCountToConstructionProgressBar.Repaint((float)_currentResource / _maxResourceForCounstract, _barRepaintDuration);
         }
         
         

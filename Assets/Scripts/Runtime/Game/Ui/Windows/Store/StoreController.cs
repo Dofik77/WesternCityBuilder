@@ -43,6 +43,9 @@ namespace Runtime.Game.Ui.Windows.Store
             View.BackBtn.OnClickAsObservable().Subscribe(x => OnBack()).AddTo(View.BackBtn);
             _signalBus.GetStream<SignalRecipeUpdate>().Subscribe(x => AddRecipeName(x.Key));
             BeforeHideEvent = new BeforeActionEvent(OnBeforeHide, _appearDuration);
+            
+            View.UiBox.Init(_windowHidePos, _appearDuration);
+            
             InitValues();
             InitUiData();
         }
@@ -135,17 +138,14 @@ namespace Runtime.Game.Ui.Windows.Store
             View.LayoutContainer.UpdatePurchaseStates(_skinsData.Get(), ref _commonPlayerData.GetData().Money.CurrencyValues);
             
             _pauseService.PauseGame(true);
-            View.BackBtn.gameObject.SetActive(true);
-            View.UiBox.gameObject.SetActive(true);
             View.Background.DoAppearColor(_fadeDuration).SetEase(Ease.InQuart);
-            View.UiBox.DoFromPosition(_windowHidePos, _appearDuration).SetDelay(_fadeDuration).SetEase(Ease.OutCubic);
+            View.UiBox.DoToDefault().SetDelay(_fadeDuration).SetEase(Ease.OutCubic);
             _delayService.Do(_appearDuration, () => EnableInput(true));
         }
 
         public override void OnBeforeHide()
         {
-            View.Background.DoDisappearColor(_appearDuration, () => View.BackBtn.gameObject.SetActive(false))
-                .SetEase(Ease.OutQuart);
+            View.Background.DoDisappearColor(_appearDuration).SetEase(Ease.OutQuart);
             SaveUiData();
         }
         
@@ -157,9 +157,8 @@ namespace Runtime.Game.Ui.Windows.Store
         private void OnBack()
         {
             EnableInput(false);
-            View.UiBox.DoToPosition(_windowHidePos, _appearDuration, () =>
+            View.UiBox.DoOutOfBounds().OnComplete(() =>
             {
-                View.UiBox.gameObject.SetActive(false);
                 _signalBus.OpenWindow<GameHudWindow>();
                 _pauseService.PauseGame(false);
             }).SetEase(Ease.InCubic);

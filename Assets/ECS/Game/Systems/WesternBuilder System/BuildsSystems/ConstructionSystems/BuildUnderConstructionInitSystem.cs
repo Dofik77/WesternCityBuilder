@@ -28,7 +28,7 @@ namespace ECS.Game.Systems.WesternBuilder_System.BuildsSystems
             
             var buildStatus = currentRecipe.GetIsStorageOffData();
             var requiredResourceToConstruct = currentRecipe.GetResourceCount();
-            var buildName = currentRecipe.GetName();
+            var buildName = currentRecipe.GetLowerKey();
             var view = entity.Get<LinkComponent>().View as BuildsView;
 
             entity.Get<BuildUnderConstruction>().BuildsView = view;

@@ -20,10 +20,8 @@ namespace Runtime.Game.Ui.Windows.InGameButtons
         public CustomButton StartToPlayBtn;
         public CustomButton HintBtn;
         public UiObjective Timer;
-        public RectTransform UiBox;
-        public RectTransform Top;
-        public RectTransform Center;
-        public RectTransform Bottom;
+        public CustomUiObject Top;
+        public CustomUiObject Bottom;
 
         public ResourceCounter WoodReserveData;
         public ResourceCounter RockReserveData;

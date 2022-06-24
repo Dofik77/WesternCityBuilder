@@ -171,7 +171,7 @@ namespace ECS.Utils.Extensions
         {
             var entity = world.NewEntity();
             entity.Get<UIdComponent>().Value = UidGenerator.Next();
-            entity.GetAndFire<PrefabComponent>().Value = recipe.GetName();
+            entity.GetAndFire<PrefabComponent>().Value = recipe.GetLowerKey();
             entity.GetAndFire<BuildUnderConstruction>().Recipe = recipe;
         }
 

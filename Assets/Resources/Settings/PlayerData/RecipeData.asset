@@ -69,7 +69,7 @@ MonoBehaviour:
     isStorageOff: 0
     _maxResourceStorage: 0
     _finalRecipe: 0
-  - _key: craftPick
+  - _key: craftPickaxe
     _dependKey: craftTower
     _name: Pickaxe
     _description: Allows mining rock.
@@ -84,7 +84,7 @@ MonoBehaviour:
     _maxResourceStorage: 0
     _finalRecipe: 0
   - _key: craftRockStorage
-    _dependKey: craftPick
+    _dependKey: craftPickaxe
     _name: Rock storage
     _description: Allows storing rock. Upgrade to increase the capacity.
     _recipeIcon: {fileID: 21300000, guid: 7a3004caa0467d34a8c4d4aa75c54506, type: 3}

@@ -46,10 +46,10 @@ namespace ECS.Installers
             Container.BindInterfacesAndSelfTo<BuildConstructionSystem>().AsSingle();
             Container.BindInterfacesAndSelfTo<BuildingEffectSystem>().AsSingle();
             
-            Container.BindInterfacesAndSelfTo<TowerEffectSystem>().AsSingle();
 
             Container.BindInterfacesAndSelfTo<MiningResourceObjectInitSystem>().AsSingle();
             Container.BindInterfacesAndSelfTo<UnitInitSystem>().AsSingle();
+            Container.BindInterfacesAndSelfTo<TowerEffectSystem>().AsSingle();
             Container.BindInterfacesAndSelfTo<SetBaseValuesOfUnitSkill>().AsSingle();
             Container.BindInterfacesAndSelfTo<ToolsControlSystem>().AsSingle();
             

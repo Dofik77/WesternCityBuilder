@@ -50,7 +50,9 @@ namespace Runtime.Game.Ui.Windows.InGameButtons
             _signalBus.GetStream<SignalStorageUpdate>().Subscribe(x => UpdateResourceCounter(x.BuildsView));
             _signalBus.GetStream<SignalEnableResourceCounter>().Subscribe(x => EnableResourceCounter(x.BuildsView));
             
-            InitTapOnStart();
+            View.Top.Init(_topHidePos, _appearDuration);
+            View.Bottom.Init(_bottomHidePos, _appearDuration);
+            
             BeforeHideEvent = new BeforeActionEvent(OnBeforeHide, _appearDuration);
 
             var data = _commonPlayerData.GetData();
@@ -59,22 +61,6 @@ namespace Runtime.Game.Ui.Windows.InGameButtons
                 View.AdsOff.gameObject.SetActive(false);
                 View.Store.gameObject.SetActive(false);
                 View.Timer.gameObject.SetActive(true);
-            }
-        }
-
-        public void InitTapOnStart()
-        {
-            if (View.StartToPlayBtn.gameObject.activeSelf)
-            {
-                View.StartToPlayBtn.OnClickAsObservable().Subscribe(x => OnStartToPlay()).AddTo(View.StartToPlayBtn);
-                View.UiBox.gameObject.SetActive(false);
-                View.StartToPlayBtn.transform.DOScale(0.1f, 1.5f).SetRelative(true).SetLoops(-1, LoopType.Yoyo);
-            }
-
-            void OnStartToPlay()
-            {
-                View.UiBox.gameObject.SetActive(true);
-                View.StartToPlayBtn.gameObject.SetActive(false);
             }
         }
 
@@ -127,10 +113,8 @@ namespace Runtime.Game.Ui.Windows.InGameButtons
         {
             // View.LevelN.text = Enum.GetName(typeof(EScene), _commonPlayerData.GetData().Level)?.Replace("_", " ");
             View.LevelN.text = _levelsData.Get().Get(_commonPlayerData.GetData().CurrentLevel.ToLower()).GetName();
-            View.Top.gameObject.SetActive(true);
-            View.Bottom.gameObject.SetActive(true);
-            View.Top.DoFromPosition(_topHidePos, _appearDuration).SetEase(Ease.OutCubic);
-            View.Bottom.DoFromPosition(_bottomHidePos, _appearDuration).SetEase(Ease.OutCubic);
+            View.Top.DoToDefault().SetEase(Ease.OutCubic);
+            View.Bottom.DoToDefault().SetEase(Ease.OutCubic);
             _delayService.Do(_appearDuration, () => EnableInput(true));
         }
         
@@ -138,8 +122,8 @@ namespace Runtime.Game.Ui.Windows.InGameButtons
         {
             //TODO
             EnableInput(false);
-            View.Top.DoToPosition(_topHidePos, _appearDuration, () => View.Top.gameObject.SetActive(false)).SetEase(Ease.InCubic);
-            View.Bottom.DoToPosition(_bottomHidePos, _appearDuration, () => View.Bottom.gameObject.SetActive(false)).SetEase(Ease.InCubic);
+            View.Top.DoOutOfBounds().SetEase(Ease.InCubic);
+            View.Bottom.DoOutOfBounds().SetEase(Ease.InCubic);
         }
         
         public override void EnableInput(bool value)
